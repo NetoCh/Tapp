@@ -15,7 +15,7 @@ appRouter.get('/login', function(req, res) {
 appRouter.get('/registroEmpresa', function(req, res) {
     res.render(mainRoute, {
         page: {
-            route: '../empresasPages/registrarEmpresa'
+            route: './registrarEmpresa'
         }
     })
 });
@@ -23,15 +23,9 @@ appRouter.get('/registroEmpresa', function(req, res) {
 appRouter.get('/registroProfesional', function(req, res) {
     res.render(mainRoute, {
         page: {
-            route: '../profesionalesPages/registrarProfesional'
+            route: './registrarProfesional'
         }
     })
-});
-appRouter.get('/empresaVacante', function(req, res) {
-    res.render('empresasPages/empresaVacante')
-});
-appRouter.get('/adminDashboard', function(req, res) {
-    res.render('adminPages/dashboard.ejs')
 });
 appRouter.get('/verVacantes', function(req, res) {
     res.render(mainRoute, {
