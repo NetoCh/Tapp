@@ -4,7 +4,7 @@
   "description": "Proyecto final DS IX",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node app.js",
     "start": "nodemon app.js"
   },
   "repository": {
