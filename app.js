@@ -19,14 +19,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use('/', appRouter)
-
+app.set('port', process.env.PORT || 3000);
 /* para sacar ip 
 var ip = require("ip");
 console.dir ( ip.address() );*/
 
-
-
-
-app.listen(config.port,config.hostname,() => {
-  console.log(`Server running at http://${config.hostname}:${config.port}`);
+app.listen(app.get('port'), function () {
+  console.log('Servidor iniciado');
 });
