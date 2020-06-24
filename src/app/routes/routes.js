@@ -2,10 +2,10 @@
 
 const express=require('express')
 const userCtrl = require('../controllers/user')
-const viewsRouter = require('./views')
 const appRouter=express.Router()
 
 // Import Routes
+const viewsRouter = require('./home')
 const empresaRoute = require('./empresa');
 const profesionalRoute = require('./profesional');
 const adminRoute = require('./admin');
