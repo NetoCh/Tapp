@@ -7,19 +7,8 @@
   },
   "main": "app.js",
   "scripts": {
-    "test": "node app.js",
-    "start": "nodemon app.js"
+    "test": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Franklin-CortesS/Tapp.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Franklin-CortesS/Tapp/issues"
-  },
-  "homepage": "https://github.com/Franklin-CortesS/Tapp#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
