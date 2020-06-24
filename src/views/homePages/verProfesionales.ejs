@@ -1,471 +1,366 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Profesionales</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <!-- Google fonts - Popppins for copy-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
-    <!-- orion icons-->
-    <link rel="stylesheet" href="/css/orionicons.css">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="/css/style.default.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="/css/custom.css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="/img/favicon.png?3">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-</head>
-<body>
-    <!-- navbar-->
-  <header class="header">
-      <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="index.html" class="navbar-brand font-weight-bold text-uppercase text-base">TAPP</a>
-        <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
-          <li class="nav-item">
-            <form id="searchForm" class="ml-auto d-none d-lg-block">
-              <div class="form-group position-relative mb-0">
-                <button type="submit" style="top: -3px; left: 0;" class="position-absolute bg-white border-0 p-0"><i class="o-search-magnify-1 text-gray text-lg"></i></button>
-                <input type="search" placeholder="Search ..." class="form-control form-control-sm border-0 no-shadow pl-4">
-              </div>
-            </form>
-          </li>
-          <li class="nav-item dropdown mr-3"><a id="notifications" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-gray-400 px-1"><i class="fa fa-bell"></i><span class="notification-icon"></span></a>
-            <div aria-labelledby="notifications" class="dropdown-menu"><a href="#" class="dropdown-item">
-                <div class="d-flex align-items-center">
-                  <div class="icon icon-sm bg-violet text-white"><i class="fab fa-twitter"></i></div>
-                  <div class="text ml-2">
-                    <p class="mb-0">You have 2 followers</p>
-                  </div>
-                </div></a><a href="#" class="dropdown-item"> 
-                <div class="d-flex align-items-center">
-                  <div class="icon icon-sm bg-green text-white"><i class="fas fa-envelope"></i></div>
-                  <div class="text ml-2">
-                    <p class="mb-0">You have 6 new messages</p>
-                  </div>
-                </div></a><a href="#" class="dropdown-item">
-                <div class="d-flex align-items-center">
-                  <div class="icon icon-sm bg-blue text-white"><i class="fas fa-upload"></i></div>
-                  <div class="text ml-2">
-                    <p class="mb-0">Server rebooted</p>
-                  </div>
-                </div></a><a href="#" class="dropdown-item">
-                <div class="d-flex align-items-center">
-                  <div class="icon icon-sm bg-violet text-white"><i class="fab fa-twitter"></i></div>
-                  <div class="text ml-2">
-                    <p class="mb-0">You have 2 followers</p>
-                  </div>
-                </div></a>
-              <div class="dropdown-divider"></div><a href="#" class="dropdown-item text-center"><small class="font-weight-bold headings-font-family text-uppercase">View all notifications</small></a>
-            </div>
-          </li>
-          <li class="nav-item dropdown ml-auto"><a id="userInfo" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img src="img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow"></a>
-            <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong class="d-block text-uppercase headings-font-family">Mark Stephen</strong><small>Web Developer</small></a>
-              <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Settings</a><a href="#" class="dropdown-item">Activity log       </a>
-              <div class="dropdown-divider"></div><a href="login.html" class="dropdown-item">Logout</a>
-            </div>
-          </li>
-        </ul>
-      </nav>
-  </header>
-  <div class="d-flex align-items-stretch">
-    <div id="sidebar" class="sidebar py-3">
-        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
-        <ul class="sidebar-menu list-unstyled">
-              <li class="sidebar-list-item"><a href="index.html" class="sidebar-link text-muted active"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
-              <li class="sidebar-list-item"><a href="charts.html" class="sidebar-link text-muted"><i class="o-sales-up-1 mr-3 text-gray"></i><span>Charts</span></a></li>
-              <li class="sidebar-list-item"><a href="tables.html" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li>
-              <li class="sidebar-list-item"><a href="forms.html" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Forms</span></a></li>
-              <li class="sidebar-list-item"><a href="profesionales.html" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>Profesionales</span></a></li>
-          <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Pages</span></a>
-            <div id="pages" class="collapse">
-              <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page one</a></li>
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page two</a></li>
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page three</a></li>
-                <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted pl-lg-5">Page four</a></li>
-              </ul>
-            </div>
-          </li>
-              <li class="sidebar-list-item"><a href="login.html" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Login</span></a></li>
-        </ul>
-        <div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
-        <ul class="sidebar-menu list-unstyled">
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-database-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-imac-screen-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-paperwork-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-              <li class="sidebar-list-item"><a href="#" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Demo</span></a></li>
-        </ul>
-    </div>
-    <div class="page-holder w-100 d-flex flex-wrap mt-5">
-      <div class="container-fluid px-xl-5">
-        <section > 
-          <!--Buscador-->
-          <div class="col-lg-12 mb-5">
-            <div class="card px-2 py-1">
-              <div class="card-body px-1 py-2">
-                <form id="searchForm" class="ml-auto">
-                  <div class="row">
-                    <div class="col-lg-2 text-center">
-                      <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary ">Filtrar profesionales</button>
-                      <!-- Modal 1-->
-                      <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
-                        <div role="document" class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h4 id="exampleModalLabel" class="modal-title">Filtrar profesionales</h4>
-                              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+<div class="page-holder w-100 d-flex flex-wrap mt-5">
+  <div class="container-fluid px-xl-5">
+    <section > 
+      <!--Buscador-->
+      <div class="col-lg-12 mb-5">
+        <div class="card px-2 py-1">
+          <div class="card-body px-1 py-2">
+            <form id="searchForm" class="ml-auto">
+              <div class="row">
+                <div class="col-lg-2 text-center">
+                  <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary ">Filtrar profesionales</button>
+                  <!-- Modal 1-->
+                  <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+                    <div role="document" class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 id="exampleModalLabel" class="modal-title">Filtrar profesionales</h4>
+                          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                          <form class="range-field">
+                            <div class="form-group">
+                                <label class="col-lg-4">Categorias</label>
+                                <div class="custom-control-inline ml-2 ">
+                                  <select class="form-control" id="exampleFormControlSelect1">
+                                      <option>Desarrollador</option>
+                                      <option>Analista de datos</option>
+                                      <option>Publicistas</option>
+                                      <option>Abogado</option>
+                                      <option>Pintor</option>
+                                  </select>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                              <form class="range-field">
-                                <div class="form-group">
-                                    <label class="col-lg-4">Categorias</label>
-                                    <div class="custom-control-inline ml-2 ">
-                                      <select class="form-control" id="exampleFormControlSelect1">
-                                          <option>Desarrollador</option>
-                                          <option>Analista de datos</option>
-                                          <option>Publicistas</option>
-                                          <option>Abogado</option>
-                                          <option>Pintor</option>
-                                      </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">       
-                                  <label class="col-lg-4">Genero</label>
-                                  <div class="custom-control custom-radio custom-control-inline ml-2">
-                                      <input id="customRadioInline1" type="radio" name="customRadioInline1" class="custom-control-input">
-                                      <label for="customRadioInline1" class="custom-control-label">M</label>
-                                  </div>
-                                  <div class="custom-control custom-radio custom-control-inline ml-2">
-                                      <input id="customRadioInline2" type="radio" name="customRadioInline1" class="custom-control-input">
-                                      <label for="customRadioInline2" class="custom-control-label">F</label>
-                                  </div>
-                                </div>
-                                <div class="form-group">       
-                                    <label class="col-lg-4">Destacado</label>
-                                    <div class="custom-control custom-radio custom-control-inline ml-2">
-                                        <input id="destacado_si" type="radio" name="destacado" class="custom-control-input">
-                                        <label for="destacado_si" class="custom-control-label">Sí</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline ml-2">
-                                        <input id="destacado_no" type="radio" name="destacado" class="custom-control-input">
-                                        <label for="destacado_no" class="custom-control-label">No</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline ml-2">
-                                        <input id="destacado_cualquiera" type="radio" name="destacado" class="custom-control-input">
-                                        <label for="destacado_cualquiera" class="custom-control-label">Todos</label>
-                                    </div>
-                                </div>
-                                <div class="form-group"> 
-                                  <label class="col-lg-4">Edad minima:</label>  
-                                  <div class="custom-control-inline">
-                                    <input class="form-control" type="number" min="18" class="ml-2" name="edad_min">
-                                  </div>                        
-                                </div>
-                                <div class="form-group"> 
-                                  <label class="col-lg-4">Edad máxima:</label>      
-                                  <div class="custom-control-inline">
-                                    <input class="form-control" type="number" min="19" class="ml-2" name="edad_max">
-                                  </div>
-                                </div>
-                              </form>
+                            <div class="form-group">       
+                              <label class="col-lg-4">Genero</label>
+                              <div class="custom-control custom-radio custom-control-inline ml-2">
+                                  <input id="customRadioInline1" type="radio" name="customRadioInline1" class="custom-control-input">
+                                  <label for="customRadioInline1" class="custom-control-label">M</label>
+                              </div>
+                              <div class="custom-control custom-radio custom-control-inline ml-2">
+                                  <input id="customRadioInline2" type="radio" name="customRadioInline1" class="custom-control-input">
+                                  <label for="customRadioInline2" class="custom-control-label">F</label>
+                              </div>
                             </div>
-                            <div class="modal-footer">
-                              <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                              <button type="button" data-dismiss="modal" class="btn btn-primary">Buscar</button>
+                            <div class="form-group">       
+                                <label class="col-lg-4">Destacado</label>
+                                <div class="custom-control custom-radio custom-control-inline ml-2">
+                                    <input id="destacado_si" type="radio" name="destacado" class="custom-control-input">
+                                    <label for="destacado_si" class="custom-control-label">Sí</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline ml-2">
+                                    <input id="destacado_no" type="radio" name="destacado" class="custom-control-input">
+                                    <label for="destacado_no" class="custom-control-label">No</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline ml-2">
+                                    <input id="destacado_cualquiera" type="radio" name="destacado" class="custom-control-input">
+                                    <label for="destacado_cualquiera" class="custom-control-label">Todos</label>
+                                </div>
                             </div>
-                          </div>
+                            <div class="form-group"> 
+                              <label class="col-lg-4">Edad minima:</label>  
+                              <div class="custom-control-inline">
+                                <input class="form-control" type="number" min="18" class="ml-2" name="edad_min">
+                              </div>                        
+                            </div>
+                            <div class="form-group"> 
+                              <label class="col-lg-4">Edad máxima:</label>      
+                              <div class="custom-control-inline">
+                                <input class="form-control" type="number" min="19" class="ml-2" name="edad_max">
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
+                          <button type="button" data-dismiss="modal" class="btn btn-primary">Buscar</button>
                         </div>
                       </div>
                     </div>
-                    <div class="form-group position-relative mb-0 col-lg-7 mt-1 ml-lg-5">                                      
-                      <button type="submit" style="top: -3px; left: 0;" class="position-absolute bg-white border-0 p-0 ml-4"><i class="o-search-magnify-1 text-gray text-lg"></i></button>
-                      <input type="search" placeholder="Buscar por categoria ..." class="form-control form-control-sm border-0 no-shadow pl-4 ml-2">
-                    </div>
                   </div>
-                </form>
+                </div>
+                <div class="form-group position-relative mb-0 col-lg-7 mt-1 ml-lg-5">                                      
+                  <button type="submit" style="top: -3px; left: 0;" class="position-absolute bg-white border-0 p-0 ml-4"><i class="o-search-magnify-1 text-gray text-lg"></i></button>
+                  <input type="search" placeholder="Buscar por categoria ..." class="form-control form-control-sm border-0 no-shadow pl-4 ml-2">
+                </div>
               </div>
-            </div>
+            </form>
           </div>
-          <!--Profesionales-->
-          <section class="px-lg-5">
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-4.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">Jason Doe</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Desarrollador</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/medalla-de-honor.svg" style="width: 40%;">
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-1.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">Joe Pritchet</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Diseñador gráfico</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/medalla-de-honor.svg" style="width: 40%;">
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-2.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">Lenon Díaz</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Abogado</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/medalla-de-honor.svg" style="width: 40%;">
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-3.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">María Sucre</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Analista de datos</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-6.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">Phil Donphy</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Pintor</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-5.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">Clair Gomez</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Publicista</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/medalla-de-honor.svg" style="width: 40%;">
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-1.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">Joe Pritchet</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Diseñador gráfico</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-2.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">Lenon Díaz</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Abogado</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-3.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">María Sucre</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Analista de datos</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/medalla-de-honor.svg" style="width: 40%;">
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-6.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">Phil Donphy</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Pintor</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-5.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">Clair Gomez</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Publicista</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/medalla-de-honor.svg" style="width: 40%;">
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-4.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">Jason Doe</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Desarrollador</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-              <div class="row">
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/avatar-1.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
-                  <h6 class="mb-0">Joe Pritchet</h6>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Diseñador gráfico</div>
-                </div>
-                <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                </div>
-                <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                  <img src="img/medalla-de-honor.svg" style="width: 40%;">
-                </div>
-              </div>
-              </a>
-            </div>
-          </section>
-          <!-- Modal 2 (Detalles de profesionales)-->
-          <div id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
-            <div role="document" class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 id="exampleModalLabel" class="modal-title">Información general</h4>
-                  <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                  <p><strong>Nombre: </strong>  Jason Doe</p>
-                  <p><strong>Edad:</strong> 25</p>
-                  <p><strong>Dirección:</strong> San Fransisco</p>
-                  <p><strong>Email:</strong> jasond@yahoo.com</p>
-                  <p><strong>Teléfono:</strong> 6666-6666</p>
-                  <p><strong>Nivel académico:</strong> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi sequi repellat architecto, blanditiis officiis doloribus a voluptates assumenda tenetur explicabo eligendi voluptatibus, earum ducimus dolores, nesciunt excepturi vel quia recusandae.</p> 
-                  <p><strong>Experiencia:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit consequatur ratione veniam ea, deserunt laboriosam officia illum incidunt ducimus sunt! Quibusdam est laudantium molestias aut iste sequi veniam quae odio!</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        </div>
       </div>
-    </div> 
+      <!--Profesionales-->
+      <section class="px-lg-5">
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-4.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">Jason Doe</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Desarrollador</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/medalla-de-honor.svg" style="width: 40%;">
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-1.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">Joe Pritchet</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Diseñador gráfico</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/medalla-de-honor.svg" style="width: 40%;">
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-2.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">Lenon Díaz</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Abogado</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/medalla-de-honor.svg" style="width: 40%;">
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-3.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">María Sucre</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Analista de datos</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-6.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">Phil Donphy</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Pintor</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-5.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">Clair Gomez</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Publicista</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/medalla-de-honor.svg" style="width: 40%;">
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-1.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">Joe Pritchet</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Diseñador gráfico</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-2.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">Lenon Díaz</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Abogado</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-3.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">María Sucre</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Analista de datos</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/medalla-de-honor.svg" style="width: 40%;">
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-6.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">Phil Donphy</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Pintor</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-5.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">Clair Gomez</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Publicista</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/medalla-de-honor.svg" style="width: 40%;">
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-4.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">Jason Doe</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Desarrollador</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              
+            </div>
+          </div>
+          </a>
+        </div>
+        <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
+          <div class="row">
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/avatar-1.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
+              <h6 class="mb-0">Joe Pritchet</h6>
+            </div>
+            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <div class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">Diseñador gráfico</div>
+            </div>
+            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+            </div>
+            <div class="col-lg-1 col-md-2 col-5 mx-auto d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+              <img src="img/medalla-de-honor.svg" style="width: 40%;">
+            </div>
+          </div>
+          </a>
+        </div>
+      </section>
+      <!-- Modal 2 (Detalles de profesionales)-->
+      <div id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+        <div role="document" class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 id="exampleModalLabel" class="modal-title">Información general</h4>
+              <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+              <p><strong>Nombre: </strong>  Jason Doe</p>
+              <p><strong>Edad:</strong> 25</p>
+              <p><strong>Dirección:</strong> San Fransisco</p>
+              <p><strong>Email:</strong> jasond@yahoo.com</p>
+              <p><strong>Teléfono:</strong> 6666-6666</p>
+              <p><strong>Nivel académico:</strong> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi sequi repellat architecto, blanditiis officiis doloribus a voluptates assumenda tenetur explicabo eligendi voluptatibus, earum ducimus dolores, nesciunt excepturi vel quia recusandae.</p> 
+              <p><strong>Experiencia:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit consequatur ratione veniam ea, deserunt laboriosam officia illum incidunt ducimus sunt! Quibusdam est laudantium molestias aut iste sequi veniam quae odio!</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
-    <!-- JavaScript files-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/popper.js/umd/popper.min.js"> </script>
-    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/vendor/jquery.cookie/jquery.cookie.js"> </script>
-    <script src="/vendor/chart.js/Chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
-    <script src="/js/front.js"></script>
-</body>
-</html>
+  <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 text-center text-md-left text-primary">
+          <p class="mb-2 mb-md-0">Tapp</p>
+        </div>
+        <div class="col-md-6 text-center text-md-right text-gray-400">
+          <p class="mb-0">Proyecto de Desarrollo IX</p>
+          <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+        </div>
+      </div>
+    </div>
+  </footer>
+</div> 
