@@ -10,7 +10,7 @@ appRouter.get('/registrarVacante', function(req, res) {
     res.render('empresasPages/registrarVacante')
 });
 
-appRouter.get('/registoEmpresa', function(req, res) {
+appRouter.get('/registroEmpresa', function(req, res) {
     res.render('empresasPages/registrarEmpresa')
 });
 
