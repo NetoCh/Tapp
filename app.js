@@ -24,9 +24,8 @@ app.use('/', appRouter)
 var ip = require("ip");
 console.dir ( ip.address() );*/
 
+app.set('port', process.env.PORT || 3000);
 
-
-
-app.listen(config.port,config.hostname,() => {
-  console.log(`Server running at http://${config.hostname}:${config.port}`);
+app.listen(app.get('port'), function () {
+    console.log('Servidor iniciado');
 });
