@@ -42,9 +42,4 @@ appRouter.get('/verProfesionales', function(req, res) {
     })
 });
 
-
-
-
-
-
 module.exports = appRouter;
