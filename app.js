@@ -18,7 +18,7 @@ require('./src/app/models/pool');
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
-app.use('/tapp', appRouter)
+app.use('/', appRouter)
 
 /* para sacar ip 
 var ip = require("ip");
