@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Registro Profesionales</title>
+    <title>Tapp</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/estilo.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="/img/favicon.png?3">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>
@@ -28,7 +29,7 @@
   <body>
     <!-- navbar-->
     <header class="header">
-      <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="index.html" class="navbar-brand font-weight-bold text-uppercase text-base">Formulario de Registro Profesionales</a>
+      <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a href="index.html" class="navbar-brand font-weight-bold text-uppercase text-base">Tapp</a>
         <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
           
         
@@ -65,13 +66,19 @@
       </div>
       <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
+          <nav class="mt-4" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">Registro</li>
+                <li class="breadcrumb-item active" aria-current="page">Profesional</li>
+            </ol>
+        </nav>
           <section class="py-5">
             <div class="row">
               <!-- Form Elements -->
               <div class="col-lg-12 mb-5">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="h6 text-uppercase mb-0">Ingrese sus Datos</h3>
+                    <h3 class="h6 text-uppercase mb-0">Formulario de registro de profesionales</h3>
                   </div>
                   <div class="card-body">
                      
@@ -99,7 +106,7 @@
                            
                         <label class="col-md-3 form-control-label">Direccion</label>
                         <div class="col-md-9">
-                          <textarea class="form-control" id="direccionP" rows="3" name="direccionpro"></textarea>
+                          <textarea class="form-control scroll" id="direccionP" rows="3" name="direccionpro"></textarea>
                         </div>
                       </div>
                       <div class="line"></div>
@@ -119,11 +126,11 @@
                         <div class="col-md-9">
                           <div class="custom-control custom-radio custom-control-inline">
                             <input id="sexoF" type="radio" name="sexopro" class="custom-control-input" checked="true">
-                            <label for="customRadioInline1" class="custom-control-label">Femenino</label>
+                            <label for="sexoF" class="custom-control-label">Femenino</label>
                           </div>
                           <div class="custom-control custom-radio custom-control-inline">
                             <input id="sexoM" type="radio" name="sexopro" class="custom-control-input">
-                            <label for="customRadioInline2" class="custom-control-label">Masculino</label>
+                            <label for="sexoM" class="custom-control-label">Masculino</label>
                           </div>
                         </div>
                       </div>
@@ -163,7 +170,7 @@
                            
                         <label class="col-md-3 form-control-label">Descripcion Profesional</label>
                         <div class="col-md-9">
-                          <textarea class="form-control" id="DescP" rows="3" name="descppro"></textarea>
+                          <textarea class="form-control scroll" id="DescP" rows="3" name="descppro"></textarea>
                         </div>
                       </div>
                       <div class="line"></div>
@@ -211,10 +218,10 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-6 text-center text-md-left text-primary">
-                <p class="mb-2 mb-md-0">Your company &copy; 2018-2020</p>
+                <p class="mb-2 mb-md-0">Tapp</p>
               </div>
               <div class="col-md-6 text-center text-md-right text-gray-400">
-                <p class="mb-0">Design by <a href="https://bootstrapious.com/admin-templates" class="external text-gray-400">Bootstrapious</a></p>
+                <p class="mb-0">Proyecto de Desarrollo IX</p>
                 <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
               </div>
             </div>
