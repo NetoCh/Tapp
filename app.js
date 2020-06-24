@@ -19,7 +19,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use('/', appRouter)
-
 /* para sacar ip 
 var ip = require("ip");
 console.dir ( ip.address() );*/
