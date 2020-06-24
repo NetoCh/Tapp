@@ -2,6 +2,9 @@
   "name": "tapp",
   "version": "1.0.0",
   "description": "Proyecto final DS IX",
+  "engines": { 
+    "node": "14.0.0" 
+  },
   "main": "app.js",
   "scripts": {
     "test": "node app.js",
