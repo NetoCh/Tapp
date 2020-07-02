@@ -65,7 +65,7 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Vacante",
-                target: "empresa/registrarVacante"
+                target: "/empresa/registrarVacante"
             }
         ]
     }
