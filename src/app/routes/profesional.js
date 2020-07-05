@@ -3,7 +3,7 @@ const mainRoute = 'profesionalesPages/index';
 const headerMenu = {
     image: "/img/avatar-6.jpg",
     title: "Titulo",
-    subTitle: "Sub Titulo",
+    subTitle: "Porfesional",
     list: [
         {
             type: "divider",
@@ -53,6 +53,8 @@ const sideMenu = [
 
 
 appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
+    user = res.user;
+    headerMenu.title = user.user;
     res.render(mainRoute, {
         page: {
             route: './home',
@@ -63,6 +65,8 @@ appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
 });
 
 appRouter.get('/registroProfesional', function (req, res) {
+    user = res.user;
+    headerMenu.title = user.user;
     res.render(mainRoute, {
         page: {
             route: './registrarProfesional',

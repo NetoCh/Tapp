@@ -36,19 +36,20 @@
             <h1 class="text-primary text-uppercase mb-4" style="font-size: 30px">Tapp</h1> <!-- class="text-base text-primary text-uppercase mb-4" -->
             <!-- <h2 class="mb-4">Bienvenido!</h2> -->
             <p class="text-muted">Bienvenido! Inicia sesión para acceder a características únicas.</p>
-            <form id="loginForm" action="index" class="mt-4" method="POST">
+            <%- include('../partials/message') %>
+            <form id="loginForm" action="/login" class="mt-4" method="POST">
               <div class="form-group mb-4">
-                <input type="text" id="username" name="username" placeholder="Correo" class="form-control border-0 shadow form-control-lg">
+                <input type="text" id="user" name="user" placeholder="Correo" class="form-control border-0 shadow form-control-lg" required>
               </div>
               <div class="form-group mb-4">
-                <input type="password" id="password" name="passowrd" placeholder="Contraseña" class="form-control border-0 shadow form-control-lg text-violet">
+                <input type="password" id="password" name="password" placeholder="Contraseña" class="form-control border-0 shadow form-control-lg text-violet" required>
               </div>
 
               <button id="iniSesion" type="submit" class="btn btn-primary shadow px-5">Iniciar sesión </button>
             </form>
             <div class="mt-5 text-center align-items-center align-middle">
            		<p class="text-muted">Aún no tiene cuenta?
-           		<a class="text-primary" href="www.google.com">Registrese aquí.</a> </p>
+           		<a class="text-primary" href="/registroProfesional">Registrese aquí.</a> </p>
            	</div>         
           </div>
         </div>

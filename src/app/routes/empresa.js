@@ -1,9 +1,10 @@
 const appRouter = require('express').Router();
 const mainRoute = 'empresasPages/index';
+let user;
 const headerMenu = {
     image: "/img/avatar-6.jpg",
     title: "Titulo",
-    subTitle: "Sub Titulo",
+    subTitle: "Empresa",
     list: [
         {
             type: "divider",
@@ -24,7 +25,7 @@ const headerMenu = {
         {
             type: "list-item",
             text: "Logout",
-            target: "/login"
+            target: "/logout"
         }
     ]
 }
@@ -72,6 +73,8 @@ const sideMenu = [
 ]
 
 appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
+    user = res.user;
+    headerMenu.title = user.user;
     res.render(mainRoute, {
         page: {
             route: './home',
@@ -82,16 +85,20 @@ appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
 });
 
 appRouter.get('/registrarVacante', function (req, res) {
+    user = res.user;
+    headerMenu.title = user.user;
     res.render(mainRoute, {
         page: {
             route: './registrarVacante',
             sideMenu,
-            headerMenu
+            hheaderMenu
         }
     })
 });
 
 appRouter.get('/empresaVacante', function (req, res) {
+    user = res.user;
+    headerMenu.title = user.user;
     res.render(mainRoute, {
         page: {
             route: './empresaVacante',
