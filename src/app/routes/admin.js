@@ -27,22 +27,17 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Inicio",
-                target: "/"
+                target: "/admin/home"
             },
             {
                 type: "list-item",
                 text: "Vacantes",
-                target: "/verVacantes"
+                target: "/admin/verVacantes"
             },
             {
                 type: "list-item",
                 text: "Profesionales",
-                target: "/verProfesionales"
-            },
-            {
-                type: "list-item",
-                text: "Login",
-                target: "/login"
+                target: "/admin/verProfesionales"
             }
         ]
     },
@@ -75,6 +70,36 @@ appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
     })
 });
 
+appRouter.get('/home', function (req, res) { //aquí debe ir el index.ejs
+    user = res.user;
+    headerMenu.title = user.user;
+    res.render(mainRoute, {
+        page: {
+            route: '../homePages/home',
+            sideMenu,
+            headerMenu
+        }
+    })
+});
 
+appRouter.get('/verVacantes', function (req, res) {
+    res.render(mainRoute, {
+        page: {
+            route: '../homePages/verVacantes',
+            sideMenu: sideMenu,
+            headerMenu
+        }
+    })
+});
+
+appRouter.get('/verProfesionales', function (req, res) {
+    res.render(mainRoute, {
+        page: {
+            route: '../homePages/verProfesionales',
+            sideMenu: sideMenu,
+            headerMenu
+        }
+    })
+});
 
 module.exports = appRouter;

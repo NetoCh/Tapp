@@ -41,17 +41,17 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Inicio",
-                target: "/"
+                target: "/empresa"
             },
             {
                 type: "list-item",
                 text: "Vacantes",
-                target: "/verVacantes"
+                target: "/empresa/verVacantes"
             },
             {
                 type: "list-item",
                 text: "Profesionales",
-                target: "/verProfesionales"
+                target: "/empresa/verProfesionales"
             }
         ]
     },
@@ -91,7 +91,7 @@ appRouter.get('/registrarVacante', function (req, res) {
         page: {
             route: './registrarVacante',
             sideMenu,
-            hheaderMenu
+            headerMenu
         }
     })
 });
@@ -103,6 +103,26 @@ appRouter.get('/empresaVacante', function (req, res) {
         page: {
             route: './empresaVacante',
             sideMenu,
+            headerMenu
+        }
+    })
+});
+
+appRouter.get('/verVacantes', function (req, res) {
+    res.render(mainRoute, {
+        page: {
+            route: '../homePages/verVacantes',
+            sideMenu: sideMenu,
+            headerMenu
+        }
+    })
+});
+
+appRouter.get('/verProfesionales', function (req, res) {
+    res.render(mainRoute, {
+        page: {
+            route: '../homePages/verProfesionales',
+            sideMenu: sideMenu,
             headerMenu
         }
     })

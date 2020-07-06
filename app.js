@@ -1,7 +1,7 @@
 'use strict'
 const express = require('express')
 const bodyParser = require('body-parser')
-const config=require('./src/app/config/config')
+const config = require('./src/app/config/config')
 const app = express()
 const path = require ('path');
 const appRouter = require('./src/app/routes/routes')
@@ -19,12 +19,10 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use('/', appRouter)
-/* para sacar ip 
-var ip = require("ip");
-console.dir ( ip.address() );*/
+
 
 app.set('port', process.env.PORT || 3000);
 
 app.listen(app.get('port'), function () {
-    console.log('Servidor iniciado');
+    console.log('Servidor iniciado en el puerto: '+app.get('port'));
 });

@@ -107,7 +107,7 @@ function UserServices() {
             }
         });
     }
-    this.authenticateToken = function (req, res, next){
+    this.authenticateToken = function (req, res, next) {
         const cookie = req.headers.cookie;
         const token1 = cookie.split('token=')[1];
         const token = token1 !== undefined ? token1.split(" ")[0] : null;
