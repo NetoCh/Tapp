@@ -11,7 +11,7 @@ const headerMenu = {
         },
         {
             type: "list-item",
-            text: "Configuración",
+            text: "Mi Cuenta",
             target: "/registroEmpresa"
         },
         {

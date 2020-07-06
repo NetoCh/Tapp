@@ -1,5 +1,6 @@
 const appRouter = require('express').Router();
 const mainRoute = 'profesionalesPages/index';
+const userServices = require('../services/user');
 const headerMenu = {
     image: "/img/avatar-6.jpg",
     title: "Titulo",
@@ -53,24 +54,20 @@ const sideMenu = [
 
 
 appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
-    user = res.user;
-    headerMenu.title = user.user;
     res.render(mainRoute, {
         page: {
             route: './home',
             sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
 
 appRouter.get('/registroProfesional', function (req, res) {
-    user = res.user;
-    headerMenu.title = user.user;
     res.render(mainRoute, {
         page: {
             route: './registrarProfesional',
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });

@@ -2,15 +2,16 @@
 const pool = require('../models/pool')();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const jwtDecode = require('jwt-decode');
 const { v4: uuidv4 } = require('uuid'); //uso ==> uuidv4();
 const rolRoutes = {
     0: "/",
     1: "/admin",
     2: "/empresa",
     3: "/profesional"
-
 }
 function UserServices() {
+    var self = this;
     this.signIn = async function (model) {
         let { user, password, ip } = model;
         let response = {
@@ -23,25 +24,22 @@ function UserServices() {
         if (user === "" || user === undefined) return response;
         if (password === "" || password === undefined) return response;
         // Buscar Contraseña Encriptada del usuario;
-        // let userData = await this.getUserDataBD(user);
-        let userData = {
-            email: "www@www",
-            password: bcrypt.hashSync("123", 10),
-            rol: 1
-        }
+        let spResponse = await self.spGetUserDataBD(user);
         // Comparar las contraseñas
+        if (!spResponse.success) return response;
+        let userData = spResponse.data;
         const match = await bcrypt.compareSync(password, userData.password);
         if (match) {
             let accessToken = {
                 user: userData.email,
-                userId: userData.id,
+                idLogin: userData.id_login,
                 rol: userData.rol,
                 ip,
                 uuid: uuidv4()
             }
             // Insertar la session si la contraseña es correcta
-            // let insertedSession = await this.insertUserSession(accessToken);
-            // if (!insertedSession.success) return response;
+            let insertedSession = await self.spInsertUserSession(accessToken);
+            if (!insertedSession.success) return response;
             response = {
                 success: true,
                 message: "Ha iniciado sesión correctamente",
@@ -53,7 +51,12 @@ function UserServices() {
             return response;
         }
     }
-    this.getUserDataBD = async function (user) {
+    this.signOut = async function (req) {
+        // Elimino la sesión de la BD
+        let user = self.decryptToken(req);
+        return await self.spDeleteUserSession(user);
+    }
+    this.callSql = function (sql, parameteres) {
         let response = {
             success: false,
             message: "No se logro encontrar este usuario",
@@ -61,7 +64,7 @@ function UserServices() {
         }
         return new Promise((resolve) => {
             try {
-                pool.query("CALL pa_usuarioPassword(?)", [user], (error, rows) => {
+                pool.query(sql, parameteres, (error, rows) => {
                     if (error) {
                         response.message = error;
                         resolve(response);
@@ -79,7 +82,36 @@ function UserServices() {
             }
         });
     }
-    this.insertUserSession = async function (accessToken) {
+    this.spGetUserDataBD = function (user) {
+        let response = {
+            success: false,
+            message: "No se logro encontrar este usuario",
+            data: []
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_data_usuario(?)", [user], (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                       response = {
+                            success: true,
+                            message: "Data del usuario extraida correctamente",
+                            data: rows[1][0]
+                       } 
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
+    this.spInsertUserSession = function (accessToken) {
+        let { uuid, ip, idLogin} = accessToken;
         let response = {
             success: false,
             message: "No se logro insertar la sesión",
@@ -87,16 +119,43 @@ function UserServices() {
         }
         return new Promise((resolve) => {
             try {
-                pool.query("CALL pa_insertUserSession(?,?,?,?,?)", Object.values(accessToken), (error, rows) => {
+                pool.query("CALL pa_insertar_sesion(?,?,?)", [uuid,ip,idLogin], (error, rows) => {
                     if (error) {
-                        response.message = error;
+                        response.error = error;
                         resolve(response);
                     }
                     if (rows[0][0]._message === 1) {
                         response = {
                             success: true,
-                            message: "Sesión insertada correctamente",
-                            data: rows
+                            message: "Sesión insertada correctamente"
+                        }
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
+    this.spDeleteUserSession = function (accessToken) {
+        let { uuid, idLogin } = accessToken;
+        let response = {
+            success: false,
+            message: "No se logro eliminar la sesión",
+            data: []
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_eliminar_sesion(?,?)", [uuid,idLogin], (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                        response = {
+                            success: true,
+                            message: "Sesión eliminada correctamente"
                         }
                     }
                     resolve(response);
@@ -108,68 +167,160 @@ function UserServices() {
         });
     }
     this.authenticateToken = function (req, res, next) {
-        const cookie = req.headers.cookie;
-        const token1 = cookie.split('token=')[1];
-        const token = token1 !== undefined ? token1.split(" ")[0] : null;
+        const token = req.cookies.token;
         if (token == null || token == undefined) return res.redirect('/');
-        jwt.verify(token, process.env.ACCESS_TOKEN_KEY, (err, user) => {
-            if (err) return res.redirect('/');
+        jwt.verify(token, process.env.ACCESS_TOKEN_KEY, async (err, user) => {
+            if (err) {
+                res.cookie("active", "false");
+                res.cookie("token", token, { expires: new Date(Date.now()), httpOnly: true });
+                return res.redirect('/');
+            } 
             res.user = user;
+            let response = await self.validateSession(user);
+            if (!response.success) {
+                res.cookie("active", "false");
+                res.cookie("token", token, { expires: new Date(Date.now()), httpOnly: true });
+                return res.redirect('/');
+            } 
             res.cookie("token", token, { expires: new Date(Date.now() + 60000 * 60), httpOnly: true });
             next()
         });
     }
+    this.validateSession = function (accessToken) {
+        // Valida si la sesión todavia es valida, de ser asi, le extiende el tiempo
+        let { uuid, ip, idLogin } = accessToken;
+        let response = {
+            success: false,
+            message: "Sesión no válida"
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_validar_sesion(?,?,?)", [uuid, ip, idLogin], (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                        response = {
+                            success: true,
+                            message: "Sesión válida"
+                        }
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.message = err;
+                resolve(response)
+            }
+        });
+        
+    }
+    this.decryptToken = function (req) {
+        let token = req.cookies.token;
+        try {
+            if (token) return jwtDecode(req.cookies.token);
+        } catch (err) {
+            console.log(err);
+        }
+        return "";
+    }
+    this.getHeaderMenu = function (req) {
+        let active = req.cookies.active === "true" ? true : false;
+        let user = self.decryptToken(req);
+        if (active && user !== "" && user !== undefined) {
+            const headerMenu = {
+                1: {
+                    image: "/img/avatar-6.jpg",
+                    title: user.user,
+                    subTitle: "Admin",
+                    list: [
+                        {
+                            type: "divider"
+                        },
+                        {
+                            type: "list-item",
+                            text: "Cerrar Sessión",
+                            target: "/logout"
+                        }
+                    ]
+                },
+                2: {
+                    image: "/img/avatar-6.jpg",
+                    title: user.user,
+                    subTitle: "Empresa",
+                    list: [
+                        {
+                            type: "divider"
+                        },
+                        {
+                            type: "list-item",
+                            text: "Mi Cuenta",
+                            target: "/registroEmpresa"
+                        },
+                        {
+                            type: "list-item",
+                            text: "Vacantes Publicadas",
+                            target: "/empresa/empresaVacante"
+                        },
+                        {
+                            type: "divider"
+                        },
+                        {
+                            type: "list-item",
+                            text: "Cerrar Sessión",
+                            target: "/logout"
+                        }
+                    ]
+                },
+                3: {
+                    image: "/img/avatar-6.jpg",
+                    title: user.user,
+                    subTitle: "Profesional",
+                    list: [
+                        {
+                            type: "divider"
+                        },
+                        {
+                            type: "list-item",
+                            text: "Mi Cuenta",
+                            target: "/registroProfesional"
+                        },
+                        {
+                            type: "divider"
+                        },
+                        {
+                            type: "list-item",
+                            text: "Cerrar Sessión",
+                            target: "/logout"
+                        }
+                    ]
+                },
+            }
+            return headerMenu[user.rol];
+        } else {
+            return {
+                image: "/img/avatar-6.jpg",
+                title: "Guest",
+                subTitle: "Sin Iniciar Sesión",
+                list: [
+                    {
+                        type: "divider",
+                    },
+                    {
+                        type: "list-item",
+                        text: "Login",
+                        target: "/login"
+                    }
+                ]
+            };
+        }
+    }
+    this.validatePageAccess = function (rol) {
+        return function (req, res, next) {
+            let user = self.decryptToken(req);
+            if (rol !== user.rol) res.redirect('/login');
+            else next();
+        }
+    }
 }
 module.exports = new UserServices();
-
-
-// module.exports={
-//         getAll: ()=>{
-//             return new Promise((resolve, reject)=>{
-//                 pool.query('select * from Login', (error, rows)=>{
-//                     if(error) reject(error);
-//                     resolve(rows)
-//                     console.log(rows[0].email)
-//                 })
-//             })  
-//         },
-
-//         ObtenerUsuario: (email)=>{
-//             return new Promise((resolve, reject)=>{
-//                 pool.query('select * from Login where email =?', email, (err, rows)=>{
-//                     if (err) reject(err);
-//                     resolve(rows[0])
-//                 });
-//             });
-//         },
-//         RegistrarEmpresa:({email, rol, pass, nombre, ubicacion, descripcion, telefono, web})=>{
-//             return new Promise((resolve, reject)=>{
-//                 pool.query('insert into Login (email, password, rol) values(?,?,?)', [email, pass, rol], (err, result)=>{
-//                     if(err) reject(err);
-//                     if (result){
-//                         pool.query('insert into Empresas (nombre_empresa, ubicacion_empresa, descripcion_empresa, telefono_empresa, email_empresa,pagina_web, rol) values(?,?,?,?,?,?,?)', [nombre, ubicacion, descripcion,telefono,email,web,rol], (error, results)=>{
-//                             if(error) reject(error);
-//                             if(results){
-//                                 resolve(result)
-//                             }
-//                         })
-//                     }
-//                 })
-//             })
-//         }, 
-//         RegistrarProfesional:({email, rol, pass, nombre, apellido, direccion, edad, sexo, telefono, descripcion, experiencia, nivelAcademico, destacado})=>{
-//             return new Promise((resolve, reject)=>{
-//                 pool.query('insert into Login (email, password, rol) values(?,?,?)', [email, pass, rol], (err, result)=>{
-//                     if(err) reject(err);
-//                     if (result){
-//                         pool.query('insert into Profesionales (nombre_profesional, apellido_profesional, direccion, edad, sexo, telefono_profesional, email_profesional, descripcion_profesional, experiencia, nivel_academico, rol, destacado) values(?,?,?,?,?,?,?,?,?,?,?,?)', [nombre, apellido, direccion, edad, sexo,telefono, email,descripcion,experiencia,nivelAcademico,rol,destacado], (error, results)=>{
-//                             if(error) reject(error);
-//                             if(results){
-//                                 resolve(result)
-//                             }
-//                         })
-//                     }
-//                 })
-//             })
-//         }, 
-// }

@@ -1,4 +1,5 @@
 const appRouter = require('express').Router();
+const userServices = require('../services/user');
 const mainRoute = 'adminPages/index';
 const headerMenu = {
     image: "/img/avatar-6.jpg",
@@ -65,7 +66,7 @@ appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
         page: {
             route: './dashboard.ejs',
             sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
@@ -77,7 +78,7 @@ appRouter.get('/home', function (req, res) { //aquí debe ir el index.ejs
         page: {
             route: '../homePages/home',
             sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
@@ -87,7 +88,7 @@ appRouter.get('/verVacantes', function (req, res) {
         page: {
             route: '../homePages/verVacantes',
             sideMenu: sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
@@ -96,8 +97,8 @@ appRouter.get('/verProfesionales', function (req, res) {
     res.render(mainRoute, {
         page: {
             route: '../homePages/verProfesionales',
-            sideMenu: sideMenu,
-            headerMenu
+            sideMenu,
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });

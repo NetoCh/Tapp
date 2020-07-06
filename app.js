@@ -1,6 +1,7 @@
 'use strict'
 const express = require('express')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const config = require('./src/app/config/config')
 const app = express()
 const path = require ('path');
@@ -18,6 +19,7 @@ require('./src/app/models/pool');
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
+app.use(cookieParser())
 app.use('/', appRouter)
 
 

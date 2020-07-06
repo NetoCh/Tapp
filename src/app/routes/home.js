@@ -1,6 +1,7 @@
 const appRouter = require('express').Router();
 const ip = require('ip');
 const userServices = require('../services/user');
+const user = require('../services/user');
 const mainRoute = 'homePages/index';
 const headerMenu = {
     image: "/img/avatar-6.jpg",
@@ -58,7 +59,7 @@ appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
         page: {
             route: './home',
             sideMenu: sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     });
 });
@@ -93,14 +94,16 @@ appRouter.post('/login', async function (req, res) {
 
 appRouter.get('/logout', function (req,res) {
     res.clearCookie("token");
+    res.clearCookie("active");
     res.redirect('/');
+    userServices.signOut(req);
 });
 
 appRouter.get('/registroEmpresa', function(req, res) {
     res.render(mainRoute, {
         page: {
             route: './registrarEmpresa',
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
@@ -109,7 +112,7 @@ appRouter.get('/registroProfesional', function(req, res) {
     res.render(mainRoute, {
         page: {
             route: './registrarProfesional',
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
@@ -119,16 +122,17 @@ appRouter.get('/verVacantes', function(req, res) {
         page: {
             route: './verVacantes',
             sideMenu: sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
+
 appRouter.get('/verProfesionales', function(req, res) {
     res.render(mainRoute, {
         page: {
             route: './verProfesionales',
-            sideMenu: sideMenu,
-            headerMenu
+            sideMenu,
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
