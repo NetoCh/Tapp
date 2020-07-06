@@ -90,7 +90,9 @@ appRouter.get('/verVacantes', async function(req, res) {
             route: './verVacantes',
             areas: vacantes[0],
             empresas: vacantes[1],
-            vacantes: vacantes[2]
+            vacantes: vacantes[2],
+            sideMenu: sideMenu,
+            headerMenu
         }
     })
 });
@@ -121,7 +123,9 @@ appRouter.post('/filtrarProfesionales', async function(req, res){
         page: {
             route: './verProfesionales',
             areas: profesionales[1],
-            profesionales: profesionales[2]
+            profesionales: profesionales[2],
+            sideMenu: sideMenu,
+            headerMenu
         }
     })
 });
