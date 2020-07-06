@@ -1,11 +1,63 @@
 const appRouter = require('express').Router();
 const mainRoute = 'homePages/index';
 const userCtrl = require('../controllers/user');
+const headerMenu = {
+    image: "/img/avatar-6.jpg",
+    title: "Titulo",
+    subTitle: "Sub Titulo",
+    list: [
+        {
+            type: "divider",
+        },
+        {
+            type: "list-item",
+            text: "Configuración",
+            target: "/registroEmpresa"
+        },
+        {
+            type: "divider"
+        },
+        {
+            type: "list-item",
+            text: "Login",
+            target: "/login"
+        }
+    ]
+}
+const sideMenu = [
+    {
+        type: "title",
+        text: "MAIN"
+    },
+    {
+        type: "list",
+        text: "",
+        list: [
+            {
+                type: "list-item",
+                text: "Inicio",
+                target: "/"
+            },
+            {
+                type: "list-item",
+                text: "Vacantes",
+                target: "/verVacantes"
+            },
+            {
+                type: "list-item",
+                text: "Profesionales",
+                target: "/verProfesionales"
+            }
+        ]
+    }
+]
 
 appRouter.get('/', function(req, res) { //aquí debe ir el index.ejs
     res.render(mainRoute, {
         page: {
-            route: './home'
+            route: './home',
+            sideMenu: sideMenu,
+            headerMenu
         }
     })
 });
@@ -16,7 +68,8 @@ appRouter.get('/login', function(req, res) {
 appRouter.get('/registroEmpresa', function(req, res) {
     res.render(mainRoute, {
         page: {
-            route: './registrarEmpresa'
+            route: './registrarEmpresa',
+            headerMenu
         }
     })
 });
@@ -24,7 +77,8 @@ appRouter.get('/registroEmpresa', function(req, res) {
 appRouter.get('/registroProfesional', function(req, res) {
     res.render(mainRoute, {
         page: {
-            route: './registrarProfesional'
+            route: './registrarProfesional',
+            headerMenu
         }
     })
 });
@@ -47,7 +101,9 @@ appRouter.get('/verProfesionales', async function(req, res) {
         page: {
             route: './verProfesionales',
             profesionales: profesionales[0],
-            areas: profesionales[1]
+            areas: profesionales[1],
+            sideMenu: sideMenu,
+            headerMenu
         }
     })
 });
@@ -81,7 +137,9 @@ appRouter.post('/filtrarVacantes', async function(req, res){
             route: './verVacantes',
             areas: vacantes[1],
             empresas: vacantes[2],
-            vacantes: vacantes[3]
+            vacantes: vacantes[3],
+            sideMenu: sideMenu,
+            headerMenu
         }
     })
 });

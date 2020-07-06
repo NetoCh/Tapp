@@ -46,5 +46,4 @@ module.exports={
     RegistrarProfesional: async(req,res)=>{
 
     }
-
 }
