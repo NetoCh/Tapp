@@ -1,8 +1,8 @@
 'use strict'
 
 const { promiseImpl } = require('ejs');
-
 const pool=require('../models/pool')();
+const x = 0;
 module.exports={
         getAll: ()=>{
             return new Promise((resolve, reject)=>{
@@ -12,6 +12,42 @@ module.exports={
                     console.log(rows[0].email)
                 })
             })  
+        },
+        
+        getProfesionales: ()=>{
+            return new Promise((resolve, reject)=>{
+                pool.query('CALL pa_traer_todos_Profesionales();', (error, rows)=>{
+                    if(error) reject(error);
+                    resolve(rows)
+                })
+            }) 
+        },
+
+        getFiltroProfesionales: (filtro)=>{
+            return new Promise((resolve, reject)=>{
+                pool.query('CALL pa_filtrar_Profesionales(?, ?, ?, ?, ?);', [ filtro[0], filtro[1], filtro[2], filtro[3], filtro[4]]  ,(error, rows)=>{
+                    if(error) reject(error);
+                    resolve(rows)
+                })
+            }) 
+        },
+
+        getVacantes: ()=>{
+            return new Promise((resolve, reject)=>{
+                pool.query('CALL pa_traer_todas_Vacantes();', (error, rows)=>{
+                    if(error) reject(error);
+                    resolve(rows)
+                })
+            })
+        },
+
+        getFiltroVacantes: (filtro)=>{
+            return new Promise ((resolve, reject)=>{
+                pool.query('CALL pa_filtrar_Vacantes(?,?,?,?)', [filtro[0], filtro[1], filtro[2], filtro[3]], (error, rows)=>{
+                    if(error) reject(error);
+                    resolve(rows)
+                })
+            })
         },
 
         ObtenerUsuario: (email)=>{
