@@ -1,5 +1,6 @@
 const appRouter = require('express').Router();
 const userServices = require('../services/user');
+const userCtrl = require('../controllers/user');
 const mainRoute = 'adminPages/index';
 const headerMenu = {
     image: "/img/avatar-6.jpg",

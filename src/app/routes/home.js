@@ -1,7 +1,6 @@
 const appRouter = require('express').Router();
 const ip = require('ip');
 const userServices = require('../services/user');
-const user = require('../services/user');
 const mainRoute = 'homePages/index';
 const userCtrl = require('../controllers/user');
 const headerMenu = {
