@@ -78,7 +78,7 @@ function UserServices() {
                 });
             } catch (err) {
                 response.message = err;
-                resolve(response)
+                resolve(response);
             }
         });
     }
@@ -322,5 +322,59 @@ function UserServices() {
             else next();
         }
     }
+    this.getAll = () => {
+        return new Promise((resolve, reject) => {
+            pool.query('select * from Login', (error, rows) => {
+                if (error) reject(error);
+                resolve(rows)
+                console.log(rows[0].email)
+            })
+        })
+    }
+    this.getProfesionales = () => {
+        return new Promise((resolve, reject) => {
+            pool.query('CALL pa_traer_todos_Profesionales();', (error, rows) => {
+                if (error) reject(error);
+                resolve(rows)
+            })
+        })
+    }
+    this.getFiltroProfesionales = (filtro) => {
+        return new Promise((resolve, reject) => {
+            pool.query('CALL pa_filtrar_Profesionales(?, ?, ?, ?, ?);', [filtro[0], filtro[1], filtro[2], filtro[3], filtro[4]], (error, rows) => {
+                if (error) reject(error);
+                resolve(rows)
+            })
+        })
+    }
+    this.getVacantes = () => {
+        return new Promise((resolve, reject) => {
+            pool.query('CALL pa_traer_todas_Vacantes();', (error, rows) => {
+                if (error) reject(error);
+                resolve(rows)
+            })
+        })
+    }
+    this.getFiltroVacantes = (filtro) => {
+        return new Promise((resolve, reject) => {
+            pool.query('CALL pa_filtrar_Vacantes(?,?,?,?)', [filtro[0], filtro[1], filtro[2], filtro[3]], (error, rows) => {
+                if (error) reject(error);
+                resolve(rows)
+            })
+        })
+    }
+    this.ObtenerUsuario = (email) => {
+        try {
+            return new Promise((resolve, reject) => {
+                pool.query('select * from Login where email =?', email, (err, rows) => {
+                    if (err) reject(err);
+                    resolve(rows[0])
+                });
+            });
+        } catch (err) {
+            response.message = err;
+            resolve(response)
+        }
+    };
 }
 module.exports = new UserServices();

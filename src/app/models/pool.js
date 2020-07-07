@@ -8,7 +8,9 @@ function mysqlConnection(){
         password: process.env.DB_PASSWORD_TAPP,
         database: process.env.DB_DATABASE_TAPP
     });
+
     return connection;
+
 }
 
 module.exports = mysqlConnection;
