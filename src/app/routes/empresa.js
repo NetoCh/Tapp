@@ -73,37 +73,31 @@ const sideMenu = [
 ]
 
 appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
-    user = res.user;
-    headerMenu.title = user.user;
     res.render(mainRoute, {
         page: {
             route: './home',
             sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
 
 appRouter.get('/registrarVacante', function (req, res) {
-    user = res.user;
-    headerMenu.title = user.user;
     res.render(mainRoute, {
         page: {
             route: './registrarVacante',
             sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
 
 appRouter.get('/empresaVacante', function (req, res) {
-    user = res.user;
-    headerMenu.title = user.user;
     res.render(mainRoute, {
         page: {
             route: './empresaVacante',
             sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
@@ -112,8 +106,8 @@ appRouter.get('/verVacantes', function (req, res) {
     res.render(mainRoute, {
         page: {
             route: '../homePages/verVacantes',
-            sideMenu: sideMenu,
-            headerMenu
+            sideMenu,
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
@@ -122,8 +116,8 @@ appRouter.get('/verProfesionales', function (req, res) {
     res.render(mainRoute, {
         page: {
             route: '../homePages/verProfesionales',
-            sideMenu: sideMenu,
-            headerMenu
+            sideMenu,
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
