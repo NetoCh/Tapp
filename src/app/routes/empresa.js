@@ -1,16 +1,19 @@
 const appRouter = require('express').Router();
 const mainRoute = 'empresasPages/index';
+const userCtrl = require('../controllers/user');
+const userServices = require('../services/user');
+let user;
 const headerMenu = {
     image: "/img/avatar-6.jpg",
     title: "Titulo",
-    subTitle: "Sub Titulo",
+    subTitle: "Empresa",
     list: [
         {
             type: "divider",
         },
         {
             type: "list-item",
-            text: "Configuración",
+            text: "Mi Cuenta",
             target: "/registroEmpresa"
         },
         {
@@ -24,7 +27,7 @@ const headerMenu = {
         {
             type: "list-item",
             text: "Logout",
-            target: "/login"
+            target: "/logout"
         }
     ]
 }
@@ -40,17 +43,17 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Inicio",
-                target: "/"
+                target: "/empresa"
             },
             {
                 type: "list-item",
                 text: "Vacantes",
-                target: "/verVacantes"
+                target: "/empresa/verVacantes"
             },
             {
                 type: "list-item",
                 text: "Profesionales",
-                target: "/verProfesionales"
+                target: "/empresa/verProfesionales"
             }
         ]
     },
@@ -76,7 +79,7 @@ appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
         page: {
             route: './home',
             sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
@@ -86,7 +89,7 @@ appRouter.get('/registrarVacante', function (req, res) {
         page: {
             route: './registrarVacante',
             sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
@@ -96,7 +99,34 @@ appRouter.get('/empresaVacante', function (req, res) {
         page: {
             route: './empresaVacante',
             sideMenu,
-            headerMenu
+            headerMenu: userServices.getHeaderMenu(req)
+        }
+    })
+});
+
+appRouter.get('/verVacantes', async function (req, res) {
+    const vacantes = await userCtrl.TraerVacantes();
+    res.render(mainRoute, {
+        page: {
+            route: '../homePages/verVacantes',
+            areas: vacantes[0],
+            empresas: vacantes[1],
+            vacantes: vacantes[2],
+            sideMenu: sideMenu,
+            headerMenu: userServices.getHeaderMenu(req)
+        }
+    })
+});
+
+appRouter.get('/verProfesionales', async function (req, res) {
+    const profesionales = await userCtrl.TraerProfesionales();
+    res.render(mainRoute, {
+        page: {
+            route: '../homePages/verProfesionales',
+            profesionales: profesionales[0],
+            areas: profesionales[1],
+            sideMenu,
+            headerMenu: userServices.getHeaderMenu(req)
         }
     })
 });
