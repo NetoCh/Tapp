@@ -3,7 +3,7 @@
             class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a><a
             href="/" class="navbar-brand font-weight-bold text-uppercase text-base">Tapp</a>
         <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <form id="searchForm" class="ml-auto d-none d-lg-block">
                     <div class="form-group position-relative mb-0">
                         <button type="submit" style="top: -3px; left: 0;"
@@ -13,7 +13,32 @@
                             class="form-control form-control-sm border-0 no-shadow pl-4">
                     </div>
                 </form>
+            </li> -->
+            <%if(page.headerMenu !== undefined){
+                let headerMenu = page.headerMenu;
+            %> 
+            <li class="nav-item dropdown ml-auto"><a id="userInfo" href="/" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img
+                        src="<%= headerMenu.image %>" alt="Foto" style="max-width: 2.5rem;"
+                        class="img-fluid rounded-circle shadow"></a>
+                <div aria-labelledby="userInfo" class="dropdown-menu"><a href="#" class="dropdown-item"><strong
+                            class="d-block text-uppercase headings-font-family"><%= headerMenu.title %></strong>
+                            <small><%= headerMenu.subTitle %></small></a>
+                    <%
+                        headerMenu.list.forEach((item)=>{
+                            switch(item.type){
+                                case "divider":%>
+                                <div class="dropdown-divider"></div>
+                                <%break;
+                                case "list-item": %>
+                                    <a href="<%= item.target %>" class="dropdown-item"><%= item.text %></a>
+                                <%break;
+                            }
+                        });
+                    %>
+                </div>
             </li>
+            <%}else{%>
             <li class="nav-item dropdown ml-auto"><a id="userInfo" href="/" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><img
                         src="/img/avatar-6.jpg" alt="Foto" style="max-width: 2.5rem;"
@@ -27,6 +52,8 @@
                     <div class="dropdown-divider"></div><a href="/login" class="dropdown-item">Logout</a>
                 </div>
             </li>
+            <%}%>
+            
         </ul>
     </nav>
 </header>

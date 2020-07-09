@@ -1,71 +1,89 @@
-
 <div class="page-holder w-100 d-flex flex-wrap mt-5">
   <div class="container-fluid px-xl-5">
     <!--Buscador-->
-    <section> 
+    <section>
       <div class="col-lg-12 mb-5">
         <div class="card px-2 py-1">
           <div class="card-body px-1 py-2">
             <form id="searchForm" class="ml-auto">
               <div class="row">
                 <div class="col-lg-2 text-center">
-                  <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Filtrar vacantes</button>
-                  <!-- Modal 1-->
-                  <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
-                    <div role="document" class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 id="exampleModalLabel" class="modal-title">Filtrar vacantes</h4>
-                          <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-                        </div>
-                        <div class="modal-body">
-                          <form class="range-field">
-                            <div class="form-group">
-                              <label class="col-lg-4">Empresa</label>
-                              <div class="custom-control-inline ml-2 ">
-                                <select class="form-control" id="exampleFormControlSelect1">
-                                    <option>IT Consulting</option>
-                                    <option>iThink Panamá</option>
-                                    <option>ArpiasSoftware</option>
-                                    <option>Xeux Innovations</option>
-                                    <option>PanaData/option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-lg-4">Area laboral</label>
-                                <div class="custom-control-inline ml-2 ">
-                                  <select class="form-control" id="exampleFormControlSelect1">
-                                      <option>Desarrollador</option>
-                                      <option>Diseño gráfico</option>
-                                      <option>Economía</option>
-                                      <option>Educación</option>
-                                      <option>Fotografía</option>
-                                  </select>
-                                </div>
-                            </div>
-                            <div class="form-group"> 
-                              <label class="col-lg-4">Salario minimo:</label>      
-                              <div class="custom-control-inline ml-2">
-                                <input class="form-control" type="number" min="150" name="salario_min">
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                          <button type="button" data-dismiss="modal" class="btn btn-primary">Buscar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Filtrar
+                    vacantes</button>
                 </div>
-                <div class="form-group position-relative mb-0 col-lg-7 mt-1 ml-lg-3 ">                                      
-                  <button type="submit" style="top: -3px; left: 0;" class="position-absolute bg-white border-0 p-0 ml-4"><i class="o-search-magnify-1 text-gray text-lg"></i></button>
-                  <input type="search" placeholder="Buscar vacantes..." class="form-control form-control-sm border-0 no-shadow pl-4 ml-2">
+                <div class="form-group position-relative mb-0 col-lg-7 mt-1 ml-lg-3 ">
+                  <button type="submit" style="top: -3px; left: 0;"
+                    class="position-absolute bg-white border-0 p-0 ml-4"><i
+                      class="o-search-magnify-1 text-gray text-lg"></i></button>
+                  <input type="search" placeholder="Buscar vacantes..."
+                    class="form-control form-control-sm border-0 no-shadow pl-4 ml-2">
                 </div>
               </div>
             </form>
+            <!-- Modal para filtrar-->
+            <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+              class="modal fade text-left">
+              <div role="document" class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 id="exampleModalLabel" class="modal-title">Filtrar vacantes</h4>
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                  </div>
+                  <form class="range-field" action="/filtrarVacantes" method="POST">
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <label class="col-lg-4">Empresa</label>
+                        <div class="custom-control-inline ml-2 ">
+                          <select class="form-control" name="empresa">
+                            <option selected value="0">Todas</option>
+                            <% for (var data of page.empresas) { %>
+                            <option value=<%= data.id_empresa %>><%= data.nombre_empresa %></option>
+                            <% } %>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-lg-4">Area laboral</label>
+                        <div class="custom-control-inline ml-2 ">
+                          <select class="form-control" name="area">
+                            <option selected value="0">Todas</option>
+                            <% for (var data of page.areas) { %>
+                            <option value=<%= data.id_area %>><%= data.nombre %></option>
+                            <% } %>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-lg-4">Destacado</label>
+                        <div class="custom-control custom-radio custom-control-inline ml-2 col-1">
+                          <input id="destacado_si" type="radio" name="destacado" class="custom-control-input" value="1">
+                          <label for="destacado_si" class="custom-control-label">Sí</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline ml-2 col-1">
+                          <input id="destacado_no" type="radio" name="destacado" class="custom-control-input" value="0">
+                          <label for="destacado_no" class="custom-control-label">No</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline ml-2 col-1">
+                          <input id="destacado_cualquiera" type="radio" name="destacado" class="custom-control-input"
+                            value="2" checked>
+                          <label for="destacado_cualquiera" class="custom-control-label">Todos</label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-lg-4">Salario minimo:</label>
+                        <div class="custom-control-inline ml-2">
+                          <input class="form-control" type="number" min="200" step="10" name="salario_min">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">Buscar</button>
+                      <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -73,235 +91,184 @@
     <!--Vacantes-->
     <section>
       <div class="row text-dark px-5">
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-blue">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">IT Consulting</small> <img src="/img/medalla-de-honor.svg" class="float-right" style="max-width: 40px;" alt=""></i> </h2>
-                <small class="text-gray">itconsulting@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Analista de datos</div>
-                  <h4 class="mb-0">$850.00</h4>
-                </div>
+        <% if (page.vacantes.length == 0){ %>
+            <div class="p-3 col-12">
+              <h2 class="text-center"><small>No hay resultados con esos requerimientos. Inténtelo con otros.</small></h2>
             </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-violet">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">iThink</small></h2>
-                <small class="text-gray">iThink@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Diseñador grafico</div>
-                  <h4 class="mb-0">$780.00</h4>
+        <%} else {%>
+        <% for(var data of page.vacantes) { %>
+        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal"
+            data-target=<%="#modal"+data.id_vacante %>>
+            <div class="card rounded bg-hover-gradient-blue">
+              <div class="content p-4">
+                <!-- <div class="h-100 border">
+                  <h2><i class="fas fa-bullhorn"></i><small class="ml-3"><%- data.nombre_empresa %></small> 
+                <% if(data.destacado == 1) { %><img src="/img/medalla-de-honor.svg" class="float-right" style="max-width: 40px;" alt=""> <% } %> </h2></div> -->
+                <!-- <div class="d-flex align-items-end flex-column">
+                    <div></div>
+                    <div class="text-uppercase font-weight-bold d-block">
+                      <h4></h4>
+                    </div>
+                    <div class="mt-auto">
+                      <h4 class=""></h4>
+                    </div>
+                </div> -->
+                <!-- <div class="d-flex align-items-start flex-column mt-4 " style="height: 150px;">
+                  <small class="text-gray"><%- data.email %></small>
+                  <div class="text-uppercase font-weight-bold d-block"><h4><%- data.nombre_vacante %></h4></div>
+                  <div class="mt-auto"><h4>$<%- data.salario %></h4></div>
+                </div> -->
+                <div class="d-flex align-items-start flex-column">
+                  <div class="row">
+                    <div class="mb-auto p-3" style="height: 100px;">
+                      <h2><% if(data.destacado == 1) { %><img src="/img/medalla-de-honor.svg" class="float-left"
+                          style="max-width: 40px;" alt=""> <% } else { %> <i class="fas fa-bullhorn"></i><% } %><small
+                          class="ml-3"><%- data.nombre_empresa %></small></h2>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="pl-3">
+                      <h5><small class="text-gray"><%- data.email %></small></h5>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="p-3 text-uppercase font-weight-bold " style="height: 100px;">
+                      <h4><%- data.nombre_vacante %></h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="p-3">
+                      <h5>$<%- data.salario %></h5>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-green">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">IT Consulting</small> <img src="/img/medalla-de-honor.svg" class="float-right" style="max-width: 40px;" alt=""></i> </h2>
-                <small class="text-gray">XeusInnovation@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Experto en eCommerce</div>
-                  <h4 class="mb-0">$950.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-green">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">PanaData</small></h2>
-                <small class="text-gray">panadatan@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Experto en DevOps</div>
-                  <h4 class="mb-0">$900.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-blue">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">IT Consulting</small> <img src="/img/medalla-de-honor.svg" class="float-right" style="max-width: 40px;" alt=""></i> </h2>                      <small class="text-gray">iarpsoftware@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Asistente legal</div>
-                  <h4 class="mb-0">$650.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-blue">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">IT Consulting</small> <img src="/img/medalla-de-honor.svg" class="float-right" style="max-width: 40px;" alt=""></i> </h2>
-                <small class="text-gray">panamago@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Community manager</div>
-                  <h4 class="mb-0">$700.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-violet">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">BuyNow</small></h2>
-                <small class="text-gray">buynow@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Supervisor</div>
-                  <h4 class="mb-0">$800.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-green">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">PanaData</small></h2>
-                <small class="text-gray">panadatan@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Experto en DevOps</div>
-                  <h4 class="mb-0">$900.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-violet">
-            <div class="content p-4">
-                <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">IT Consulting</small> <img src="/img/medalla-de-honor.svg" class="float-right" style="max-width: 40px;" alt=""></i> </h2>
-                <small class="text-gray">iThink@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Diseñador grafico</div>
-                  <h4 class="mb-0">$780.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>  
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-blue">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">IT Consulting</small></h2>
-                <small class="text-gray">itconsulting@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Analista de datos</div>
-                  <h4 class="mb-0">$850.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-violet">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">IT Consulting</small> <img src="/img/medalla-de-honor.svg" class="float-right" style="max-width: 40px;" alt=""></i> </h2>
-                <small class="text-gray">iThink@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Diseñador grafico</div>
-                  <h4 class="mb-0">$780.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-green">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">XeusInnovation</small></h2>
-                <small class="text-gray">XeusInnovation@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Experto en eCommerce</div>
-                  <h4 class="mb-0">$950.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-green">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">IT Consulting</small> <img src="/img/medalla-de-honor.svg" class="float-right" style="max-width: 40px;" alt=""></i> </h2>                      <small class="text-gray">panadatan@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Experto en DevOps</div>
-                  <h4 class="mb-0">$900.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-blue">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">Julio&Ruiz</small></h2>
-                <small class="text-gray">iarpsoftware@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Asistente legal</div>
-                  <h4 class="mb-0">$650.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-blue">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">PanamáGo</small></h2>
-                <small class="text-gray">panamago@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Community manager</div>
-                  <h4 class="mb-0">$700.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-violet">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">BuyNow</small></h2>
-                <small class="text-gray">buynow@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Supervisor</div>
-                  <h4 class="mb-0">$800.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-green">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">IT Consulting</small> <img src="/img/medalla-de-honor.svg" class="float-right" style="max-width: 40px;" alt=""></i> </h2>                      <small class="text-gray">panadatan@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Experto en DevOps</div>
-                  <h4 class="mb-0">$900.00</h4>
-                </div>
-            </div>
-          </div></a>
-        </div>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#myModal2">
-          <div class="card rounded bg-hover-gradient-violet">
-            <div class="content p-4">
-              <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">iThink</small></h2>
-                <small class="text-gray">iThink@yahoo.com</small>
-                <div class="text-uppercase">
-                  <div class="font-weight-bold d-block">Diseñador grafico</div>
-                  <h4 class="mb-0">$780.00</h4>
-                </div>
-            </div>
-          </div></a>
+          </a>
         </div>
         <!-- Modal2 (dettalles de vacante)-->
-        <div id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
-          <div role="document" class="modal-dialog modal-dialog-centered">
+        <div id=<%="modal"+ data.id_vacante %> tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true" class="modal fade text-left">
+          <div role="document" class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
                 <h4 id="exampleModalLabel" class="modal-title">Detalles de la vacante</h4>
-                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
+                    aria-hidden="true">×</span></button>
               </div>
               <div class="modal-body">
-                <p><strong>Nombre: </strong> Analista de datos</p>
-                <p><strong>Área laboral:</strong> Lorem omgu cojfanet. </p>
-                <p><strong>Descripción:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat labore eum temporibus eius incidunt dolorum consequuntur totam dolorem blanditiis eaque doloremque tempore distinctio voluptatum reprehenderit, et exercitationem nemo laboriosam nam.</p>
-                <p><strong>Trabajos a desempeñar:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit illo saepe maxime consequatur fuga assumenda id tempora fugit, magni reiciendis nemo iste ut quidem obcaecati nobis sapiente voluptatum eum optio!</p>
-                <p><strong>Salario:</strong> Lorem ipsum dolor.</p>
-                <p><strong>Ubicación:</strong> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi sequi repellat architecto, blanditiis officiis doloribus.</p> 
-                <p><strong>Fecha de publicación:</strong> Lorem ipsum dolor sit amet.</p>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Nombre: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.nombre_vacante%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Descripción de la vacante: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.descripcion_vacante%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Área laboral: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.nombre_area%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Requisitos </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.requisitos%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Trabajos a desempeñar: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.trabajos_desempeñar%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Salario: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.salario%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Ubicación del trabajo: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.ubicacion%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Tipo de horario: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.tipo_horario%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Fecha de publicación: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.fecha%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Nombre de la empresa: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.nombre_empresa%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Descripción de la empresa: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.descripcion_empresa%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Teléfono de la empresa: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.telefono_empresa%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Sitio web: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.pagina_web%></p>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <strong>Email: </strong>
+                  </div>
+                  <div class="col-8">
+                    <p><%= data.email%></p>
+                  </div>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
@@ -309,6 +276,7 @@
             </div>
           </div>
         </div>
+        <% } } %>
       </div>
     </section>
   </div>
@@ -326,4 +294,18 @@
     </div>
   </footer>
 </div>
-        
+
+<!-- <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal"
+            data-target="#myModal2">
+            <div class="card rounded bg-hover-gradient-violet">
+              <div class="content p-4">
+                <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">iThink</small></h2>
+                <small class="text-gray">iThink@yahoo.com</small>
+                <div class="text-uppercase">
+                  <div class="font-weight-bold d-block">Diseñador grafico</div>
+                  <h4 class="mb-0">$780.00</h4>
+                </div>
+              </div>
+            </div>
+          </a>
+      </div> -->
