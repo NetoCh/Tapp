@@ -5,7 +5,6 @@
       <div class="col-lg-12 mb-5">
         <div class="card px-2 py-1">
           <div class="card-body px-1 py-2">
-            <form id="searchForm" class="ml-auto">
               <div class="row">
                 <div class="col-lg-2 text-center">
                   <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary">Filtrar
@@ -16,10 +15,9 @@
                     class="position-absolute bg-white border-0 p-0 ml-4"><i
                       class="o-search-magnify-1 text-gray text-lg"></i></button>
                   <input type="search" placeholder="Buscar vacantes..."
-                    class="form-control form-control-sm border-0 no-shadow pl-4 ml-2">
+                    class="form-control form-control-sm border-0 no-shadow pl-4 ml-2" id="buscar" value="">
                 </div>
               </div>
-            </form>
             <!-- Modal para filtrar-->
             <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
               class="modal fade text-left">
@@ -96,39 +94,23 @@
               <h2 class="text-center"><small>No hay resultados con esos requerimientos. Inténtelo con otros.</small></h2>
             </div>
         <%} else {%>
-        <% for(var data of page.vacantes) { %>
-        <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal"
-            data-target=<%="#modal"+data.id_vacante %>>
+        <% var i = -1; for(var data of page.vacantes) { i++ %>
+        <div class="col-lg-4 mb-4" id="<%= i %>"><a href="#" class="message bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#modal" data-id=<%= i %>>
             <div class="card rounded bg-hover-gradient-blue">
               <div class="content p-4">
-                <!-- <div class="h-100 border">
-                  <h2><i class="fas fa-bullhorn"></i><small class="ml-3"><%- data.nombre_empresa %></small> 
-                <% if(data.destacado == 1) { %><img src="/img/medalla-de-honor.svg" class="float-right" style="max-width: 40px;" alt=""> <% } %> </h2></div> -->
-                <!-- <div class="d-flex align-items-end flex-column">
-                    <div></div>
-                    <div class="text-uppercase font-weight-bold d-block">
-                      <h4></h4>
-                    </div>
-                    <div class="mt-auto">
-                      <h4 class=""></h4>
-                    </div>
-                </div> -->
-                <!-- <div class="d-flex align-items-start flex-column mt-4 " style="height: 150px;">
-                  <small class="text-gray"><%- data.email %></small>
-                  <div class="text-uppercase font-weight-bold d-block"><h4><%- data.nombre_vacante %></h4></div>
-                  <div class="mt-auto"><h4>$<%- data.salario %></h4></div>
-                </div> -->
                 <div class="d-flex align-items-start flex-column">
                   <div class="row">
-                    <div class="mb-auto p-3" style="height: 100px;">
+                    <div class="p-3" style="height: 100px;">
                       <h2><% if(data.destacado == 1) { %><img src="/img/medalla-de-honor.svg" class="float-left"
                           style="max-width: 40px;" alt=""> <% } else { %> <i class="fas fa-bullhorn"></i><% } %><small
                           class="ml-3"><%- data.nombre_empresa %></small></h2>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="pl-3">
-                      <h5><small class="text-gray"><%- data.email %></small></h5>
+                    <div class="pl-3 mt-3 col-lg-12">
+                      <small class="text-gray" style="overflow-x:-webkit-marquee;"><%- data.email %></small>
+                      <!-- <marquee behavior="scroll" direction="right"
+                        onmouseout="this.stop();">Hower over and hold the mouse marquee stop</marquee> -->
                     </div>
                   </div>
                   <div class="row">
@@ -146,8 +128,9 @@
             </div>
           </a>
         </div>
+        <% } } %>
         <!-- Modal2 (dettalles de vacante)-->
-        <div id=<%="modal"+ data.id_vacante %> tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
           aria-hidden="true" class="modal fade text-left">
           <div role="document" class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -162,7 +145,7 @@
                     <strong>Nombre: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.nombre_vacante%></p>
+                    <p id="#nombre"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -170,7 +153,7 @@
                     <strong>Descripción de la vacante: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.descripcion_vacante%></p>
+                    <p id="#descripcion"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -178,7 +161,7 @@
                     <strong>Área laboral: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.nombre_area%></p>
+                    <p id="#area"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -186,7 +169,7 @@
                     <strong>Requisitos </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.requisitos%></p>
+                    <p id="#requisito"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -194,7 +177,7 @@
                     <strong>Trabajos a desempeñar: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.trabajos_desempeñar%></p>
+                    <p id="#trabajos"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -202,7 +185,7 @@
                     <strong>Salario: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.salario%></p>
+                    <p id="#salario"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -210,7 +193,7 @@
                     <strong>Ubicación del trabajo: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.ubicacion%></p>
+                    <p id="#ubicacion"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -218,7 +201,7 @@
                     <strong>Tipo de horario: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.tipo_horario%></p>
+                    <p id="#horario"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -226,7 +209,7 @@
                     <strong>Fecha de publicación: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.fecha%></p>
+                    <p id="#fecha"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -234,7 +217,7 @@
                     <strong>Nombre de la empresa: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.nombre_empresa%></p>
+                    <p id="#empresa"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -242,7 +225,7 @@
                     <strong>Descripción de la empresa: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.descripcion_empresa%></p>
+                    <p id="#descripcionempr"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -250,7 +233,7 @@
                     <strong>Teléfono de la empresa: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.telefono_empresa%></p>
+                    <p id="#telefono"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -258,7 +241,7 @@
                     <strong>Sitio web: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.pagina_web%></p>
+                    <p id="#sitio"></p>
                   </div>
                 </div>
                 <div class="row mt-3">
@@ -266,7 +249,7 @@
                     <strong>Email: </strong>
                   </div>
                   <div class="col-8">
-                    <p><%= data.email%></p>
+                    <p id="#email"></p>
                   </div>
                 </div>
               </div>
@@ -276,7 +259,6 @@
             </div>
           </div>
         </div>
-        <% } } %>
       </div>
     </section>
   </div>
@@ -293,6 +275,50 @@
       </div>
     </div>
   </footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script>
+    var buscar = document.querySelector('#buscar');
+    var data = '<%-JSON.stringify(page.vacantes)%>';
+    var objVacantes = JSON.parse(data);
+    console.log(objVacantes);
+    var comparar = new Array();
+    var filtrar = () =>{
+      for (let data of objVacantes){
+        comparar.push(data.nombre_empresa+" "+data.nombre_vacante);
+      }
+      for (let data of comparar){
+          let z = comparar.findIndex(index => index === data);
+          let m = document.getElementById(z);
+          if(data.toLowerCase().indexOf(buscar.value.toLowerCase()) !== -1){
+            if (m.style.display === "none"){
+                m.style.display = "block";
+            }
+          }
+          else{
+            m.style.display = "none";
+          }
+      }
+    }
+    buscar.addEventListener('keyup', filtrar);
+  </script>
+  <script type="text/javascript">
+    $(document).on("click", ".message", function () {
+      document.getElementById("#nombre").innerHTML = objVacantes[$(this).data('id')].nombre_vacante;
+      document.getElementById("#descripcion").innerHTML = objVacantes[$(this).data('id')].descripcion_vacante;
+      document.getElementById("#area").innerHTML = objVacantes[$(this).data('id')].nombre_area;
+      document.getElementById("#requisito").innerHTML = objVacantes[$(this).data('id')].requisitos;
+      document.getElementById("#trabajos").innerHTML = objVacantes[$(this).data('id')].trabajos_desempeñar;
+      document.getElementById("#salario").innerHTML = "$"+objVacantes[$(this).data('id')].salario;
+      document.getElementById("#ubicacion").innerHTML = objVacantes[$(this).data('id')].ubicacion;
+      document.getElementById("#horario").innerHTML = objVacantes[$(this).data('id')].tipo_horario;
+      document.getElementById("#fecha").innerHTML = objVacantes[$(this).data('id')].fecha;
+      document.getElementById("#empresa").innerHTML = objVacantes[$(this).data('id')].nombre_empresa; 
+      document.getElementById("#descripcionempr").innerHTML = objVacantes[$(this).data('id')].descripcion_empresa;  
+      document.getElementById("#telefono").innerHTML = objVacantes[$(this).data('id')].telefono_empresa; 
+      document.getElementById("#sitio").innerHTML = objVacantes[$(this).data('id')].pagina_web;  
+      document.getElementById("#email").innerHTML = objVacantes[$(this).data('id')].email;
+    });
+  </script>
 </div>
 
 <!-- <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal"

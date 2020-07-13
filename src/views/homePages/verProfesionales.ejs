@@ -5,7 +5,6 @@
       <div class="col-lg-12 mb-5">
         <div class="card px-2 py-1">
           <div class="card-body px-1 py-2">
-            <form id="searchForm" class="ml-auto">
               <div class="row">
                 <div class="col-lg-2 text-center">
                   <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary ">Filtrar
@@ -15,11 +14,10 @@
                   <button type="submit" style="top: -3px; left: 0;"
                     class="position-absolute bg-white border-0 p-0 ml-4"><i
                       class="o-search-magnify-1 text-gray text-lg"></i></button>
-                  <input type="search" placeholder="Buscar por categoria ..."
-                    class="form-control form-control-sm border-0 no-shadow pl-4 ml-2">
+                  <input type="text" placeholder="Buscar por categoria ..."
+                    class="form-control form-control-sm border-0 no-shadow pl-4 ml-2" id="buscar" value="">
                 </div>
               </div>
-            </form>
             <!-- Modal 1 para filtrar-->
             <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
               class="modal fade text-left">
@@ -110,10 +108,10 @@
           </div>
         </div>
       <%} else {%>
-      <% for (var data of page.profesionales) { %>
+      <% var i = -1; for (var data of page.profesionales) { i++ %>
       <!--Profesionales-->
-      <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style"
-          data-toggle="modal" data-target=<%="#modal"+ data.id_profesional  %>>
+      <div class="col-lg-12" id="<%= i %>"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style"
+          data-toggle="modal" data-id="<%= i %>" data-target="#modal">
           <div class="row">
             <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
               <img src="/img/avatar-4.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
@@ -137,8 +135,9 @@
           </div>
         </a>
       </div>
+      <% } } %>
       <!-- Modal 2 (Detalles de profesionales)-->
-      <div id=<%="modal"+ data.id_profesional %> tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      <div id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true" class="modal fade text-left">
         <div role="document" class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -153,7 +152,7 @@
                   <p><strong class="mr-1">Nombre: </strong>
                 </div>
                 <div class="col-8">
-                  <%- data.nombre_profesional + " " + data.apellido_profesional %></p>
+                  <p id="#nombre" value=""></p>
                 </div>
               </div>
               <div class="row">
@@ -161,7 +160,7 @@
                   <p><strong class="mr-1">Edad: </strong>
                 </div>
                 <div class="col-8">
-                  <p><%- data.edad %></p>
+                  <p id="#edad" value=""></p>
                 </div>
               </div>
               <div class="row">
@@ -169,7 +168,7 @@
                   <p><strong class="mr-1">Genero: </strong>
                 </div>
                 <div class="col-8">
-                  <p><%- data.sexo%></p>
+                  <p id="#sexo" value=""></p>
                 </div>
               </div>
               <div class="row">
@@ -177,7 +176,7 @@
                   <p><strong class="mr-1">Dirección: </strong>
                 </div>
                 <div class="col-8">
-                  <p><%- data.direccion %></p>
+                  <p id="#direccion" value=""></p>
                 </div>
               </div>
               <div class="row">
@@ -185,7 +184,7 @@
                   <p><strong class="mr-1">Email: </strong>
                 </div>
                 <div class="col-8">
-                  <p><%- data.email %></p>
+                  <p id="#email" value=""></p>
                 </div>
               </div>
               <div class="row">
@@ -193,7 +192,7 @@
                   <p><strong class="mr-1">Teléfono: </strong>
                 </div>
                 <div class="col-8">
-                  <p><%- data.telefono_profesional %></p>
+                  <p id="#telefono" value=""></p>
                 </div>
               </div>
               <div class="row">
@@ -201,7 +200,7 @@
                   <p><strong class="mr-1">Nivel académico: </strong>
                 </div>
                 <div class="col-8">
-                  <p><%- data.nivel_academico %></p>
+                  <p id="#nivel" value=""></p>
                 </div>
               </div>
               <div class="row">
@@ -209,7 +208,7 @@
                   <p><strong class="mr-1">Experiencia: </strong>
                 </div>
                 <div class="col-8">
-                  <p><%- data.experiencia %></p>
+                  <p id="#experiencia" value=""></p>
                 </div>
               </div>
             </div>
@@ -219,7 +218,6 @@
           </div>
         </div>
       </div>
-      <% } } %>
       <!-- <div class="col-lg-12"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style"
             data-toggle="modal" data-target="#myModal2">
             <div class="row">
@@ -257,4 +255,42 @@
       </div>
     </div>
   </footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script>
+    var buscar = document.querySelector('#buscar');
+    var data = '<%-JSON.stringify(page.profesionales)%>';
+    var objProfesionales = JSON.parse(data);
+    var comparar = new Array();
+    var filtrar = () =>{
+      for (let data of objProfesionales){
+        comparar.push(data.nombre_profesional+" "+data.apellido_profesional);
+      }
+      for (let data of comparar){
+          let z = comparar.findIndex(index => index === data);
+          let m = document.getElementById(z);
+          if(data.toLowerCase().indexOf(buscar.value.toLowerCase()) !== -1){
+            if (m.style.display === "none"){
+                m.style.display = "block";
+            }
+          }
+          else{
+            m.style.display = "none";
+          }
+      }
+    }
+    buscar.addEventListener('keyup', filtrar);
+  </script>
+  <script type="text/javascript">
+    console.log(objProfesionales);
+    $(document).on("click", ".message", function () {
+      document.getElementById("#nombre").innerHTML = objProfesionales[$(this).data('id')].nombre_profesional + " " + objProfesionales[$(this).data('id')].apellido_profesional;
+      document.getElementById("#edad").innerHTML = objProfesionales[$(this).data('id')].edad;
+      document.getElementById("#sexo").innerHTML = objProfesionales[$(this).data('id')].sexo;
+      document.getElementById("#direccion").innerHTML = objProfesionales[$(this).data('id')].direccion;
+      document.getElementById("#email").innerHTML = objProfesionales[$(this).data('id')].email;
+      document.getElementById("#telefono").innerHTML = objProfesionales[$(this).data('id')].telefono_profesional;
+      document.getElementById("#nivel").innerHTML = objProfesionales[$(this).data('id')].nivel_academico;
+      document.getElementById("#experiencia").innerHTML = objProfesionales[$(this).data('id')].experiencia;   
+    });
+  </script>
 </div>
