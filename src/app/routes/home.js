@@ -38,17 +38,17 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Inicio",
-                target: "/"
+                target: "#"
             },
             {
                 type: "list-item",
                 text: "Vacantes",
-                target: "/verVacantes"
+                target: "#vacantes"
             },
             {
                 type: "list-item",
                 text: "Profesionales",
-                target: "/verProfesionales"
+                target: "#profesionales"
             }
         ]
     }
@@ -57,7 +57,6 @@ const sideMenu = [
 appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
     res.render(mainRoute, {
         page: {
-            route: './home',
             sideMenu: sideMenu,
             headerMenu: userServices.getHeaderMenu(req)
         }
