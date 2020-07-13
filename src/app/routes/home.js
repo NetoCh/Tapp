@@ -40,17 +40,17 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Inicio",
-                target: "/"
+                target: "#"
             },
             {
                 type: "list-item",
                 text: "Vacantes",
-                target: "/verVacantes"
+                target: "#vacantes"
             },
             {
                 type: "list-item",
                 text: "Profesionales",
-                target: "/verProfesionales"
+                target: "#profesionales"
             }
         ]
     }
@@ -60,12 +60,15 @@ appRouter.get('/', async (req, res) => { //aquí debe ir el index.ejs
     let data = await homeServices.getDestacados()
     res.render(mainRoute, {
         page: {
-            route: './home',
             sideMenu: sideMenu,
             data,
             headerMenu: userServices.getHeaderMenu(req)
         }
     });
+});
+
+appRouter.get('/home', function (req, res) { //aquí debe ir el index.ejs
+    res.render('homePages/home');
 });
 
 appRouter.get('/login', function(req, res) {
@@ -123,27 +126,21 @@ appRouter.get('/registroProfesional', function(req, res) {
 
 appRouter.get('/verVacantes', async function(req, res) {
     const vacantes = await userCtrl.TraerVacantes();
-    res.render(mainRoute, {
+    res.render('homePages/verVacantes', {
         page: {
-            route: './verVacantes',
             areas: vacantes[0],
             empresas: vacantes[1],
-            vacantes: vacantes[2],
-            sideMenu: sideMenu,
-            headerMenu: userServices.getHeaderMenu(req)
+            vacantes: vacantes[2]
         }
     })
 });
 
 appRouter.get('/verProfesionales', async function(req, res) {
     const profesionales = await userCtrl.TraerProfesionales();
-    res.render(mainRoute, {
+    res.render('homePages/verProfesionales', {
         page: {
-            route: './verProfesionales',
             profesionales: profesionales[0],
-            areas: profesionales[1],
-            sideMenu,
-            headerMenu: userServices.getHeaderMenu(req)
+            areas: profesionales[1]
         }
     })
 });
