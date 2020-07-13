@@ -64,6 +64,10 @@ appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
     });
 });
 
+appRouter.get('/home', function (req, res) { //aquí debe ir el index.ejs
+    res.render('homePages/home');
+});
+
 appRouter.get('/login', function(req, res) {
     res.render('homePages/login')
 });
@@ -119,27 +123,21 @@ appRouter.get('/registroProfesional', function(req, res) {
 
 appRouter.get('/verVacantes', async function(req, res) {
     const vacantes = await userCtrl.TraerVacantes();
-    res.render(mainRoute, {
+    res.render('homePages/verVacantes', {
         page: {
-            route: './verVacantes',
             areas: vacantes[0],
             empresas: vacantes[1],
-            vacantes: vacantes[2],
-            sideMenu: sideMenu,
-            headerMenu: userServices.getHeaderMenu(req)
+            vacantes: vacantes[2]
         }
     })
 });
 
 appRouter.get('/verProfesionales', async function(req, res) {
     const profesionales = await userCtrl.TraerProfesionales();
-    res.render(mainRoute, {
+    res.render('homePages/verProfesionales', {
         page: {
-            route: './verProfesionales',
             profesionales: profesionales[0],
-            areas: profesionales[1],
-            sideMenu,
-            headerMenu: userServices.getHeaderMenu(req)
+            areas: profesionales[1]
         }
     })
 });
