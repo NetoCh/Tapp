@@ -1,8 +1,10 @@
 const appRouter = require('express').Router();
 const ip = require('ip');
 const userServices = require('../services/user');
+const homeServices = require('../services/home');
 const mainRoute = 'homePages/index';
 const userCtrl = require('../controllers/user');
+
 const headerMenu = {
     image: "/img/avatar-6.jpg",
     title: "Titulo",
@@ -54,11 +56,13 @@ const sideMenu = [
     }
 ]
 
-appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
+appRouter.get('/', async (req, res) => { //aquí debe ir el index.ejs
+    let data = await homeServices.getDestacados()
     res.render(mainRoute, {
         page: {
             route: './home',
             sideMenu: sideMenu,
+            data,
             headerMenu: userServices.getHeaderMenu(req)
         }
     });
@@ -181,5 +185,6 @@ appRouter.post('/filtrarVacantes', async function(req, res){
         }
     })
 });
+
 
 module.exports = appRouter;
