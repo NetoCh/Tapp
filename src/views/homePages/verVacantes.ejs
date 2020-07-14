@@ -275,12 +275,10 @@
       </div>
     </div>
   </footer>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script>
     var buscar = document.querySelector('#buscar');
     var data = '<%-JSON.stringify(page.vacantes)%>';
     var objVacantes = JSON.parse(data);
-    console.log(objVacantes);
     var comparar = new Array();
     var filtrar = () =>{
       for (let data of objVacantes){
@@ -301,24 +299,7 @@
     }
     buscar.addEventListener('keyup', filtrar);
   </script>
-  <script type="text/javascript">
-    $(document).on("click", ".message", function () {
-      document.getElementById("#nombre").innerHTML = objVacantes[$(this).data('id')].nombre_vacante;
-      document.getElementById("#descripcion").innerHTML = objVacantes[$(this).data('id')].descripcion_vacante;
-      document.getElementById("#area").innerHTML = objVacantes[$(this).data('id')].nombre_area;
-      document.getElementById("#requisito").innerHTML = objVacantes[$(this).data('id')].requisitos;
-      document.getElementById("#trabajos").innerHTML = objVacantes[$(this).data('id')].trabajos_desempeñar;
-      document.getElementById("#salario").innerHTML = "$"+objVacantes[$(this).data('id')].salario;
-      document.getElementById("#ubicacion").innerHTML = objVacantes[$(this).data('id')].ubicacion;
-      document.getElementById("#horario").innerHTML = objVacantes[$(this).data('id')].tipo_horario;
-      document.getElementById("#fecha").innerHTML = objVacantes[$(this).data('id')].fecha;
-      document.getElementById("#empresa").innerHTML = objVacantes[$(this).data('id')].nombre_empresa; 
-      document.getElementById("#descripcionempr").innerHTML = objVacantes[$(this).data('id')].descripcion_empresa;  
-      document.getElementById("#telefono").innerHTML = objVacantes[$(this).data('id')].telefono_empresa; 
-      document.getElementById("#sitio").innerHTML = objVacantes[$(this).data('id')].pagina_web;  
-      document.getElementById("#email").innerHTML = objVacantes[$(this).data('id')].email;
-    });
-  </script>
+
 </div>
 
 <!-- <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal"
