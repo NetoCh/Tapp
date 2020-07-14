@@ -1,4 +1,5 @@
-$(function () {
+function Charts() {
+    this.init = function () {
 
 
     var violet = '#DF99CA',
@@ -704,10 +705,9 @@ $(function () {
     var radarChartExample = {
         responsive: true
     };
+    };
+}
 
-
-
-});
 
 
 
