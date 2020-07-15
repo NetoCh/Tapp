@@ -22,8 +22,7 @@ module.exports={
         const vacantes = await user.getVacantes();
         return vacantes;
     },
-
-    FiltrarVacantes: async (filtro)=>{
+   FiltrarVacantes: async (filtro)=>{
         var vacantes = await user.getFiltroVacantes(filtro);
         return vacantes;
     },

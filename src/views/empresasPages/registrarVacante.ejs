@@ -24,10 +24,10 @@
                   <label class="col-md-3 form-control-label">Área laboral</label>
                   <div class="col-md-9">
                     <select name="areaLaboral" id ="areaLaboral" class="form-control" required="true">
-                      <option>Área 1</option>
-                      <option>Área 2</option>
-                      <option>Área 3</option>
-                      <option>Área 4</option>
+                      <option selected value="-1">Seleccione un área</option>
+                        <% for (var area of page.areas) { %>
+                           <option value=<%= area.id %>><%= area.Nombre %></option>
+                        <% } %>
                     </select>
                     <small class="form-text text-muted ml-3">Seleccione el área laboral de su vacante.</small>
                   </div>
@@ -121,4 +121,3 @@
     </div>
   </footer>
 </div>
-   

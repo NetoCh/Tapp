@@ -4,7 +4,8 @@
   "description": "Proyecto final DS IX",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "test": "node app.js",
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
