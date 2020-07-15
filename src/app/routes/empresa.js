@@ -1,6 +1,7 @@
 const appRouter = require('express').Router();
 const mainRoute = 'empresasPages/index';
 const userCtrl = require('../controllers/user');
+const homeServices = require('../services/home');
 const userServices = require('../services/user');
 let user;
 const headerMenu = {
@@ -74,11 +75,13 @@ const sideMenu = [
     }
 ]
 
-appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
+appRouter.get('/', async (req, res) => { //aquí debe ir el index.ejs
+    let data = await homeServices.getDestacados()
     res.render(mainRoute, {
         page: {
             route: './home',
             sideMenu,
+            data,
             headerMenu: userServices.getHeaderMenu(req)
         }
     })

@@ -6,6 +6,7 @@ const config = require('./src/app/config/config')
 const app = express()
 const path = require ('path');
 const appRouter = require('./src/app/routes/routes')
+const apiRouter = require('./src/app/webapi/registrar-api')
 const cors=require('cors');
 const ejs = require('ejs');
 
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use('/', appRouter)
+app.use('/api', apiRouter)
 
 
 app.set('port', process.env.PORT || 3000);

@@ -56,7 +56,7 @@ function UserServices() {
         let user = self.decryptToken(req);
         return await self.spDeleteUserSession(user);
     }
-    this.callSql = function (sql, parameteres) {
+    this.callSql = function (sql, parameteres) { // select * from tabla where id = ?;
         let response = {
             success: false,
             message: "No se logro encontrar este usuario",

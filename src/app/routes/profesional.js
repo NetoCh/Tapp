@@ -1,29 +1,8 @@
 const appRouter = require('express').Router();
 const mainRoute = 'profesionalesPages/index';
 const userServices = require('../services/user');
-const headerMenu = {
-    image: "/img/avatar-6.jpg",
-    title: "Titulo",
-    subTitle: "Porfesional",
-    list: [
-        {
-            type: "divider",
-        },
-        {
-            type: "list-item",
-            text: "Configuración",
-            target: "/registroProfesional"
-        },
-        {
-            type: "divider"
-        },
-        {
-            type: "list-item",
-            text: "Login",
-            target: "/login"
-        }
-    ]
-}
+const homeServices = require('../services/home');
+const home = require('../services/home');
 const sideMenu = [
     {
         type: "title",
@@ -36,27 +15,26 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Inicio",
-                target: "/"
+                target: "#"
             },
             {
                 type: "list-item",
                 text: "Vacantes",
-                target: "/verVacantes"
+                target: "#vacantes"
             },
             {
                 type: "list-item",
                 text: "Profesionales",
-                target: "/verProfesionales"
+                target: "#profesionales"
             }
         ]
     }
 ]
 
 
-appRouter.get('/', function (req, res) { //aquí debe ir el index.ejs
+appRouter.get('/', async (req, res) => { 
     res.render(mainRoute, {
         page: {
-            route: './home',
             sideMenu,
             headerMenu: userServices.getHeaderMenu(req)
         }

@@ -1,5 +1,5 @@
 'use strict'
-const user=require('../services/user');
+const user = require('../services/user');
 const { render } = require('ejs');
 const bcrypt = require('bcrypt')
 module.exports={
