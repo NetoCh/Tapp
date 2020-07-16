@@ -7,8 +7,9 @@ const { v4: uuidv4 } = require('uuid'); //uso ==> uuidv4();
 const rolRoutes = {
     0: "/",
     1: "/admin",
-    2: "/empresa",
-    3: "/profesional"
+    2: "/profesional",
+    3: "/empresa"
+   
 }
 function UserServices() {
     var self = this;
@@ -244,7 +245,7 @@ function UserServices() {
                         }
                     ]
                 },
-                2: {
+                3: {
                     image: "/img/avatar-6.jpg",
                     title: user.user,
                     subTitle: "Empresa",
@@ -272,7 +273,7 @@ function UserServices() {
                         }
                     ]
                 },
-                3: {
+                2: {
                     image: "/img/avatar-6.jpg",
                     title: user.user,
                     subTitle: "Profesional",

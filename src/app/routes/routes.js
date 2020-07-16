@@ -14,8 +14,8 @@ const profesionalRoute = require('./profesional');
 const adminRoute = require('./admin');
 
 appRouter.use('/', homeRoutes);
-appRouter.use('/empresa', authenticateToken, validatePageAccess(2), empresaRoute);
-appRouter.use('/profesional', authenticateToken, validatePageAccess(3), profesionalRoute);
+appRouter.use('/empresa', authenticateToken, validatePageAccess(3), empresaRoute);
+appRouter.use('/profesional', authenticateToken, validatePageAccess(2), profesionalRoute);
 appRouter.use('/admin', authenticateToken, validatePageAccess(1), adminRoute);
 // appRouter.post('/registoempresa', userCtrl.RegistrarEmpresa);            se movio a webapi/registrar-api.js
 // appRouter.post('/registoprofesional', userCtrl.RegistrarProfesional);    se movio a webapi/registrar-api.js

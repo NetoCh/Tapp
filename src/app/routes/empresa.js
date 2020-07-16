@@ -49,12 +49,12 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Vacantes",
-                target: "/empresa/verVacantes"
+                target: "#vacantes"
             },
             {
                 type: "list-item",
                 text: "Profesionales",
-                target: "/empresa/verProfesionales"
+                target: "#profesionales"
             }
         ]
     },
@@ -69,7 +69,7 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Vacante",
-                target: "/empresa/registrarVacante"
+                target: "#registrarVacante"
             }
         ]
     }
@@ -88,20 +88,7 @@ appRouter.get('/', async (req, res) => { //aquí debe ir el index.ejs
 });
 
 appRouter.get('/registrarVacante', function (req, res) {
-     let area=[
-          {"id":0, "Nombre":"Area1"},
-          {"id":1, "Nombre":"Area2"},
-          {"id":2, "Nombre":"Area3"}
-        ]
-        console.log(area)
-    res.render(mainRoute, {
-        page: {
-            route: './registrarVacante',
-            sideMenu,
-            areas: area,
-            headerMenu: userServices.getHeaderMenu(req)
-        }
-    })
+    res.render('empresasPages/registrarVacante')
 });
 
 appRouter.get('/empresaVacante', function (req, res) {
