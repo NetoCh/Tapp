@@ -7,9 +7,14 @@ route.load({
 });
 
 
-route.register({ name: "vacantes", page: "/verVacantes" });
 route.register({
-    name: "profesionales", page: "/verProfesionales", postLoad: function () {
-        console.log("hola")
+    name: "vacantes", page: "/verVacantes", postLoad: function () {
+        new Vacantes().vacante();
     }
 });
+route.register({
+    name: "profesionales", page: "/verProfesionales", postLoad: function () {
+        new Profesionales().profesional();
+    }
+});
+
