@@ -106,6 +106,7 @@ appRouter.get('/registroProfesional', function (req, res) {
 });
 
 appRouter.get('/verVacantes', async function (req, res) {
+    console.log("vacante")
     let dbResponse;
     let vacantes;
     let areas;

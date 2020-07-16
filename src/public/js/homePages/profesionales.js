@@ -1,7 +1,7 @@
 function Profesionales() {
     this.profesional = () =>{
         $(document).ready(function () {
-            var objProfesionales;
+            let objProfesionales;
             $.get("/api/profesional/getProfesionales", {}, function (data) {
                 let comparar = new Array();
                 objProfesionales = data[0];

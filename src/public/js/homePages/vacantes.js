@@ -1,11 +1,10 @@
 function Vacantes() {
     this.vacante = () => {
         $(document).ready(function() {
-            var objVacantes;
+            let objVacantes;
             $.get("/api/empresa/getVacantes", {}, function (data) {
                 var comparar = new Array();
                 objVacantes = data[2];
-                console.log(objVacantes);
                 for (let data of objVacantes) {
                     let obj = new Object();
                     obj.nombre = data.nombre_empresa+ " "+data.nombre_vacante;
