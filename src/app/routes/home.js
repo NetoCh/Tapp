@@ -112,7 +112,7 @@ appRouter.get('/verVacantes', async function (req, res) {
     let empresas;
     let { empresa, area, destacado, salario_min } = req.query;
     var filtro = [empresa, area, destacado, salario_min];
-    if (empresa !== undefined || area !== undefined || destacado !== undefined || salario_min !== undefined) {
+    if (empresa !== undefined & area !== undefined & destacado !== undefined & salario_min !== undefined) {
         dbResponse = await vacanteServices.getFiltroVacantes(filtro);
         areas = dbResponse[1];
         empresas = dbResponse[2];
@@ -139,7 +139,7 @@ appRouter.get('/verProfesionales', async function (req, res) {
     let areas;
     let { area, genero, destacado, edad_min, edad_max } = req.query;
     var filtro = [area, genero, destacado, edad_min, edad_max];
-    if (area !== undefined || genero !== undefined || destacado !== undefined || edad_min !== undefined || edad_max !== undefined) {
+    if (area !== undefined & genero !== undefined & destacado !== undefined & edad_min !== undefined & edad_max !== undefined) {
         dbResponse = await profesionalServices.getFiltroProfesionales(filtro);
         profesionales = dbResponse[2];
         areas = dbResponse[1];
