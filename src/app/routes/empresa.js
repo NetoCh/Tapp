@@ -48,12 +48,12 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Vacantes",
-                target: "/empresa/verVacantes"
+                target: "#vacantes"
             },
             {
                 type: "list-item",
                 text: "Profesionales",
-                target: "/empresa/verProfesionales"
+                target: "#profesionales"
             }
         ]
     },
@@ -105,5 +105,6 @@ appRouter.get('/empresaVacante', function (req, res) {
         }
     })
 });
+
 
 module.exports = appRouter;

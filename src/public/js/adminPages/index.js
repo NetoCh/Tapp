@@ -12,8 +12,14 @@ route.load({
 });
 
 route.register({ name: "home", page: "/home" });
-route.register({ name: "vacantes", page: "/verVacantes" });
-route.register({name: "profesionales", page: "/verProfesionales", postLoad: function () {
-        new Profesionales().init();
+route.register({
+    name: "vacantes", page: "/verVacantes", postLoad: function () {
+        new Vacantes().vacante();
     }
 });
+route.register({
+    name: "profesionales", page: "/verProfesionales", postLoad: function () {
+        new Profesionales().profesional();
+    }
+});
+

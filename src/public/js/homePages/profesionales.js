@@ -1,39 +1,45 @@
 function Profesionales() {
-    this.init = () =>{
+    this.profesional = () =>{
         $(document).ready(function () {
-            var objProfesionales;
+            let objProfesionales;
             $.get("/api/profesional/getProfesionales", {}, function (data) {
-                var buscar = document.querySelector('#buscar');
-                var comparar = new Array();
+                let comparar = new Array();
                 objProfesionales = data[0];
+                for (let data of objProfesionales) {
+                    let obj = new Object();
+                    obj.nombre = data.nombre_profesional + " "+ data.apellido_profesional + " " + data.nombre_area;
+                    obj.id = data.id_profesional;
+                    comparar.push(obj);
+                }
                 var filtrar = () => {
-                    for (let data of objProfesionales) {
-                        comparar.push(data.nombre_profesional + " " + data.apellido_profesional);
-                    }
+                    let buscar = document.querySelector('#buscar');
                     for (let data of comparar) {
-                        let z = comparar.findIndex(index => index === data);
-                        let m = document.getElementById(z);
-                        if (data.toLowerCase().indexOf(buscar.value.toLowerCase()) !== -1) {
-                            if (m.style.display === "none") {
-                                m.style.display = "block";
+                        let m = document.getElementById(data.id);
+                        if(m != null) {
+                            if (data.nombre.toLowerCase().indexOf(buscar.value.toLowerCase()) !== -1) {
+                                if (m.style.display === "none") {
+                                    m.style.display = "block";
+                                }
                             }
-                        }
-                        else {
-                            m.style.display = "none";
+                            else {
+                                m.style.display = "none";
+                            }
                         }
                     }
                 }
                 buscar.addEventListener('keyup', filtrar);
             });
-            $(document).on("click", ".message", function () {
-                document.getElementById("#nombre").innerHTML = objProfesionales[$(this).data('id')].nombre_profesional + " " + objProfesionales[$(this).data('id')].apellido_profesional;
-                document.getElementById("#edad").innerHTML = objProfesionales[$(this).data('id')].edad;
-                document.getElementById("#sexo").innerHTML = objProfesionales[$(this).data('id')].sexo;
-                document.getElementById("#direccion").innerHTML = objProfesionales[$(this).data('id')].direccion;
-                document.getElementById("#email").innerHTML = objProfesionales[$(this).data('id')].email;
-                document.getElementById("#telefono").innerHTML = objProfesionales[$(this).data('id')].telefono_profesional;
-                document.getElementById("#nivel").innerHTML = objProfesionales[$(this).data('id')].nivel_academico;
-                document.getElementById("#experiencia").innerHTML = objProfesionales[$(this).data('id')].experiencia;
+            $(document).on("click", ".messageProfesional", function () {
+                let id = $(this).data('id');
+                let found = objProfesionales.findIndex(x => x.id_profesional === id);
+                document.getElementById("#nombre").innerHTML = objProfesionales[found].nombre_profesional + " " + objProfesionales[found].apellido_profesional;
+                document.getElementById("#edad").innerHTML = objProfesionales[found].edad;
+                document.getElementById("#sexo").innerHTML = objProfesionales[found].sexo;
+                document.getElementById("#direccion").innerHTML = objProfesionales[found].direccion;
+                document.getElementById("#email").innerHTML = objProfesionales[found].email;
+                document.getElementById("#telefono").innerHTML = objProfesionales[found].telefono_profesional;
+                document.getElementById("#nivel").innerHTML = objProfesionales[found].nivel_academico;
+                document.getElementById("#experiencia").innerHTML = objProfesionales[found].experiencia;
             });
             $("#filtrarProfesional").click((e) => {
                 e.preventDefault();

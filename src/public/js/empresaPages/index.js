@@ -2,11 +2,13 @@ const { route } = plugdo;
 
 route.load({
     el: '#container',
-    notFoundMessage: `<p>404 - Page not found</p>`,
-    defaultPage: { name: "", page: "/home" }
+    notFoundMessage: `<link rel="import" href="404.html">`,
+    defaultPage: {
+        name: "", page: "/home", postLoad: () => {
+    }}
 });
 
-
+route.register({ name: "home", page: "/home" });
 route.register({
     name: "vacantes", page: "/verVacantes", postLoad: function () {
         new Vacantes().vacante();

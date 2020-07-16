@@ -50,4 +50,5 @@ appRouter.get('/registroProfesional', function (req, res) {
     })
 });
 
+
 module.exports = appRouter;

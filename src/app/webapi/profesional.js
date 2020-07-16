@@ -1,8 +1,8 @@
 const appRouter = require('express').Router();
-const userCtrl = require('../controllers/user');
+const profesionalesCtrl = require('../services/profesional');
 
 appRouter.get("/getProfesionales", async (req, res) => {
-    let response = await userCtrl.TraerProfesionales();
+    let response = await profesionalesCtrl.getProfesionales();
     res.json(response);
 })
 
