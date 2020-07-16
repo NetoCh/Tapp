@@ -1,7 +1,7 @@
 function Charts() {
     this.init = function () {
 
-
+        
     var violet = '#DF99CA',
         red    = '#F0404C',
         green  = '#7CF29C';

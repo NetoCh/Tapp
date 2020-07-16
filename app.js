@@ -2,25 +2,23 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const config = require('./src/app/config/config')
 const app = express()
 const path = require ('path');
 const appRouter = require('./src/app/routes/routes')
 const apiRouter = require('./src/app/webapi/registrar-api')
-const cors=require('cors');
-const ejs = require('ejs');
+const cors = require('cors');
 
 app.use(express.static("public"), express.static(path.join(__dirname,"src/public/")));
 app.use(express.static(path.join(__dirname, 'src/public')));
 app.set('views', path.join(__dirname, 'src/views/'));
 //app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
-
-require('./src/app/models/pool');
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(bodyParser.json())
-app.use(cookieParser())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+
 app.use('/', appRouter)
 app.use('/api', apiRouter)
 

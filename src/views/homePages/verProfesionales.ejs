@@ -111,7 +111,7 @@
       <% var i = -1; for (var data of page.profesionales) { i++ %>
       <!--Profesionales-->
       <div class="col-lg-12" id="<%= i %>"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style"
-          data-toggle="modal" data-id="<%= i %>" data-target="#modal">
+          data-toggle="modal" data-id="<%= i %>" data-target="#modal" onclick="setModal(<%= data.id %>)">
           <div class="row">
             <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
               <img src="/img/avatar-4.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">

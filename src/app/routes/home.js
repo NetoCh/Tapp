@@ -56,7 +56,6 @@ appRouter.get('/login', function (req, res) {
 
 appRouter.post('/login', async function (req, res) {
     let user = req.body;
-    user.ip = ip.address() || "";
     // Llamar funcion para verificar si el usuario y la contraseña existe
     try {
         let response = await userServices.signIn(user);
@@ -95,6 +94,15 @@ appRouter.get('/registroEmpresa', function (req, res) {
 });
 
 appRouter.get('/registroProfesional', function (req, res) {
+    res.render(mainRoute, {
+        page: {
+            route: './registrarProfesional',
+            headerMenu: userServices.getHeaderMenu(req)
+        }
+    })
+});
+
+appRouter.post('/registroProfesional', function (req, res) {
     res.render(mainRoute, {
         page: {
             route: './registrarProfesional',
