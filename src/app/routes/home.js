@@ -1,7 +1,9 @@
 const appRouter = require('express').Router();
 const ip = require('ip');
 const userServices = require('../services/user');
-const homeServices = require('../services/home')
+const homeServices = require('../services/home');
+const vacanteServices = require('../services/vacante');
+const profesionalServices = require('../services/profesional');
 const mainRoute = 'homePages/index';
 const userCtrl = require('../controllers/user');
 const sideMenu = [
@@ -104,15 +106,32 @@ appRouter.get('/registroProfesional', function (req, res) {
 });
 
 appRouter.get('/verVacantes', async function (req, res) {
-    const vacantes = await userCtrl.TraerVacantes();
+    let dbResponse;
+    let vacantes;
+    let areas;
+    let empresas;
+    let { empresa, area, destacado, salario_min } = req.query;
+    var filtro = [empresa, area, destacado, salario_min];
+    if (empresa !== undefined || area !== undefined || destacado !== undefined || salario_min !== undefined) {
+        dbResponse = await vacanteServices.getFiltroVacantes(filtro);
+        areas = dbResponse[1];
+        empresas = dbResponse[2];
+        vacantes = dbResponse[3];
+    } else {
+        dbResponse = await vacanteServices.getVacantes();
+        areas = dbResponse[0];
+        empresas = dbResponse[1];
+        vacantes = dbResponse[2];
+    }
     res.render('homePages/verVacantes', {
         page: {
-            areas: vacantes[0],
-            empresas: vacantes[1],
-            vacantes: vacantes[2]
+            areas,
+            empresas,
+            vacantes
         }
     })
 });
+
 
 appRouter.get('/verProfesionales', async function (req, res) {
     let dbResponse;
@@ -120,18 +139,15 @@ appRouter.get('/verProfesionales', async function (req, res) {
     let areas;
     let { area, genero, destacado, edad_min, edad_max } = req.query;
     var filtro = [area, genero, destacado, edad_min, edad_max];
-    if (edad_min == "") filtro[3] = 18;
-    if (edad_max == "") filtro[4] = 0;
     if (area !== undefined || genero !== undefined || destacado !== undefined || edad_min !== undefined || edad_max !== undefined) {
-        dbResponse = await userServices.getFiltroProfesionales(filtro);
+        dbResponse = await profesionalServices.getFiltroProfesionales(filtro);
         profesionales = dbResponse[2];
         areas = dbResponse[1];
     } else {
-        dbResponse = await userCtrl.TraerProfesionales();
+        dbResponse = await profesionalServices.getProfesionales();
         profesionales = dbResponse[0];
         areas = dbResponse[1];
     }
-
     res.render('homePages/verProfesionales', {
         page: {
             profesionales,
@@ -140,6 +156,8 @@ appRouter.get('/verProfesionales', async function (req, res) {
     })
 });
 
+
+//creo que no va
 appRouter.post('/filtrarProfesionales', async function (req, res) {
     var filtro = [req.body.area, req.body.genero, req.body.destacado, req.body.edad_min, req.body.edad_max];
     if (req.body.edad_min == "") {
@@ -159,7 +177,7 @@ appRouter.post('/filtrarProfesionales', async function (req, res) {
         }
     })
 });
-
+//creo que no va
 appRouter.post('/filtrarVacantes', async function (req, res) {
     var filtro = [req.body.empresa, req.body.area, req.body.destacado, req.body.salario_min];
     if (req.body.salario_min == "") {

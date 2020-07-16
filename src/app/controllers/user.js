@@ -8,25 +8,6 @@ module.exports={
         res.json(users);
     },
 
-    TraerProfesionales: async ()=>{
-        const profesionales = await user.getProfesionales();
-        return profesionales;
-    },
-
-    FiltrarProfesionales: async (filtro)=>{
-        const profesionales = await user.getFiltroProfesionales(filtro);
-        return profesionales;
-    },
-
-    TraerVacantes: async ()=>{
-        const vacantes = await user.getVacantes();
-        return vacantes;
-    },
-
-    FiltrarVacantes: async (filtro)=>{
-        var vacantes = await user.getFiltroVacantes(filtro);
-        return vacantes;
-    },
 
     RegistrarEmpresa: async(req, res)=>{
         try{

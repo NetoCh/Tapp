@@ -6,8 +6,14 @@ route.load({
     defaultPage: { name: "", page: "/home" }
 });
 
-route.register({ name: "vacantes", page: "/verVacantes" });
+route.register({ name: "vacantes", page: "/verVacantes", postLoad: function(){
+    new Vacantes().vacante();
+    } 
+});
 route.register({ name: "profesionales", page: "/verProfesionales", postLoad: function () {
-    new Profesionales().init();
+    new Profesionales().profesional();
     }
 });
+
+
+

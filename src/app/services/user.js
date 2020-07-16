@@ -7,8 +7,8 @@ const { v4: uuidv4 } = require('uuid'); //uso ==> uuidv4();
 const rolRoutes = {
     0: "/",
     1: "/admin",
-    2: "/empresa",
-    3: "/profesional"
+    3: "/empresa",
+    2: "/profesional"
 }
 function UserServices() {
     var self = this;
@@ -244,7 +244,7 @@ function UserServices() {
                         }
                     ]
                 },
-                2: {
+                3: {
                     image: "/img/avatar-6.jpg",
                     title: user.user,
                     subTitle: "Empresa",
@@ -272,7 +272,7 @@ function UserServices() {
                         }
                     ]
                 },
-                3: {
+                2: {
                     image: "/img/avatar-6.jpg",
                     title: user.user,
                     subTitle: "Profesional",
@@ -328,38 +328,6 @@ function UserServices() {
                 if (error) reject(error);
                 resolve(rows)
                 console.log(rows[0].email)
-            })
-        })
-    }
-    this.getProfesionales = () => {
-        return new Promise((resolve, reject) => {
-            pool.query('CALL pa_traer_todos_Profesionales();', (error, rows) => {
-                if (error) reject(error);
-                resolve(rows)
-            })
-        })
-    }
-    this.getFiltroProfesionales = (filtro) => {
-        return new Promise((resolve, reject) => {
-            pool.query('CALL pa_filtrar_Profesionales(?, ?, ?, ?, ?);', [filtro[0], filtro[1], filtro[2], filtro[3], filtro[4]], (error, rows) => {
-                if (error) reject(error);
-                resolve(rows)
-            })
-        })
-    }
-    this.getVacantes = () => {
-        return new Promise((resolve, reject) => {
-            pool.query('CALL pa_traer_todas_Vacantes();', (error, rows) => {
-                if (error) reject(error);
-                resolve(rows)
-            })
-        })
-    }
-    this.getFiltroVacantes = (filtro) => {
-        return new Promise((resolve, reject) => {
-            pool.query('CALL pa_filtrar_Vacantes(?,?,?,?)', [filtro[0], filtro[1], filtro[2], filtro[3]], (error, rows) => {
-                if (error) reject(error);
-                resolve(rows)
             })
         })
     }
