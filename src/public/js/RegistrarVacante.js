@@ -54,7 +54,6 @@ function RegistrarVacantes (){
              //Verificar que se llenen los datos del formulario
              $("#salario").keyup(function() {
                 var salario = document.getElementById("salario").value;
-                console.log(salario.length)
                 try {
                     salario = parseFloat(salario)
                     if(salario <=0 || isNaN(salario)==true){
@@ -70,7 +69,6 @@ function RegistrarVacantes (){
                           })
                     }
                 } catch (error) {
-                    console.log("catch")
                     Swal.fire({
                         title: 'El salario debe ser un número mayor a cero.',
                         showClass: {
