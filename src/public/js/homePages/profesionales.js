@@ -1,5 +1,8 @@
+const { response } = require("express");
+
 function Profesionales() {
-    this.profesional = () =>{
+    var self = this;
+    this.profesional = () => {
         $(document).ready(function () {
             let objProfesionales;
             $.get("/api/profesional/getProfesionales", {}, function (data) {
@@ -7,7 +10,7 @@ function Profesionales() {
                 objProfesionales = data[0];
                 for (let data of objProfesionales) {
                     let obj = new Object();
-                    obj.nombre = data.nombre_profesional + " "+ data.apellido_profesional + " " + data.nombre_area;
+                    obj.nombre = data.nombre_profesional + " " + data.apellido_profesional + " " + data.nombre_area;
                     obj.id = data.id_profesional;
                     comparar.push(obj);
                 }
@@ -15,7 +18,7 @@ function Profesionales() {
                     let buscar = document.querySelector('#buscar');
                     for (let data of comparar) {
                         let m = document.getElementById(data.id);
-                        if(m != null) {
+                        if (m != null) {
                             if (data.nombre.toLowerCase().indexOf(buscar.value.toLowerCase()) !== -1) {
                                 if (m.style.display === "none") {
                                     m.style.display = "block";
@@ -53,6 +56,39 @@ function Profesionales() {
                 location.reload();
             })
             // End Doc Ready
+        });
+    }
+    this.registrarInit = () => {
+        $(document).ready(() => {
+            $("form").on("submit", (e) => {
+                e.preventDefault();
+                let formData = $("form").serializeArray();
+                let model = {}
+                formData.map(({name, value}) => {
+                    model[name] = value;
+                });
+                $.post("/api/user/registrarProfesional", model, function (response) {
+                    console.log(response)
+                });
+            });
+        });
+    }
+    this.saveImage = function () {
+        let url = "/api/user/registrarProfesional"
+        let fd = new FormData($("form").get(0));
+        $.ajax({
+            url: url,
+            data: fd,
+            dataType: 'json',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data)
+            },
+            error: function (xhr, status, error) {
+                console.log('Error: ' + error.message);
+            }
         });
     }
 }

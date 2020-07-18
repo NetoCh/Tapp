@@ -96,21 +96,7 @@ appRouter.get('/registroEmpresa', function (req, res) {
 });
 
 appRouter.get('/registroProfesional', function (req, res) {
-    res.render(mainRoute, {
-        page: {
-            route: './registrarProfesional',
-            headerMenu: userServices.getHeaderMenu(req)
-        }
-    })
-});
-
-appRouter.post('/registroProfesional', function (req, res) {
-    res.render(mainRoute, {
-        page: {
-            route: './registrarProfesional',
-            headerMenu: userServices.getHeaderMenu(req)
-        }
-    })
+    res.render("homePages/registrarProfesional")
 });
 
 appRouter.get('/verVacantes', async function (req, res) {

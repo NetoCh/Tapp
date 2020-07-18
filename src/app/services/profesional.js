@@ -22,6 +22,9 @@ function profesionalServices() {
             })
         })
     }
+    this.registerProfesional = (model) => {
+        console.log(model);
+    }
 
 }
 

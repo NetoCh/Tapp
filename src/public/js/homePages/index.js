@@ -15,5 +15,12 @@ route.register({ name: "profesionales", page: "/verProfesionales", postLoad: fun
     }
 });
 
+route.register({
+    name: "registrar-profesional", page: "/registroProfesional", postLoad: function () {
+        $(document).ready(() => {
+            new Profesionales().registrarInit();
+        });
+    }
+});
 
 
