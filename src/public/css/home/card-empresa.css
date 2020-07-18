@@ -1,0 +1,224 @@
+/*PEN STYLES*/
+* {
+    box-sizing: border-box;
+  }
+  
+
+  
+  .blog-card-entrepressx {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+            flex-direction: column;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.3);
+    margin-bottom: 1.6%;
+    background: #fff;
+    line-height: 1.4;
+    min-height: 350px;
+    font-family: sans-serif;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .blog-card-entrepressx a {
+    color: inherit;
+  }
+  .blog-card-entrepressx a:hover {
+    color: #4687ff;
+  }
+  .blog-card-entrepressx:hover .photo-entrepressx {
+    -webkit-transform: scale(1.3) rotate(3deg);
+            transform: scale(1.3) rotate(3deg);
+  }
+  .blog-card-entrepressx .meta-entrepressx {
+    position: relative;
+    z-index: 0;
+    height: 200px;
+  }
+  .blog-card-entrepressx .photo-entrepressx {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    -webkit-transition: -webkit-transform 0.2s;
+    transition: -webkit-transform 0.2s;
+    transition: transform 0.2s;
+    transition: transform 0.2s, -webkit-transform 0.2s;
+  }
+  .blog-card-entrepressx .details-entrepressx,
+  .blog-card-entrepressx .details-entrepressx ul {
+    margin: auto;
+    padding: 0;
+    list-style: none;
+  }
+  .blog-card-entrepressx .details-entrepressx {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -100%;
+    margin: auto;
+    -webkit-transition: left 0.2s;
+    transition: left 0.2s;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  .blog-card-entrepressx .details-entrepressx a {
+    -webkit-text-decoration: dotted underline;
+            text-decoration: dotted underline;
+  }
+  .blog-card-entrepressx .details-entrepressx ul li {
+    display: inline-block;
+  }
+  .blog-card-entrepressx .details-entrepressx .author-entrepressx:before {
+    font-family: FontAwesome;
+    margin-right: 10px;
+    content: "\f007";
+  }
+  .blog-card-entrepressx .details-entrepressx .date-entrepressx:before {
+    font-family: FontAwesome;
+    margin-right: 10px;
+    content: "\f133";
+  }
+  .blog-card-entrepressx .details-entrepressx .place-entrepressx:before {
+    font-family: FontAwesome;
+    margin-right: 10px;
+    content: "\f0ac";
+  }
+  .blog-card-entrepressx .details-entrepressx .area-entrepressx:before {
+    font-family: FontAwesome;
+    content: "\f0b1";
+    margin-right: 10px;
+  }
+  .blog-card-entrepressx .description-entrepressx {
+    padding: 1rem;
+    background: #fff;
+    position: relative;
+    z-index: 1;
+  }
+  .blog-card-entrepressx .description-entrepressx h1,
+  .blog-card-entrepressx .description-entrepressx h2 {
+    /* font-family: Poppins, sans-serif; */
+  }
+  .blog-card-entrepressx .description-entrepressx h1 {
+    line-height: 1;
+    margin: 0;
+    font-size: 1.7rem;
+  }
+  .blog-card-entrepressx .description-entrepressx h2 {
+    font-size: 1rem;
+    font-weight: 300;
+    text-transform: lowercase;
+    color: #4687ff;
+    margin-top: 5px;
+  }
+  .blog-card-entrepressx .description-entrepressx .read-more-entrepressx {
+    text-align: right;
+  }
+  .blog-card-entrepressx .description-entrepressx .read-more-entrepressx a {
+    color: #4687ff;
+    display: inline-block;
+    position: relative;
+  }
+  .blog-card-entrepressx .description-entrepressx .read-more-entrepressx a:after {
+    content: "\f061";
+    font-family: FontAwesome;
+    margin-left: -10px;
+    opacity: 0;
+    vertical-align: middle;
+    -webkit-transition: margin 0.3s, opacity 0.3s;
+    transition: margin 0.3s, opacity 0.3s;
+  }
+  .blog-card-entrepressx .description-entrepressx .read-more-entrepressx a:hover:after {
+    margin-left: 5px;
+    opacity: 1;
+  }
+  .blog-card-entrepressx .description-entrepressx .price-entrepressx {
+    text-align: right;
+  }
+  .blog-card-entrepressx .description-entrepressx .price-entrepressx a {
+    color: #4687ff;
+    display: inline-block;
+    position: relative;
+  }
+  .blog-card-entrepressx .description-entrepressx .price-entrepressx a:after {
+    content: "\f155";
+    font-family: FontAwesome;
+    margin-left: -10px;
+    opacity: 0;
+    vertical-align: middle;
+    -webkit-transition: margin 0.3s, opacity 0.3s;
+    transition: margin 0.3s, opacity 0.3s;
+  }
+  .blog-card-entrepressx .description-entrepressx .price-entrepressx a:hover:after {
+    margin-left: 5px;
+    opacity: 1;
+  }
+  .blog-card-entrepressx p {
+    position: relative;
+    margin: 1rem 0 0;
+  }
+  .blog-card-entrepressx p:first-of-type {
+    margin-top: 1.25rem;
+  }
+  .blog-card-entrepressx p:first-of-type:before {
+    content: "";
+    position: absolute;
+    height: 5px;
+    background: #4687ff;
+    width: 35px;
+    top: -0.75rem;
+    border-radius: 3px;
+  }
+  .blog-card-entrepressx:hover .details-entrepressx {
+    left: 0%;
+  }
+  @media (min-width: 640px) {
+    .blog-card-entrepressx {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+              flex-direction: row;
+      max-width: 700px;
+    }
+    .blog-card-entrepressx .meta-entrepressx {
+      flex-basis: 40%;
+      height: auto;
+    }
+    .blog-card-entrepressx .description-entrepressx {
+      flex-basis: 60%;
+    }
+    .blog-card-entrepressx .description-entrepressx:before {
+      -webkit-transform: skewX(-3deg);
+              transform: skewX(-3deg);
+      content: "";
+      background: #fff;
+      width: 30px;
+      position: absolute;
+      left: -10px;
+      top: 0;
+      bottom: 0;
+      z-index: -1;
+    }
+    .blog-card-entrepressx.alt-entrepressx {
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: reverse;
+              flex-direction: row-reverse;
+    }
+    .blog-card-entrepressx.alt-entrepressx .description-entrepressx:before {
+      left: inherit;
+      right: -10px;
+      -webkit-transform: skew(3deg);
+              transform: skew(3deg);
+    }
+    .blog-card-entrepressx.alt-entrepressx .details-entrepressx {
+      padding-left: 25px;
+    }
+  }
+  
