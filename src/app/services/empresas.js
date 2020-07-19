@@ -17,6 +17,21 @@ function EmpresasServices(){
         }
         return response
     }
+   this.GetTipoHorarios = async function(){
+        let tipoHorarios = await self.spGetTipoHorarios()
+        let response = {
+            success: false,
+            message: "No hay tipos de horarios registradas",
+            data: []
+        }
+        if(tipoHorarios.success){
+            response.success=true;
+            response.message="Tipos de horarios extraidas exitosamente"
+            response.data=tipoHorarios.data
+        }
+        console.log(response)
+        return response
+    }
     this.spRegistrarVacantes = function (data){
         let {nombre, areaLaboral, descripcion, trabajosDesen, requisitos, tipoHorario, salario, ubicacion, idLogin}= data;
         let response = {
@@ -30,6 +45,7 @@ function EmpresasServices(){
                 [nombre, areaLaboral, descripcion, trabajosDesen, requisitos, tipoHorario, salario, ubicacion, idLogin], (error, rows) => {
                     if (error) {
                         response.message=error;
+                        console.log(error)
                         resolve(response);
                     }
                     if(rows[1][0]._message===1){
@@ -63,6 +79,34 @@ function EmpresasServices(){
                        response = {
                             success: true,
                             message: "Areas extraidas correctamente",
+                            data: rows[1]
+                       } 
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
+    this.spGetTipoHorarios = function () {
+        let response = {
+            success: false,
+            message: "No hay tipos de horarios registradas",
+            data: []
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_traer_tipo_horarios()", (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                       response = {
+                            success: true,
+                            message: "Tipos de horario extraidas correctamente",
                             data: rows[1]
                        } 
                     }

@@ -7,15 +7,50 @@ function RegistrarVacantes (){
             $.get("/api/empresa/getAreas", {}, function (response) {
                 if(response.success){
                     SELECT.fill(response.data,"areaLaboral", {text: "nombre", value: "id_area"}); 
-                    Swal.fire({
-                        title: 'Todos los campos deben ser llenados para el envío de este formulario.',
-                        showClass: {
-                          popup: 'animate__animated animate__fadeInDown'
+                    $.get("/api/empresa/getTipoHorarios", {}, function (response) {
+                    if(response.success){
+                        SELECT.fill(response.data,"tipoHorario", {text: "nombre", value: "id"}); 
+                        Swal.fire({
+                            title: 'Todos los campos deben ser llenados para el envío de este formulario.',
+                            showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                            },
+                            hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                            }
+                        })
+                    }
+                    else{
+                        let timerInterval
+                        Swal.fire({
+                        title: 'Se ha producido un error',
+                        html: 'Redireccionando en <b></b> milisegundos.',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        onBeforeOpen: () => {
+                            Swal.showLoading()
+                            timerInterval = setInterval(() => {
+                            const content = Swal.getContent()
+                            if (content) {
+                                const b = content.querySelector('b')
+                                if (b) {
+                                b.textContent = Swal.getTimerLeft()
+                                }
+                            }
+                            }, 100)
                         },
-                        hideClass: {
-                          popup: 'animate__animated animate__fadeOutUp'
+                        onClose: () => {
+                            clearInterval(timerInterval)
+                            window.location.href = "/empresa";
                         }
-                      })
+                        }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            console.log('I was closed by the timer')
+                        }
+                        });
+                    }
+                });
                 }
                 else{
                     let timerInterval
