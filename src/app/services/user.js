@@ -274,12 +274,15 @@ function UserServices() {
             if (userData.success) {
                 let { nombre_profesional, apellido_profesional, foto } = userData.data;
                 foto = foto;
-                title = `${nombre_profesional} ${apellido_profesional}`
+                if (userData.data.nombre_profesional !== undefined);
+                title = `${userData.data.nombre_profesional} ${userData.data.apellido_profesional}`;
+                if (userData.data.nombre_empresa !== undefined)
+                    title = `${userData.data.nombre_empresa}`;
             }
             const headerMenu = {
                 1: {
                     image: "/img/" + foto,
-                    title: user.user,
+                    title,
                     subTitle: "Admin",
                     list: [
                         {
