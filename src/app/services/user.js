@@ -269,11 +269,10 @@ function UserServices() {
         let user = self.decryptToken(req);
         if (user !== "" && user !== undefined) {
             let userData = await self.spGetUserDataBDComplete(user.idLogin);
-            let foto = "defaultAvatar.png";
+            let avatar = "defaultAvatar.png";
             let title = user.user;
             if (userData.success) {
-                let { nombre_profesional, apellido_profesional, foto } = userData.data;
-                foto = foto;
+                avatar = userData.data.foto;
                 if (userData.data.nombre_profesional !== undefined);
                 title = `${userData.data.nombre_profesional} ${userData.data.apellido_profesional}`;
                 if (userData.data.nombre_empresa !== undefined)
@@ -281,7 +280,7 @@ function UserServices() {
             }
             const headerMenu = {
                 1: {
-                    image: "/img/" + foto,
+                    image: "/img/" + avatar,
                     title,
                     subTitle: "Admin",
                     list: [
@@ -296,7 +295,7 @@ function UserServices() {
                     ]
                 },
                 3: {
-                    image: "/img/" + foto,
+                    image: "/img/" + avatar,
                     title,
                     subTitle: "Empresa",
                     list: [
@@ -324,7 +323,7 @@ function UserServices() {
                     ]
                 },
                 2: {
-                    image: "/img/" + foto,
+                    image: "/img/" + avatar,
                     title,
                     subTitle: "Profesional",
                     list: [

@@ -1,0 +1,168 @@
+<div class="page-holder w-100 d-flex flex-wrap">
+    <div class="container-fluid px-xl-5">
+        <nav class="mt-4" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">Actualizar</li>
+                <li class="breadcrumb-item active" aria-current="page">Perfil</li>
+            </ol>
+        </nav>
+        <section class="py-5">
+            <div class="row">
+                <!-- Form Elements -->
+                <div class="col-lg-12 mb-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="h6 text-uppercase mb-0">Formulario de registro de profesionales</h3>
+                        </div>
+                        <div class="card-body">
+                            <form class="form-horizontal">
+                                <!-- Campo Nombre -->
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label">Nombre</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="nombreP" name="nombreEmp" required>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <!-- Campo Apellido -->
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label">Apellido</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="apellidOP" name="apellidopro"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <!-- Campo Direccion -->
+                                <div class="form-group row">
+
+                                    <label class="col-md-3 form-control-label">Direccion</label>
+                                    <div class="col-md-9">
+                                        <textarea class="form-control scroll" id="direccionP" rows="3"
+                                            name="direccionpro"></textarea>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <!--Campo Edad-->
+                                <div class="form-group row">
+
+                                    <label class="col-md-3 form-control-label">Edad</label>
+                                    <div class="col-md-9">
+                                        <input type="number" class="form-control" step="1" start="1" id="edadP"
+                                            name="edadpro" required>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+
+                                <!--Campo Sexo-->
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label">Sexo</label>
+                                    <div class="col-md-9">
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input id="sexoF" type="radio" name="sexopro" value="F"
+                                                class="custom-control-input" checked="true">
+                                            <label for="sexoF" class="custom-control-label">Femenino</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input id="sexoM" type="radio" name="sexopro" value="M"
+                                                class="custom-control-input">
+                                            <label for="sexoM" class="custom-control-label">Masculino</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+
+                                <!-- Campo telefono -->
+                                <div class="form-group row">
+
+                                    <label class="col-md-3 form-control-label">telefono</label>
+                                    <div class="col-md-9">
+                                        <input type="phone" class="form-control" id="telefonoP" name="telefonopro">
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+
+                                <!-- Campo Email -->
+                                <div class="form-group row">
+
+                                    <label class="col-md-3 form-control-label">Correo Electronico</label>
+                                    <div class="col-md-9">
+                                        <input type="email" class="form-control" id="emailP" name="mailpro" required>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+
+                                <!--Campo password-->
+
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label">Password</label>
+                                    <div class="col-md-9">
+                                        <input type="password" name="password" class="form-control" id="passP"
+                                            name="Passpro" required>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+                                <!--Campo Descripcion-->
+                                <div class="form-group row">
+
+                                    <label class="col-md-3 form-control-label">Descripcion Profesional</label>
+                                    <div class="col-md-9">
+                                        <textarea class="form-control scroll" id="DescP" rows="3"
+                                            name="descppro"></textarea>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+
+                                <!--Campo Experiencia-->
+                                <div class="form-group row">
+
+                                    <label class="col-md-3 form-control-label">Experiencia</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="expP" name="experienciapro">
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+
+                                <!--Campo Nivel Academico -->
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label">Nivel Academico</label>
+
+                                    <div class="col-md-9 ml-auto select">
+                                        <select class="form-control rounded" name="nivelAcademico">
+                                            <option value="0" selected>Primaria</option>
+                                            <option value="1">Secundaria</option>
+                                            <option value="2">Universitario</option>
+                                            <option value="3">Empirico</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="line"></div>
+
+                                <!---->
+                                <div class="form-group row">
+                                    <div class="col-md-9 ml-auto">
+                                        <button type="reset" class="btn btn-secondary">Limpiar</button>
+                                        <button type="submit" class="btn btn-primary">Enviar Datos</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-left text-primary">
+                    <p class="mb-2 mb-md-0">Tapp</p>
+                </div>
+                <div class="col-md-6 text-center text-md-right text-gray-400">
+                    <p class="mb-0">Proyecto de Desarrollo IX</p>
+                    <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
