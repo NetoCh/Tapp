@@ -40,7 +40,7 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Vacante",
-                target: "/empresa/registrarVacante"
+                target: "#registrarVacante"
             }
         ]
     }
@@ -58,14 +58,8 @@ appRouter.get('/', async (req, res) => { //aquí debe ir el index.ejs
     })
 });
 
-appRouter.get('/registrarVacante', async function (req, res) {
-    res.render(mainRoute, {
-        page: {
-            route: './registrarVacante',
-            sideMenu,
-            headerMenu: await userServices.getHeaderMenu(req)
-        }
-    })
+appRouter.get('/registrarVacante', function (req, res) {
+    res.render('empresasPages/registrarVacante')
 });
 
 appRouter.get('/empresaVacante', function (req, res) {
