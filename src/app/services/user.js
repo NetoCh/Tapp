@@ -312,7 +312,7 @@ function UserServices() {
                         {
                             type: "list-item",
                             text: "Vacantes Publicadas",
-                            target: "/empresa/empresaVacante"
+                            target: "#empresaVacante"
                         },
                         {
                             type: "divider"

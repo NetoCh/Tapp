@@ -21,7 +21,8 @@ route.register({
 });
 
 route.register({
-    name: "vacantes-publicadas", page: "empresa/empresaVacante", postLoad: function () {
+    name: "empresaVacante", page: "empresa/empresaVacante", postLoad: function () {
+        new MisVacantes().init();
     }
 });
 

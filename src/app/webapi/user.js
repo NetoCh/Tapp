@@ -3,7 +3,7 @@ const fs = require('fs');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
 const profesionalServices = require('../services/profesional');
-const empresaServices = require('../services/empresa');
+const empresaServices = require('../services/empresas');
 var storage = multer.diskStorage({
      destination: function (req, file, cb) {
           let fileStorage = 'src/public/img/avatar';

@@ -11,26 +11,21 @@ appRouter.get("/getVacantes", async (req, res) => {
     res.json(response);
 })
 
-    // appRouter.post("/registrarVacantes", async (req, res) => {
-    //     let response = await userCtrl.TraerProfesionales();
-    //     res.json(response);
-    // })
-
-appRouter.get("/getAreas", async(req,res)=>{
-    let areas= await empresaService.GetAreas();
+appRouter.get("/getAreas", async (req, res) => {
+    let areas = await empresaService.GetAreas();
     res.json(areas);
 })
-appRouter.get("/getTipoHorarios", async(req,res)=>{
-    let tipoHorarios= await empresaService.GetTipoHorarios();
+appRouter.get("/getTipoHorarios", async (req, res) => {
+    let tipoHorarios = await empresaService.GetTipoHorarios();
     res.json(tipoHorarios);
 })
-appRouter.post("/registrarVacantes", async(req,res)=>{
+appRouter.post("/registrarVacantes", async (req, res) => {
     let user = userService.decryptToken(req);
-    let model=req.body;
-    model.idLogin=user.idLogin;
-    model.areaLaboral=parseInt(model.areaLaboral)
-    model.tipoHorario=parseInt(model.tipoHorario)
-    model.salario=parseFloat(model.salario)
+    let model = req.body;
+    model.idLogin = user.idLogin;
+    model.areaLaboral = parseInt(model.areaLaboral)
+    model.tipoHorario = parseInt(model.tipoHorario)
+    model.salario = parseFloat(model.salario)
     await check('nombre').isAlphanumeric().withMessage('El nombre solo debe contener caracteres alfanuméricos').isEmpty().withMessage("El campo esta vacío").run(model);
     await check('areaLaboral').isNumeric().withMessage('El nombre solo debe ser un número').isEmpty().withMessage("El campo esta vacío").run(model);
     await check('descripcion').isAscii().withMessage("El campo debe contener solo caracteres ASCII").isEmpty().withMessage("El campo esta vacío").run(model);
@@ -48,12 +43,18 @@ appRouter.post("/registrarVacantes", async(req,res)=>{
         }
         return res.json(response)
     }
-    model.nombre=sanitizer.sanitize(model.nombre);
-    model.descripcion=sanitizer.sanitize(model.descripcion);
-    model.trabajosDesen=sanitizer.sanitize(model.trabajosDesen);
-    model.requisitos=sanitizer.sanitize(model.requisitos);
-    model.ubicacion=sanitizer.sanitize(model.ubicacion);
-    let response= await empresaService.spRegistrarVacantes(model)
+    model.nombre = sanitizer.sanitize(model.nombre);
+    model.descripcion = sanitizer.sanitize(model.descripcion);
+    model.trabajosDesen = sanitizer.sanitize(model.trabajosDesen);
+    model.requisitos = sanitizer.sanitize(model.requisitos);
+    model.ubicacion = sanitizer.sanitize(model.ubicacion);
+    let response = await empresaService.spRegistrarVacantes(model)
+    res.json(response)
+})
+
+appRouter.post('/getMyVacants', async (req, res) => {
+    let id = userService.decryptToken(req).idLogin;
+    let response = await empresaService.spGetVacant(id)
     res.json(response)
 })
 

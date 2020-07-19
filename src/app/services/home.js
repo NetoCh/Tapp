@@ -5,9 +5,9 @@ const pool = require('../models/pool')();
 function HomeServices() {
 
     this.getDestacados = () => {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             pool.query('CALL pa_traer_destacados()', (error, rows) => {
-                if (error) reject(error);
+                if (error) resolve(error);
                 resolve(rows)
             })
         })
