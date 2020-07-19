@@ -62,7 +62,6 @@ function profesionalServices() {
         return new Promise((resolve) => {
             try {
                 pool.query("CALL pa_registrar_profesional(?,?,?,?,?,?,?,?,?,?,?)", data, (error, rows) => {
-                    console.log(rows,error)
                     if (error) {
                         response.error = error;
                         resolve(response);
@@ -83,7 +82,6 @@ function profesionalServices() {
     }
     this.update = async function (model) {
         let data = Object.values(model);
-        // console.log(model);
         let response = {
             success: false,
             message: "No se logro actualizar el perfil"
