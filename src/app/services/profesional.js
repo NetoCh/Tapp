@@ -41,6 +41,7 @@ function profesionalServices() {
         }
         try {
             let result = await self.spRegisterProfesional(data);
+            console.log(result)
             if (!result.success) return response;
             response = {
                 success: true,
@@ -60,6 +61,7 @@ function profesionalServices() {
         return new Promise((resolve) => {
             try {
                 pool.query("CALL pa_registrar_profesional(?,?,?,?,?,?,?,?,?,?,?)", data, (error, rows) => {
+                    console.log(rows,error)
                     if (error) {
                         response.error = error;
                         resolve(response);

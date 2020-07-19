@@ -22,4 +22,3 @@ route.register({
         new Profesionales().profesional();
     }
 });
-

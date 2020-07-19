@@ -10,7 +10,6 @@ function Image() {
             processData: false,
             contentType: false,
             success: function (data) {
-                console.log(data)
             },
             error: function (xhr, status, error) {
                 console.log('Error: ' + error.message);

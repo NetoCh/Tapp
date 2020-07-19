@@ -25,3 +25,8 @@ route.register({
     }
 });
 
+route.register({ name: "registrarVacante", page: "empresa/registrarVacante", postLoad: function () {
+    new RegistrarVacantes().init();
+    }
+});
+

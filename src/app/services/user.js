@@ -9,7 +9,8 @@ const rolRoutes = {
     0: "/",
     1: "/admin",
     2: "/profesional",
-    3: "/empresa",
+    3: "/empresa"
+   
 }
 function UserServices() {
     var self = this;

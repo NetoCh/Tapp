@@ -1,0 +1,88 @@
+
+/* General styles and layout */
+
+
+.container-divider {
+    /* overflow: hidden; */
+    width: 100%;
+    margin: 0px;
+  }
+  
+  .container-divider svg {
+    display: block;
+  }
+  
+  .section-dividerx {
+    position: relative;
+    padding: 5em;
+    background: white;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .section-dividerx h2 {
+    font-size: 2.8em;
+    font-weight: 400;
+  }
+  
+  .section-dividerx p {
+    color: #fff;
+    font-size: 1.3em;
+    /* line-height: 1.5; */
+  }
+  
+  .text-dividerx:first-child {
+    text-align: right;
+  }
+  
+  .text-dividerx:nth-child(2) {
+    text-align: left;
+  }
+  
+  .color-dividerx {
+    background: #4680ff;
+  }
+  
+  /*** Individual .section-dividerx styles and separators ***/
+  /* Common style for pseudo-elements */
+  
+  
+  
+  
+  /* Curves */
+  #curveUpColor path,
+  #curveDownColor path {
+    fill: #4680ff;
+    stroke: #4680ff;
+  }
+  
+  /* Media Queries for the layout */
+  @media screen and (max-width: 68em) {
+    .section-dividerx {
+      font-size: 80%;
+    }
+  }
+  @media screen and (max-width: 54em) {
+    .column-dividerx {
+      display: block;
+      width: 100% !important;
+    }
+  
+    .text-dividerx:first-child,
+    .text-dividerx:nth-child(2) {
+      text-align: center;
+    }
+  
+    .icon {
+      margin: 0 auto;
+    }
+  
+    .col-2-dividerx .column-dividerx:first-child .icon {
+      margin: 0 auto 50px;
+    }
+  
+    .col-2-dividerx .column-dividerx:nth-child(2) .icon {
+      margin: 50px auto 0;
+    }
+  }
+  

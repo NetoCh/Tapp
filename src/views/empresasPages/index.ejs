@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
@@ -15,14 +16,21 @@
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!-- Google fonts - Popppins for copy-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,800">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
     <!-- orion icons-->
     <link rel="stylesheet" href="/css/orionicons.css">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="/css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/css/estilo.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="/img/favicon.png?3">
+
+    <link rel="stylesheet" href="/css/home/hero.css">
+    <link rel="stylesheet" href="/css/home/card.css">
+    <link rel="stylesheet" href="/css/home/card-empresa.css">
+    <link rel="stylesheet" href="/css/home/divider.css">
     <!-- SCRIPTS -->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/popper.js/umd/popper.min.js"> </script>
@@ -37,7 +45,7 @@
     <%- include('../partials/header') %>
     <div class="d-flex align-items-stretch">
         <%- include('../partials/sideMenu') %>
-        <div id="container" class="container-fluid"></div>
+        <div id="container"></div>
     </div>
     <script
         src="https://cdn.jsdelivr.net/gh/NetoCh/libraries@v1.1.3/SelectService-Example/select-services.min.js"></script>
@@ -45,6 +53,10 @@
     <script src="/vendor/jquery.cookie/jquery.cookie.js"> </script>
     <script src="/js/homePages/profesionales.js"></script>
     <script src="/js/homePages/vacantes.js"></script>
+    <!-- <script src="/js/charts-home.js"></script> -->
+    <script src="/js/front.js"></script>
+    <script src="/js/RegistrarVacante.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"> </script>
 </body>
 
 </html>
