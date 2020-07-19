@@ -29,7 +29,6 @@ function EmpresasServices(){
             response.message="Tipos de horarios extraidas exitosamente"
             response.data=tipoHorarios.data
         }
-        console.log(response)
         return response
     }
     this.spRegistrarVacantes = function (data){

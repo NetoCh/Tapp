@@ -11,10 +11,10 @@ appRouter.get("/getVacantes", async (req, res) => {
     res.json(response);
 })
 
-appRouter.post("/registrarVacantes", async (req, res) => {
-    let response = await userCtrl.TraerProfesionales();
-    res.json(response);
-})
+    // appRouter.post("/registrarVacantes", async (req, res) => {
+    //     let response = await userCtrl.TraerProfesionales();
+    //     res.json(response);
+    // })
 
 appRouter.get("/getAreas", async(req,res)=>{
     let areas= await empresaService.GetAreas();
@@ -22,7 +22,6 @@ appRouter.get("/getAreas", async(req,res)=>{
 })
 appRouter.get("/getTipoHorarios", async(req,res)=>{
     let tipoHorarios= await empresaService.GetTipoHorarios();
-    console.log(tipoHorarios)
     res.json(tipoHorarios);
 })
 appRouter.post("/registrarVacantes", async(req,res)=>{
