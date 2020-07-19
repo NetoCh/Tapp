@@ -20,3 +20,13 @@ route.register({
     }
 });
 
+route.register({
+    name: "vacantes-publicadas", page: "empresa/empresaVacante", postLoad: function () {
+    }
+});
+
+route.register({ name: "registrarVacante", page: "empresa/registrarVacante", postLoad: function () {
+    new RegistrarVacantes().init();
+    }
+});
+

@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 function Profesionales() {
     var self = this;
     this.profesional = () => {
@@ -68,27 +66,28 @@ function Profesionales() {
                     model[name] = value;
                 });
                 $.post("/api/user/registrarProfesional", model, function (response) {
-                    console.log(response)
+                    if (response.success) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 1500,
+                            onClose: () => {
+                                window.location.href = "/login";
+                            }
+                        });
+                    } else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
                 });
             });
-        });
-    }
-    this.saveImage = function () {
-        let url = "/api/user/registrarProfesional"
-        let fd = new FormData($("form").get(0));
-        $.ajax({
-            url: url,
-            data: fd,
-            dataType: 'json',
-            type: 'POST',
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                console.log(data)
-            },
-            error: function (xhr, status, error) {
-                console.log('Error: ' + error.message);
-            }
         });
     }
 }

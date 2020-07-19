@@ -36,7 +36,6 @@ function Image() {
                 });
             });
             if (result.success) {
-                console.log(result);
                 // model.mainLogo = publicDir + '/' + result.image;
                 // // Actualizo el link de la imagen
                 // let response = await this.spSetConfigurationTemplate(model);
