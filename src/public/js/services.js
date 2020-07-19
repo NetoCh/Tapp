@@ -1,5 +1,5 @@
 function Image() {
-    this.saveImage = function (url, fd) {
+    this.upload = function (url, fd) {
         // let url = "/api/user/registrarProfesional"
         // let fd = new FormData($("form").get(0));
         $.ajax({
@@ -10,6 +10,8 @@ function Image() {
             processData: false,
             contentType: false,
             success: function (data) {
+                console.log(data);
+                return data;
             },
             error: function (xhr, status, error) {
                 console.log('Error: ' + error.message);

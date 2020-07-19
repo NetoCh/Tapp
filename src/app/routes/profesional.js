@@ -31,7 +31,6 @@ const sideMenu = [
     }
 ]
 
-
 appRouter.get('/', async (req, res) => { 
     res.render(mainRoute, {
         page: {
@@ -41,6 +40,8 @@ appRouter.get('/', async (req, res) => {
     })
 });
 
-
+appRouter.get('/perfil', (req, res) => {
+    res.render("profesionalesPages/perfil");
+});
 
 module.exports = appRouter;

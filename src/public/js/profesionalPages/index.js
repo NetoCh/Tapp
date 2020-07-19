@@ -17,4 +17,9 @@ route.register({
         new Profesionales().profesional();
     }
 });
+route.register({
+    name: "perfil", page: "profesional/perfil", postLoad: function () {
+        new Profesionales().perfilInit();
+    }
+});
 

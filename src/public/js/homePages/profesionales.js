@@ -90,4 +90,55 @@ function Profesionales() {
             });
         });
     }
+    this.perfilInit = () => {
+        $(document).ready(() => {
+            $.get("/api/profesional/accions", {}, function (response) {
+                if (response.success) {
+                    let userData = response.data;
+                    let foto = `img/${userData.foto}`;
+                    $("#nombreP").val(userData.nombre_profesional);
+                    $("#apellidOP").val(userData.apellido_profesional);
+                    $("#direccionP").val(userData.direccion);
+                    $("#edadP").val(userData.edad);
+                    $("input[name='sexopro']").val(userData.sexo);
+                    $("#telefonoP").val(userData.telefono_profesional);
+                    $("#emailP").val(userData.email)
+                    $("#DescP").val(userData.descripcion_profesional);
+                    $("#expP").val(userData.experiencia);
+                    $('#imagePreview').css('background-image', 'url(' + foto + ')');
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            });
+            $("form").on("submit", (e) => {
+                e.preventDefault();
+                let formData = $("form").serializeArray();
+                let model = {}
+                formData.map(({ name, value }) => {
+                    model[name] = value;
+                });
+                let url = "/api/profesional/accions";
+                let fd = new FormData($("form").get(0));
+                new Image().upload(url, fd);
+            });
+            $("#imageUpload").change(function () {
+                let input = this;
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(650);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            });
+        });
+    }
 }
