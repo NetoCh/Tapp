@@ -36,19 +36,11 @@ appRouter.get('/', async (req, res) => {
     res.render(mainRoute, {
         page: {
             sideMenu,
-            headerMenu: userServices.getHeaderMenu(req)
+            headerMenu: await userServices.getHeaderMenu(req)
         }
     })
 });
 
-appRouter.get('/registroProfesional', function (req, res) {
-    res.render(mainRoute, {
-        page: {
-            route: './registrarProfesional',
-            headerMenu: userServices.getHeaderMenu(req)
-        }
-    })
-});
 
 
 module.exports = appRouter;

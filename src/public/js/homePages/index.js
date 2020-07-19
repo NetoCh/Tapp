@@ -23,4 +23,12 @@ route.register({
     }
 });
 
+route.register({
+    name: "registrar-empresa", page: "/registroEmpresa", postLoad: function () {
+        $(document).ready(() => {
+            new Empresa().registrarInit();
+        });
+    }
+});
+
 

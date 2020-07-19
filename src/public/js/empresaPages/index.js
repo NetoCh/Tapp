@@ -20,3 +20,8 @@ route.register({
     }
 });
 
+route.register({
+    name: "vacantes-publicadas", page: "empresa/empresaVacante", postLoad: function () {
+    }
+});
+

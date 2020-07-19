@@ -110,6 +110,34 @@ function UserServices() {
             }
         });
     }
+    this.spGetUserDataBDComplete = function (idLogin) {
+        let response = {
+            success: false,
+            message: "No se logro encontrar este usuario",
+            data: []
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_data_usuario_completa(?)", [idLogin], (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                        response = {
+                            success: true,
+                            message: "Data del usuario extraida correctamente",
+                            data: rows[1][0]
+                        }
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
     this.spInsertUserSession = function (accessToken) {
         let { uuid, idLogin } = accessToken;
         let ip = userIp.address();
@@ -237,12 +265,20 @@ function UserServices() {
         }
         return "";
     }
-    this.getHeaderMenu = function (req) {
+    this.getHeaderMenu = async function (req) {
         let user = self.decryptToken(req);
         if (user !== "" && user !== undefined) {
+            let userData = await self.spGetUserDataBDComplete(user.idLogin);
+            let foto = "defaultAvatar.png";
+            let title = user.user;
+            if (userData.success) {
+                let { nombre_profesional, apellido_profesional, foto } = userData.data;
+                foto = foto;
+                title = `${nombre_profesional} ${apellido_profesional}`
+            }
             const headerMenu = {
                 1: {
-                    image: "/img/avatar-6.jpg",
+                    image: "/img/" + foto,
                     title: user.user,
                     subTitle: "Admin",
                     list: [
@@ -257,8 +293,8 @@ function UserServices() {
                     ]
                 },
                 3: {
-                    image: "/img/avatar-6.jpg",
-                    title: user.user,
+                    image: "/img/" + foto,
+                    title,
                     subTitle: "Empresa",
                     list: [
                         {
@@ -285,8 +321,8 @@ function UserServices() {
                     ]
                 },
                 2: {
-                    image: "/img/avatar-6.jpg",
-                    title: user.user,
+                    image: "/img/" + foto,
+                    title,
                     subTitle: "Profesional",
                     list: [
                         {
@@ -311,7 +347,7 @@ function UserServices() {
             return headerMenu[user.rol];
         } else {
             return {
-                image: "/img/avatar-6.jpg",
+                image: "/img/defaultAvatar.png",
                 title: "Guest",
                 subTitle: "Sin Iniciar Sesión",
                 list: [
