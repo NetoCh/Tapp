@@ -179,8 +179,7 @@ function EmpresasServices(){
                     if (rows[0][0]._message === 1) {
                         response = {
                             success: true,
-                            SpData : rows[1],
-                            message: "Se ha registrado correctamente"
+                            spData : rows[1]
                         }
                     }else{
                         response.message = 'No existen vacantes publicadas.'
