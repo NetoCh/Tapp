@@ -215,19 +215,7 @@ function UserServices() {
             next()
         });
     }
-    this.authenticateToken1 = function(req, res, next) {
-        const authHeader = req.headers['authorization']
-        console.log(req.headers);
-        const token = authHeader && authHeader.split(' ')[1]
-        if (token == null) return res.sendStatus(401)
 
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-            console.log(err)
-            if (err) return res.sendStatus(403)
-            req.user = user
-            next()
-        })
-    }
     this.validateSession = function (accessToken) {
         // Valida si la sesión todavia es valida, de ser asi, le extiende el tiempo
         let { uuid, ip, idLogin } = accessToken;
@@ -281,8 +269,8 @@ function UserServices() {
             }
             const headerMenu = {
                 1: {
-                    image: "/img/" + avatar,
-                    title,
+                    image: "/img/" + "defaultAvatar.png",
+                    title: user.user,
                     subTitle: "Admin",
                     list: [
                         {
@@ -296,7 +284,7 @@ function UserServices() {
                     ]
                 },
                 3: {
-                    image: "/img/" + "defaultAvatar.png",
+                    image: "/img/" + avatar,
                     title,
                     subTitle: "Empresa",
                     list: [

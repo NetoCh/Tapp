@@ -1,4 +1,4 @@
 node_modules
 .env
 extras
-pushBranch.sh
+push.sh
