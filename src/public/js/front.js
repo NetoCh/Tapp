@@ -39,5 +39,3 @@ $(function () {
 
 });
 
-
-Cookies.set('active', 'true');

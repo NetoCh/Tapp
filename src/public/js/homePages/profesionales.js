@@ -1,0 +1,94 @@
+const { response } = require("express");
+
+function Profesionales() {
+    var self = this;
+    this.profesional = () => {
+        $(document).ready(function () {
+            let objProfesionales;
+            $.get("/api/profesional/getProfesionales", {}, function (data) {
+                let comparar = new Array();
+                objProfesionales = data[0];
+                for (let data of objProfesionales) {
+                    let obj = new Object();
+                    obj.nombre = data.nombre_profesional + " " + data.apellido_profesional + " " + data.nombre_area;
+                    obj.id = data.id_profesional;
+                    comparar.push(obj);
+                }
+                var filtrar = () => {
+                    let buscar = document.querySelector('#buscar');
+                    for (let data of comparar) {
+                        let m = document.getElementById(data.id);
+                        if (m != null) {
+                            if (data.nombre.toLowerCase().indexOf(buscar.value.toLowerCase()) !== -1) {
+                                if (m.style.display === "none") {
+                                    m.style.display = "block";
+                                }
+                            }
+                            else {
+                                m.style.display = "none";
+                            }
+                        }
+                    }
+                }
+                buscar.addEventListener('keyup', filtrar);
+            });
+            $(document).on("click", ".messageProfesional", function () {
+                let id = $(this).data('id');
+                let found = objProfesionales.findIndex(x => x.id_profesional === id);
+                document.getElementById("#nombre").innerHTML = objProfesionales[found].nombre_profesional + " " + objProfesionales[found].apellido_profesional;
+                document.getElementById("#edad").innerHTML = objProfesionales[found].edad;
+                document.getElementById("#sexo").innerHTML = objProfesionales[found].sexo;
+                document.getElementById("#direccion").innerHTML = objProfesionales[found].direccion;
+                document.getElementById("#email").innerHTML = objProfesionales[found].email;
+                document.getElementById("#telefono").innerHTML = objProfesionales[found].telefono_profesional;
+                document.getElementById("#nivel").innerHTML = objProfesionales[found].nivel_academico;
+                document.getElementById("#experiencia").innerHTML = objProfesionales[found].experiencia;
+            });
+            $("#filtrarProfesional").click((e) => {
+                e.preventDefault();
+                let formData = $("form").serializeArray();
+                let params = "";
+                formData.forEach((item) => {
+                    params += `${item.name}=${item.value}&`;
+                });
+                let root = '#profesionales?' + params;
+                window.location.href = root;
+                location.reload();
+            })
+            // End Doc Ready
+        });
+    }
+    this.registrarInit = () => {
+        $(document).ready(() => {
+            $("form").on("submit", (e) => {
+                e.preventDefault();
+                let formData = $("form").serializeArray();
+                let model = {}
+                formData.map(({name, value}) => {
+                    model[name] = value;
+                });
+                $.post("/api/user/registrarProfesional", model, function (response) {
+                    console.log(response)
+                });
+            });
+        });
+    }
+    this.saveImage = function () {
+        let url = "/api/user/registrarProfesional"
+        let fd = new FormData($("form").get(0));
+        $.ajax({
+            url: url,
+            data: fd,
+            dataType: 'json',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data)
+            },
+            error: function (xhr, status, error) {
+                console.log('Error: ' + error.message);
+            }
+        });
+    }
+}
