@@ -16,7 +16,6 @@ appRouter.get("/getAreas", async(req,res)=>{
 })
 appRouter.get("/getTipoHorarios", async(req,res)=>{
     let tipoHorarios= await empresaService.GetTipoHorarios();
-    console.log(tipoHorarios)
     res.json(tipoHorarios);
 })
 appRouter.post("/registrarVacantes", async(req,res)=>{
