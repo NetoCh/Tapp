@@ -6,7 +6,7 @@ route.load({
     defaultPage: { name: "", page: "/home" }
 });
 
-
+route.register({ name: "home", page: "/home" });
 route.register({
     name: "vacantes", page: "/verVacantes", postLoad: function () {
         new Vacantes().vacante();

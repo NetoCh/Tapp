@@ -1,39 +1,9 @@
-'use strict'
-const bcrypt = require('bcrypt');
 const pool = require('../models/pool')();
-
-function profesionalServices() {
+const bcrypt = require('bcrypt');
+function Empresa() {
     var self = this;
-    this.getProfesionales = () => {
-        return new Promise((resolve, reject) => {
-            pool.query('CALL pa_traer_todos_Profesionales();', (error, rows) => {
-                if (error) reject(error);
-                resolve(rows)
-            })
-        })
-    }
-    this.getFiltroProfesionales = (filtro) => {
-        return new Promise((resolve, reject) => {
-            if (filtro[3] == "") filtro[3] = 18;
-            if (filtro[4] == "") filtro[4] = 0;
-            pool.query('CALL pa_filtrar_Profesionales(?, ?, ?, ?, ?);', filtro, (error, rows) => {
-                if (error) reject(error);
-                resolve(rows)
-            })
-        })
-    }
-    this.registerProfesional = async (model) => {
-        let { nombreEmp,
-            apellidopro,
-            direccionpro,
-            edadpro,
-            sexopro,
-            telefonopro,
-            mailpro,
-            password,
-            descppro,
-            experienciapro } = model;
-        model.password = await bcrypt.hash(model.password, 10);
+    this.registerEmpresa = async (model) => {
+        model.pass = await bcrypt.hash(model.pass, 10);
         let data = Object.values(model);
         let response = {
             success: false,
@@ -59,7 +29,7 @@ function profesionalServices() {
         }
         return new Promise((resolve) => {
             try {
-                pool.query("CALL pa_registrar_profesional(?,?,?,?,?,?,?,?,?,?,?)", data, (error, rows) => {
+                pool.query("CALL pa_registrar_empresa(?,?,?,?,?,?,?)", data, (error, rows) => {
                     if (error) {
                         response.error = error;
                         resolve(response);
@@ -80,4 +50,4 @@ function profesionalServices() {
     }
 }
 
-module.exports = new profesionalServices();
+module.exports = new Empresa();

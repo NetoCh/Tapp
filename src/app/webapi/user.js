@@ -2,7 +2,8 @@ const appRouter = require('express').Router();
 const fs = require('fs');
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
-const userServices = require('../services/user');
+const profesionalServices = require('../services/profesional');
+const empresaServices = require('../services/empresa');
 var storage = multer.diskStorage({
      destination: function (req, file, cb) {
           let fileStorage = 'src/public/img/avatar';
@@ -23,9 +24,15 @@ appRouter.get("/verifySession", async (req, res, next) => {
      await userServices.authenticateToken(req, res, next);
 })
 
-appRouter.post('/registrarProfesional', function (req, res) {
+appRouter.post('/registrarProfesional', async function (req, res) {
      let model = req.body;
-     let response = userServices.registerProfesional(model);
+     let response = await profesionalServices.registerProfesional(model);
+     res.json(response);
+})
+
+appRouter.post('/registrarEmpresa', async function (req, res) {
+     let model = req.body;
+     let response = await empresaServices.registerEmpresa(model);
      res.json(response);
 })
 

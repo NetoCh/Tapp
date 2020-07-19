@@ -3,34 +3,6 @@ const mainRoute = 'empresasPages/index';
 const userCtrl = require('../controllers/user');
 const homeServices = require('../services/home');
 const userServices = require('../services/user');
-const headerMenu = {
-    image: "/img/avatar-6.jpg",
-    title: "Titulo",
-    subTitle: "Empresa",
-    list: [
-        {
-            type: "divider",
-        },
-        {
-            type: "list-item",
-            text: "Mi Cuenta",
-            target: "/registroEmpresa"
-        },
-        {
-            type: "list-item",
-            text: "Vacantes Publicadas",
-            target: "empresa/empresaVacante/"
-        },
-        {
-            type: "divider"
-        },
-        {
-            type: "list-item",
-            text: "Logout",
-            target: "/logout"
-        }
-    ]
-}
 const sideMenu = [
     {
         type: "title",
@@ -43,7 +15,7 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Inicio",
-                target: "#home"
+                target: "#"
             },
             {
                 type: "list-item",
@@ -81,29 +53,23 @@ appRouter.get('/', async (req, res) => { //aquí debe ir el index.ejs
             route: './home',
             sideMenu,
             data,
-            headerMenu: userServices.getHeaderMenu(req)
+            headerMenu: await userServices.getHeaderMenu(req)
         }
     })
 });
 
-appRouter.get('/registrarVacante', function (req, res) {
+appRouter.get('/registrarVacante', async function (req, res) {
     res.render(mainRoute, {
         page: {
             route: './registrarVacante',
             sideMenu,
-            headerMenu: userServices.getHeaderMenu(req)
+            headerMenu: await userServices.getHeaderMenu(req)
         }
     })
 });
 
 appRouter.get('/empresaVacante', function (req, res) {
-    res.render(mainRoute, {
-        page: {
-            route: './empresaVacante',
-            sideMenu,
-            headerMenu: userServices.getHeaderMenu(req)
-        }
-    })
+    res.render("empresasPages/empresaVacante");
 });
 
 
