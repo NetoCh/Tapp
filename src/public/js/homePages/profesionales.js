@@ -92,9 +92,10 @@ function Profesionales() {
     }
     this.perfilInit = () => {
         $(document).ready(() => {
-            $.get("/api/profesional/perfilProfesional", {}, function (response) {
+            $.get("/api/profesional/accions", {}, function (response) {
                 if (response.success) {
                     let userData = response.data;
+                    let foto = `img/${userData.foto}`;
                     $("#nombreP").val(userData.nombre_profesional);
                     $("#apellidOP").val(userData.apellido_profesional);
                     $("#direccionP").val(userData.direccion);
@@ -104,6 +105,7 @@ function Profesionales() {
                     $("#emailP").val(userData.email)
                     $("#DescP").val(userData.descripcion_profesional);
                     $("#expP").val(userData.experiencia);
+                    $('#imagePreview').css('background-image', 'url(' + foto + ')');
                 } else {
                     Swal.fire({
                         position: 'top-end',
@@ -121,6 +123,21 @@ function Profesionales() {
                 formData.map(({ name, value }) => {
                     model[name] = value;
                 });
+                let url = "/api/profesional/accions";
+                let fd = new FormData($("form").get(0));
+                new Image().upload(url, fd);
+            });
+            $("#imageUpload").change(function () {
+                let input = this;
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(650);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
             });
         });
     }

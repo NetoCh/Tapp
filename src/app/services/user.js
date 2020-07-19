@@ -296,7 +296,7 @@ function UserServices() {
                     ]
                 },
                 3: {
-                    image: "/img/" + avatar,
+                    image: "/img/" + "defaultAvatar.png",
                     title,
                     subTitle: "Empresa",
                     list: [
@@ -334,7 +334,7 @@ function UserServices() {
                         {
                             type: "list-item",
                             text: "Mi Cuenta",
-                            target: "/registroProfesional"
+                            target: "/profesional#perfil"
                         },
                         {
                             type: "divider"
