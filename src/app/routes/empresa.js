@@ -3,7 +3,6 @@ const mainRoute = 'empresasPages/index';
 const userCtrl = require('../controllers/user');
 const homeServices = require('../services/home');
 const userServices = require('../services/user');
-let user;
 const headerMenu = {
     image: "/img/avatar-6.jpg",
     title: "Titulo",
@@ -44,17 +43,17 @@ const sideMenu = [
             {
                 type: "list-item",
                 text: "Inicio",
-                target: "/empresa"
+                target: "#home"
             },
             {
                 type: "list-item",
                 text: "Vacantes",
-                target: "/empresa/verVacantes"
+                target: "#vacantes"
             },
             {
                 type: "list-item",
                 text: "Profesionales",
-                target: "/empresa/verProfesionales"
+                target: "#profesionales"
             }
         ]
     },
@@ -107,31 +106,5 @@ appRouter.get('/empresaVacante', function (req, res) {
     })
 });
 
-appRouter.get('/verVacantes', async function (req, res) {
-    const vacantes = await userCtrl.TraerVacantes();
-    res.render(mainRoute, {
-        page: {
-            route: '../homePages/verVacantes',
-            areas: vacantes[0],
-            empresas: vacantes[1],
-            vacantes: vacantes[2],
-            sideMenu: sideMenu,
-            headerMenu: userServices.getHeaderMenu(req)
-        }
-    })
-});
-
-appRouter.get('/verProfesionales', async function (req, res) {
-    const profesionales = await userCtrl.TraerProfesionales();
-    res.render(mainRoute, {
-        page: {
-            route: '../homePages/verProfesionales',
-            profesionales: profesionales[0],
-            areas: profesionales[1],
-            sideMenu,
-            headerMenu: userServices.getHeaderMenu(req)
-        }
-    })
-});
 
 module.exports = appRouter;

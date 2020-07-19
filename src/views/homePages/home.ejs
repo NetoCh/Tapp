@@ -1,11 +1,4 @@
-<% 
-    let response = page.data;
-    
-    let color = ['bg-hover-gradient-violet',
-        'bg-hover-gradient-blue',
-        'bg-hover-gradient-green'
-    ]
-%>
+<%let response = page.data;%>
 <style>
     .sidebar {
         display: none;
@@ -13,8 +6,8 @@
 </style>
 <div class="hero-awesomex" style="background-image: url(https://ununsplash.imgix.net/photo-1416339134316-0e91dc9ded92?q=75&fm=jpg&s=883a422e10fc4149893984019f63c818)">
     <div class="hero__content-awesomex">
-      <h1>Yolo, it's a real word.</h1>
-      <a class="btn" href="#">Sign up</a>
+      <h1>TAPP, it's a real word.</h1>
+      <!-- <a class="btn btn-hero-awesomex" href="#">Iniciar sesion</a> -->
     </div>
   </div>
 <!-- -----------------------------------------------DIVIDER------------------------------------------------------------------------ -->
@@ -35,6 +28,11 @@
 <!-- -----------------------------------------------DIVIDER------------------------------------------------------------------------ -->
 <div class="w-100 d-flex flex-wrap">
     <div class="container-fluid px-xl-5">
+        <div class="description-entrepressx text-right">
+            <p class="ver-mas-entrepressx text-right">
+                <a href="#profesionales" style="font-size: 2rem;">Más profesionales</a>
+            </p>
+        </div>
         <div class="row">
             <% for (var i = 0; i< response[1].length && i< 4; i++) {%>
             <div class="col-lg-3 col-md-6 col-sm-12 my-5 ">
@@ -82,8 +80,13 @@
 <!-- -----------------------------------------------DIVIDER------------------------------------------------------------------------ -->
 <div class="w-100 d-flex flex-wrap">
     <div class="container-fluid px-xl-5 ">
+        <div class="description-entrepressx">
+            <p class="ver-mas-entrepressx text-left">
+                <a href="#vacantes" style="font-size: 2rem;">Más vacantes</a>
+            </p>
+        </div>
         <div class="row my-5">
-            <% for (var i = 0; i< response[1].length && i< 3; i++) {%>
+            <% for (var i = 0; i< response[0].length && i< 3; i++) {%>
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="blog-card-entrepressx">
                         <div class="meta-entrepressx">

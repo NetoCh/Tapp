@@ -161,6 +161,26 @@
     margin-left: 5px;
     opacity: 1;
   }
+
+   .description-entrepressx .ver-mas-entrepressx a {
+    color: #4687ff;
+    display: inline-block;
+    font-size: 10px;
+    position: relative;
+  }
+   .description-entrepressx .ver-mas-entrepressx a:after {
+    content: "\f061";
+    font-family: FontAwesome;
+    margin-left: -10px;
+    opacity: 0;
+    vertical-align: middle;
+    -webkit-transition: margin 0.3s, opacity 0.3s;
+    transition: margin 0.3s, opacity 0.3s;
+  }
+   .description-entrepressx .ver-mas-entrepressx a:hover:after {
+    margin-left: 5px;
+    opacity: 1;
+  }
   .blog-card-entrepressx p {
     position: relative;
     margin: 1rem 0 0;

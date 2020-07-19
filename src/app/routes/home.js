@@ -1,32 +1,11 @@
 const appRouter = require('express').Router();
 const ip = require('ip');
 const userServices = require('../services/user');
-const homeServices = require('../services/home')
+const homeServices = require('../services/home');
+const vacanteServices = require('../services/vacante');
+const profesionalServices = require('../services/profesional');
 const mainRoute = 'homePages/index';
 const userCtrl = require('../controllers/user');
-const headerMenu = {
-    image: "/img/avatar-6.jpg",
-    title: "Titulo",
-    subTitle: "Sub Titulo",
-    list: [
-        {
-            type: "divider",
-        },
-        {
-            type: "list-item",
-            text: "Configuración",
-            target: "/registroEmpresa"
-        },
-        {
-            type: "divider"
-        },
-        {
-            type: "list-item",
-            text: "Login",
-            target: "/login"
-        }
-    ]
-}
 const sideMenu = [
     {
         type: "title",
@@ -79,7 +58,6 @@ appRouter.get('/login', function (req, res) {
 
 appRouter.post('/login', async function (req, res) {
     let user = req.body;
-    user.ip = ip.address() || "";
     // Llamar funcion para verificar si el usuario y la contraseña existe
     try {
         let response = await userServices.signIn(user);
@@ -102,10 +80,10 @@ appRouter.post('/login', async function (req, res) {
 });
 
 appRouter.get('/logout', function (req, res) {
+    userServices.signOut(req);
     res.clearCookie("token");
     res.clearCookie("active");
     res.redirect('/');
-    userServices.signOut(req);
 });
 
 appRouter.get('/registroEmpresa', function (req, res) {
@@ -118,35 +96,62 @@ appRouter.get('/registroEmpresa', function (req, res) {
 });
 
 appRouter.get('/registroProfesional', function (req, res) {
-    res.render(mainRoute, {
-        page: {
-            route: './registrarProfesional',
-            headerMenu: userServices.getHeaderMenu(req)
-        }
-    })
+    res.render("homePages/registrarProfesional")
 });
 
 appRouter.get('/verVacantes', async function (req, res) {
-    const vacantes = await userCtrl.TraerVacantes();
+    let dbResponse;
+    let vacantes;
+    let areas;
+    let empresas;
+    let { empresa, area, destacado, salario_min } = req.query;
+    var filtro = [empresa, area, destacado, salario_min];
+    if (empresa !== undefined & area !== undefined & destacado !== undefined & salario_min !== undefined) {
+        dbResponse = await vacanteServices.getFiltroVacantes(filtro);
+        areas = dbResponse[1];
+        empresas = dbResponse[2];
+        vacantes = dbResponse[3];
+    } else {
+        dbResponse = await vacanteServices.getVacantes();
+        areas = dbResponse[0];
+        empresas = dbResponse[1];
+        vacantes = dbResponse[2];
+    }
     res.render('homePages/verVacantes', {
         page: {
-            areas: vacantes[0],
-            empresas: vacantes[1],
-            vacantes: vacantes[2]
+            areas,
+            empresas,
+            vacantes
         }
     })
 });
+
 
 appRouter.get('/verProfesionales', async function (req, res) {
-    const profesionales = await userCtrl.TraerProfesionales();
+    let dbResponse;
+    let profesionales;
+    let areas;
+    let { area, genero, destacado, edad_min, edad_max } = req.query;
+    var filtro = [area, genero, destacado, edad_min, edad_max];
+    if (area !== undefined & genero !== undefined & destacado !== undefined & edad_min !== undefined & edad_max !== undefined) {
+        dbResponse = await profesionalServices.getFiltroProfesionales(filtro);
+        profesionales = dbResponse[2];
+        areas = dbResponse[1];
+    } else {
+        dbResponse = await profesionalServices.getProfesionales();
+        profesionales = dbResponse[0];
+        areas = dbResponse[1];
+    }
     res.render('homePages/verProfesionales', {
         page: {
-            profesionales: profesionales[0],
-            areas: profesionales[1]
+            profesionales,
+            areas
         }
     })
 });
 
+
+//creo que no va
 appRouter.post('/filtrarProfesionales', async function (req, res) {
     var filtro = [req.body.area, req.body.genero, req.body.destacado, req.body.edad_min, req.body.edad_max];
     if (req.body.edad_min == "") {
@@ -166,7 +171,7 @@ appRouter.post('/filtrarProfesionales', async function (req, res) {
         }
     })
 });
-
+//creo que no va
 appRouter.post('/filtrarVacantes', async function (req, res) {
     var filtro = [req.body.empresa, req.body.area, req.body.destacado, req.body.salario_min];
     if (req.body.salario_min == "") {

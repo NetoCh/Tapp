@@ -28,7 +28,7 @@
                     <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
                         aria-hidden="true">×</span></button>
                   </div>
-                  <form class="range-field" action="#profesionales" method="GET">
+                  <form class="range-field">
                     <div class="modal-body">
                       <div class="form-group">
                         <label class="col-lg-4">Areas laborales:</label>
@@ -89,7 +89,7 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary">Buscar</button>
+                      <button type="submit" id="filtrarProfesional" class="btn btn-primary">Buscar</button>
                       <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
                     </div>
                   </form>
@@ -110,20 +110,20 @@
       <%} else {%>
       <% var i = -1; for (var data of page.profesionales) { i++ %>
       <!--Profesionales-->
-      <div class="col-lg-12" id="<%= i %>"><a href="#" class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style"
-          data-toggle="modal" data-id="<%= i %>" data-target="#modal">
+      <div class="col-lg-12" id="<%= data.id_profesional %>"><a href="#" class="messageProfesional card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style"
+          data-toggle="modal" data-id="<%= data.id_profesional %>" data-target="#modal">
           <div class="row">
             <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
               <img src="/img/avatar-4.jpg" alt="..." style="max-width: 3rem" class="rounded-circle mx-3 my-2 my-lg-0">
               <h6 class="mb-0"><%- data.nombre_profesional + " " + data.apellido_profesional  %></h6>
             </div>
-            <div class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+            <div class="col-lg-4 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
               <div
                 class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">
-                <%- data.nombre_servicio %>
+                <%- data.nombre_area %>
               </div>
             </div>
-            <div class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
+            <div class="col-lg-4 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
               <p class="mb-0 mt-3 mt-lg-0"><%- data.descripcion_profesional %></p>
             </div>
             <% if (data.destacado == 1) { %>
@@ -255,28 +255,4 @@
       </div>
     </div>
   </footer>
-  <script>
-    var buscar = document.querySelector('#buscar');
-    var data = '<%-JSON.stringify(page.profesionales)%>';
-    var objProfesionales = JSON.parse(data);
-    var comparar = new Array();
-    var filtrar = () =>{
-      for (let data of objProfesionales){
-        comparar.push(data.nombre_profesional+" "+data.apellido_profesional);
-      }
-      for (let data of comparar){
-          let z = comparar.findIndex(index => index === data);
-          let m = document.getElementById(z);
-          if(data.toLowerCase().indexOf(buscar.value.toLowerCase()) !== -1){
-            if (m.style.display === "none"){
-                m.style.display = "block";
-            }
-          }
-          else{
-            m.style.display = "none";
-          }
-      }
-    }
-    buscar.addEventListener('keyup', filtrar);
-  </script>
 </div>

@@ -75,7 +75,7 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary">Buscar</button>
+                      <button type="submit" class="btn btn-primary" id="filtrarVacante">Buscar</button>
                       <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
                     </div>
                   </form>
@@ -95,7 +95,7 @@
             </div>
         <%} else {%>
         <% var i = -1; for(var data of page.vacantes) { i++ %>
-        <div class="col-lg-4 mb-4" id="<%= i %>"><a href="#" class="message bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#modal" data-id=<%= i %>>
+        <div class="col-lg-4 mb-4" id="<%= data.id_vacante %>"><a href="#" class="messageVacante bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#modal" data-id=<%= data.id_vacante %>>
             <div class="card rounded bg-hover-gradient-blue">
               <div class="content p-4">
                 <div class="d-flex align-items-start flex-column">
@@ -109,8 +109,6 @@
                   <div class="row">
                     <div class="pl-3 mt-3 col-lg-12">
                       <small class="text-gray" style="overflow-x:-webkit-marquee;"><%- data.email %></small>
-                      <!-- <marquee behavior="scroll" direction="right"
-                        onmouseout="this.stop();">Hower over and hold the mouse marquee stop</marquee> -->
                     </div>
                   </div>
                   <div class="row">
@@ -140,7 +138,7 @@
                     aria-hidden="true">×</span></button>
               </div>
               <div class="modal-body">
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Nombre: </strong>
                   </div>
@@ -148,7 +146,7 @@
                     <p id="#nombre"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Descripción de la vacante: </strong>
                   </div>
@@ -156,7 +154,7 @@
                     <p id="#descripcion"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Área laboral: </strong>
                   </div>
@@ -164,7 +162,7 @@
                     <p id="#area"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Requisitos </strong>
                   </div>
@@ -172,7 +170,7 @@
                     <p id="#requisito"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Trabajos a desempeñar: </strong>
                   </div>
@@ -180,7 +178,7 @@
                     <p id="#trabajos"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Salario: </strong>
                   </div>
@@ -188,7 +186,7 @@
                     <p id="#salario"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Ubicación del trabajo: </strong>
                   </div>
@@ -196,7 +194,7 @@
                     <p id="#ubicacion"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Tipo de horario: </strong>
                   </div>
@@ -204,7 +202,7 @@
                     <p id="#horario"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Fecha de publicación: </strong>
                   </div>
@@ -212,7 +210,7 @@
                     <p id="#fecha"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Nombre de la empresa: </strong>
                   </div>
@@ -220,7 +218,7 @@
                     <p id="#empresa"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Descripción de la empresa: </strong>
                   </div>
@@ -228,7 +226,7 @@
                     <p id="#descripcionempr"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Teléfono de la empresa: </strong>
                   </div>
@@ -236,7 +234,7 @@
                     <p id="#telefono"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Sitio web: </strong>
                   </div>
@@ -244,7 +242,7 @@
                     <p id="#sitio"></p>
                   </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-2">
                   <div class="col-4">
                     <strong>Email: </strong>
                   </div>
@@ -275,31 +273,6 @@
       </div>
     </div>
   </footer>
-  <script>
-    var buscar = document.querySelector('#buscar');
-    var data = '<%-JSON.stringify(page.vacantes)%>';
-    var objVacantes = JSON.parse(data);
-    var comparar = new Array();
-    var filtrar = () =>{
-      for (let data of objVacantes){
-        comparar.push(data.nombre_empresa+" "+data.nombre_vacante);
-      }
-      for (let data of comparar){
-          let z = comparar.findIndex(index => index === data);
-          let m = document.getElementById(z);
-          if(data.toLowerCase().indexOf(buscar.value.toLowerCase()) !== -1){
-            if (m.style.display === "none"){
-                m.style.display = "block";
-            }
-          }
-          else{
-            m.style.display = "none";
-          }
-      }
-    }
-    buscar.addEventListener('keyup', filtrar);
-  </script>
-
 </div>
 
 <!-- <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style" data-toggle="modal"
