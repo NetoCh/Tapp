@@ -1,10 +1,28 @@
 const appRouter = require('express').Router();
-const userCtrl = require('../controllers/user');
+const fs = require('fs');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
 const vacantesCtrl = require('../services/vacante');
 const empresaService = require('../services/empresas');
 const userService = require('../services/user');
 const sanitizer = require('sanitizer');
 const { check, validationResult, sanitize } = require('express-validator');
+const { response } = require('express');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        let fileStorage = 'src/public/img/';
+        fs.mkdir(fileStorage, { recursive: true }, (err) => {
+            if (err) throw err;
+        });
+        cb(null, fileStorage)
+    },
+    filename: function (req, file, cb) {
+        cb(null, uuidv4() + '-' + Date.now() + '.' + file.mimetype.split("image/")[1])
+    }
+});
+var uploadAvatarProfesional = multer({
+    storage: storage
+});
 
 appRouter.get("/getVacantes", async (req, res) => {
     let response = await vacantesCtrl.getVacantes();
@@ -57,5 +75,26 @@ appRouter.post('/getMyVacants', async (req, res) => {
     let response = await empresaService.spGetVacant(id)
     res.json(response)
 })
+
+appRouter.get("/accions", async (req, res) => {
+    let user = userService.decryptToken(req);
+    let response = await userService.spGetUserDataBDComplete(user.idLogin);
+    response.data.email = user.user;
+    res.json(response);
+})
+
+appRouter.post("/accions", uploadAvatarProfesional.single("avatar"), async (req, res) => {
+    let user = userService.decryptToken(req);
+    let model = req.body;
+    model.idLogin = user.idLogin;
+    let response = await empresaService.update(model);
+    if (req.file) {
+        let updatedAvatarResponse = await empresaService.updateAvatar(user.idLogin, req.file);
+        if(!updatedAvatarResponse.success)
+            response.message += " " + updatedAvatarResponse.message;
+    }
+    res.json(response);
+})
+
 
 module.exports = appRouter;

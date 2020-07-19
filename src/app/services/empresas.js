@@ -1,6 +1,6 @@
 'use strict'
 const pool = require('../models/pool')();
-
+const fs = require('fs');
 function EmpresasServices(){
     var self = this;
     this.GetAreas = async function(){
@@ -163,7 +163,6 @@ function EmpresasServices(){
             }
         });
     }
-
     this.spGetVacant = (id)=>  {
         let response = {
             success: false
@@ -184,6 +183,94 @@ function EmpresasServices(){
                         }
                     }else{
                         response.message = 'No existen vacantes publicadas.'
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
+    this.update = async function (model) {
+        let data = Object.values(model);
+        let response = {
+            success: false,
+            message: "No se logro actualizar el perfil"
+        }
+        try {
+            let update = await self.spUpdateEmpresa(data);
+            if (!update.success) return response;
+            response = {
+                success: true,
+                message: "Perfil actualizado correctamente"
+            }
+            return response;
+        } catch (err) {
+            console.log(err);
+            return response;
+        }
+    }
+    this.spUpdateEmpresa = function (data) {
+        let response = {
+            success: false,
+            message: "No se logro actualizar el avatar"
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_actualizar_empresa(?,?,?,?,?,?,?,?)", data, (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                        response = {
+                            success: true,
+                            message: "Avatar actualizado correctamente"
+                        }
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
+    this.updateAvatar = async function (idLogin, image) {
+        let { filename, destination } = image;
+        let avatarStatus = await self.spUpdateAvatar(idLogin, filename);
+        if (avatarStatus.success) {
+            if (avatarStatus.data) {
+                let oldImage = destination + "/" + avatarStatus.data.foto;
+                if (fs.existsSync(oldImage)) {
+                    fs.unlink(oldImage, (err) => {
+                        if (err) throw err;
+                        console.log(`deleted image: ${oldImage}`);
+                    });
+                }
+            }
+        }
+        return avatarStatus;
+    }
+    this.spUpdateAvatar = function (idLogin, filename) {
+        let response = {
+            success: false,
+            message: "No se logro actualizar el avatar"
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_actualizar_avatar_Empresa(?,?)", [idLogin, filename], (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                        response = {
+                            success: true,
+                            message: "Avatar actualizado correctamente",
+                            data: rows[1][0]
+                        }
                     }
                     resolve(response);
                 });

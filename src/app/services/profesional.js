@@ -139,7 +139,7 @@ function profesionalServices() {
                 }
             }
         }
-        return response;
+        return avatarStatus;
     }
     this.spUpdateAvatar = function (idLogin, filename) {
         let response = {
