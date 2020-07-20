@@ -192,6 +192,36 @@ function EmpresasServices(){
             }
         });
     }
+
+    this.spUpdateVacante = (model)=>  {
+        let response = {
+            success: false,
+            icon: 'warning'
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_actualizar_vacante(?,?,?,?,?,?,?,?,?)", Object.values(model), (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        response.message  = 'No se pudieron actualizar los datos.'
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                        response = {
+                            success: true,
+                            icon: 'success',
+                            message: 'vacante actualizada correctamente' 
+                        }
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.icon = "error"
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
 }
 
 module.exports= new EmpresasServices();

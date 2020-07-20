@@ -58,4 +58,10 @@ appRouter.post('/getMyVacants', async (req, res) => {
     res.json(response)
 })
 
+appRouter.post('/updateVacante', async (req, res) => {
+    let model = req.body;
+    let response = await empresaService.spUpdateVacante(model)
+    res.json(response)
+})
+
 module.exports = appRouter;
