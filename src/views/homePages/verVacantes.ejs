@@ -95,37 +95,30 @@
             </div>
         <%} else {%>
         <% var i = -1; for(var data of page.vacantes) { i++ %>
-        <div class="col-lg-4 mb-4" id="<%= data.id_vacante %>"><a href="#" class="messageVacante bg-hover-gradient-primary no-anchor-style" data-toggle="modal" data-target="#modal" data-id=<%= data.id_vacante %>>
-            <div class="card rounded bg-hover-gradient-blue">
-              <div class="content p-4">
-                <div class="d-flex align-items-start flex-column">
-                  <div class="row">
-                    <div class="p-3" style="height: 100px;">
-                      <h2><% if(data.destacado == 1) { %><img src="/img/medalla-de-honor.svg" class="float-left"
-                          style="max-width: 40px;" alt=""> <% } else { %> <i class="fas fa-bullhorn"></i><% } %><small
-                          class="ml-3"><%- data.nombre_empresa %></small></h2>
-                    </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 mt-4" id="<%= data.id_vacante %>">
+              <div class="blog-card-entrepressx">
+                  <div class="meta-entrepressx"><a  class="messageVacante  no-anchor-style" data-toggle="modal" data-target="#modal" data-id=<%= data.id_vacante %>>
+                      <div class="photo-entrepressx"
+                          style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)">
+                      </div>
+                      <ul class="details-entrepressx">
+                          <li class="date-entrepressx"><%=data.fecha%></li>
+                          <li class="area-entrepressx"><%=data.nombre_area%></li>
+                          <li class="place-entrepressx"><%=data.ubicacion%></li>
+                      </ul>
                   </div>
-                  <div class="row">
-                    <div class="pl-3 mt-3 col-lg-12">
-                      <small class="text-gray" style="overflow-x:-webkit-marquee;"><%- data.email %></small>
-                    </div>
+                  <div class="description-entrepressx">
+                      <h1><%=data.nombre_vacante%> <img src="img/medalla-de-honor.svg" style="max-width: 40px;"></h1>
+                      <h2><%=data.email%></h2>
+                      <!-- <p class="text-center"><img src="img/medalla-de-honor.svg" style="max-width: 40px;"></p> -->
+                      <p><%=data.descripcion_vacante%></p>
+                      <p class="price-entrepressx text-left">
+                          <a style="font-size: 2rem;"><%=data.salario%></a>
+                      </p>
                   </div>
-                  <div class="row">
-                    <div class="p-3 text-uppercase font-weight-bold " style="height: 100px;">
-                      <h4><%- data.nombre_vacante %></h4>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="p-3">
-                      <h5>$<%- data.salario %></h5>
-                    </div>
-                  </div>
-                </div>
+                </a>
               </div>
-            </div>
-          </a>
-        </div>
+          </div>
         <% } } %>
         <!-- Modal2 (dettalles de vacante)-->
         <div id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
