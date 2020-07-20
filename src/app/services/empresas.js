@@ -243,7 +243,7 @@ function EmpresasServices(){
         if (avatarStatus.success) {
             if (avatarStatus.data) {
                 let oldImage = destination + "/" + avatarStatus.data.foto;
-                if (fs.existsSync(oldImage)) {
+                if (fs.existsSync(oldImage) && avatarStatus.data.foto !== "defaultAvatar.png") {
                     fs.unlink(oldImage, (err) => {
                         if (err) throw err;
                         console.log(`deleted image: ${oldImage}`);
