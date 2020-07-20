@@ -1,0 +1,39 @@
+.hero-awesomex {
+    background-size: 150%;
+    background-repeat: no-repeat;
+    background-position: left;
+    -webkit-animation: slide 40s ease;
+    transform: translate3d(0,0,0);
+    /* height: 100vh; */
+  }
+  
+  .hero__content-awesomex {
+    z-index: 101;
+    height: 30%;
+    position: relative;
+  }
+  
+  @-webkit-keyframes slide {
+    0%   { background-position: left; }
+    50%   { background-position: right; }
+    100% { background-position: left; }
+  }
+  
+  .hero-awesomex h1 {
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .hero__content-awesomex {
+      padding: 15% 20%;
+      max-width: 50%;
+  }
+  
+  .btn-hero-awesomex {
+    background: #4680ff;
+    color: white;
+    display: inline-block;
+    border-radius: 3px;
+    font-size: 20px;
+  }

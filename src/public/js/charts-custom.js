@@ -1,713 +1,407 @@
-$(function () {
+function Charts() {
+    this.init = function () {
+        $(document).ready(()=>{
+                    var violet = '#DF99CA',
+                    red    = '#F0404C',
+                    green  = '#7CF29C';
+
+                    $.get("/api/admin/getDatos", {}, function (response) {
+                        if(response.success){
+                            /*  Cargar gráficas s todos los datos llegan    */
+                                     // ------------------------------------------------------- //
+                                    // Charts Gradients
+                                    // ------------------------------------------------------ //
+                                    var ctx1 = $("canvas").get(0).getContext("2d");
+                                    var gradient1 = ctx1.createLinearGradient(150, 0, 150, 300);
+                                    gradient1.addColorStop(0, '#273044');
+                                    gradient1.addColorStop(1, '#273044');
+
+                                    var gradient2 = ctx1.createLinearGradient(10, 0, 150, 300);
+                                    gradient2.addColorStop(0, '#5d99de');
+                                    gradient2.addColorStop(1, '#5d99de');
 
 
-    var violet = '#DF99CA',
-        red    = '#F0404C',
-        green  = '#7CF29C';
+                                    // ------------------------------------------------------- //
+                                    // Gráfica de cantidad de vacantes registradas por mes
+                                    // ------------------------------------------------------ //
+                                    var BARCHARTEXMPLE2    = $('#cantVacantesMes');
+                                    var barChartExample2 = new Chart(BARCHARTEXMPLE2, {
+                                        type: 'bar',
+                                        options: {
+                                            scales: {
+                                                xAxes: [{
+                                                    display: true,
+                                                    gridLines: {
+                                                        color: '#fff'
+                                                    }
+                                                }],
+                                                yAxes: [{
+                                                    display: true,
+                                                    ticks: {
+                                                        max: 100,
+                                                        min: 5
+                                                    },
+                                                    gridLines: {
+                                                        color: '#fff'
+                                                    }
+                                                }]
+                                            },
+                                            legend: false
+                                        },
+                                        data: {
+                                            labels: [response.data[3][0].mes, response.data[3][1].mes, response.data[3][2].mes, response.data[3][3].mes, response.data[3][4].mes, response.data[3][5].mes, response.data[3][6].mes, response.data[3][7].mes, response.data[3][8].mes, response.data[3][9].mes, response.data[3][10].mes, response.data[3][11].mes],
+                                            datasets: [
+                                                {
+                                                    label: "Cantidad",
+                                                    backgroundColor: [
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2
+                                                    ],
+                                                    hoverBackgroundColor: [
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2
+                                                    ],
+                                                    borderColor: [
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2,
+                                                        gradient2
+                                                    ],
+                                                    borderWidth: 1,
+                                                    data: [response.data[3][0].cantidad, response.data[3][1].cantidad, response.data[3][2].cantidad, response.data[3][3].cantidad, response.data[3][4].cantidad, response.data[3][5].cantidad, response.data[3][6].cantidad, response.data[3][7].cantidad, response.data[3][8].cantidad, response.data[3][9].cantidad, response.data[3][10].cantidad, response.data[3][11].cantidad],
+                                                }
+                                            ]
+                                        }
+                                    });
+
+                            
+                                    // ------------------------------------------------------- //
+                                    // Gráfica de cantidad de profesionales registrados por mes
+                                    // ------------------------------------------------------ //
+                                    var BARCHARTEXMPLE3    = $('#cantProfesionalesMes');
+                                    var barChartExample3 = new Chart(BARCHARTEXMPLE3, {
+                                        type: 'bar',
+                                        options: {
+                                            scales: {
+                                                xAxes: [{
+                                                    display: true,
+                                                    gridLines: {
+                                                        color: '#fff'
+                                                    }
+                                                }],
+                                                yAxes: [{
+                                                    display: true,
+                                                    ticks: {
+                                                        max: 50,
+                                                        min: 5
+                                                    },
+                                                    gridLines: {
+                                                        color: '#fff'
+                                                    }
+                                                }]
+                                            },
+                                            legend: false
+                                        },
+                                        data: {
+                                            labels: [response.data[4][0].mes, response.data[4][1].mes, response.data[4][2].mes, response.data[4][3].mes, response.data[4][4].mes, response.data[4][5].mes, response.data[4][6].mes, response.data[4][7].mes, response.data[4][8].mes, response.data[4][9].mes, response.data[4][10].mes, response.data[4][11].mes],
+                                            datasets: [
+                                                {
+                                                    label: "Data Set 1",
+                                                    backgroundColor: [
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1
+                                                    ],
+                                                    hoverBackgroundColor: [
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1
+                                                    ],
+                                                    borderColor: [
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1,
+                                                        gradient1
+                                                    ],
+                                                    borderWidth: 1,
+                                                    data: [response.data[4][0].cantidad, response.data[4][1].cantidad, response.data[4][2].cantidad, response.data[4][3].cantidad, response.data[4][4].cantidad, response.data[4][5].cantidad, response.data[4][6].cantidad, response.data[4][7].cantidad, response.data[4][8].cantidad, response.data[4][9].cantidad, response.data[4][10].cantidad, response.data[4][11].cantidad],
+                                                }
+                                            ]
+                                        }
+                                    });
+                                
+                                    // ------------------------------------------------------- //
+                                    // Gráfica de cantidad de empresas registradas por mes
+                                    // ------------------------------------------------------ //
+                                    var LINECHARTEXMPLE   = $('#CantEmpMes');
+                                    var lineChartExample = new Chart(LINECHARTEXMPLE, {
+                                        type: 'line',
+                                        options: {
+                                            legend: {labels:{fontColor:"#777", fontSize: 12}},
+                                            scales: {
+                                                xAxes: [{
+                                                    display: true,
+                                                    gridLines: {
+                                                        color: '#fff'
+                                                    }
+                                                }],
+                                                yAxes: [{
+                                                    display: true,
+                                                    ticks: {
+                                                        max: 50,
+                                                        min: 5
+                                                    },
+                                                    gridLines: {
+                                                        color: '#fff'
+                                                    }
+                                                }]
+                                            },
+                                        },
+                                        data: {
+                                            labels: [response.data[1][0].mes, response.data[1][1].mes, response.data[1][2].mes, response.data[1][3].mes, response.data[1][4].mes, response.data[1][5].mes, response.data[1][6].mes, response.data[1][7].mes, response.data[1][8].mes, response.data[1][9].mes, response.data[1][10].mes, response.data[1][11].mes],
+                                            datasets: [
+                                                {
+                                                    label: "Cantidad",
+                                                    fill: true,
+                                                    lineTension: 0.3,
+                                                    backgroundColor: gradient1,
+                                                    borderColor: '#273044',
+                                                    borderCapStyle: 'butt',
+                                                    borderDash: [],
+                                                    borderDashOffset: 0.0,
+                                                    borderJoinStyle: 'miter',
+                                                    borderWidth: 2,
+                                                    pointBorderColor: gradient1,
+                                                    pointBackgroundColor: "#fff",
+                                                    pointBorderWidth: 2,
+                                                    pointHoverRadius: 5,
+                                                    pointHoverBackgroundColor: gradient1,
+                                                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                                                    pointHoverBorderWidth: 2,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 10,
+                                                    data: [response.data[1][0].cantidad, response.data[1][1].cantidad, response.data[1][2].cantidad, response.data[1][3].cantidad, response.data[1][4].cantidad, response.data[1][5].cantidad, response.data[1][6].cantidad, response.data[1][7].cantidad, response.data[1][8].cantidad, response.data[1][9].cantidad, response.data[1][10].cantidad, response.data[1][11].cantidad],
+                                                    spanGaps: false
+                                                }
+                                            ]
+                                        }
+                                    });
 
 
+                                    // ------------------------------------------------------- //
+                                    // Gráfica de cantidad de empresas y profesionales registrados
+                                    // ------------------------------------------------------ //
+                                    var DOUGHNUTCHARTEXMPLE  = $('#cantEmpProf');
+                                    var pieChartExample = new Chart(DOUGHNUTCHARTEXMPLE, {
+                                        type: 'doughnut',
+                                        options: {
+                                            cutoutPercentage: 80,
+                                        },
+                                        data: {
+                                            labels: [
+                                                "Empresas",
+                                                "Profesionales"
+                                            ],
+                                            datasets: [
+                                                {
+                                                    data: [response.data[2][0].cantidad,response.data[2][1].cantidad],
+                                                    borderWidth: 0,
+                                                    backgroundColor: [
+                                                        '#5d99de',
+                                                        '#273044 '
+                                                    ],
+                                                    hoverBackgroundColor: [
+                                                        '#5d99de',
+                                                        '#273044'
+                                                    ]
+                                                }]
+                                            }
+                                    });
 
-    // ------------------------------------------------------- //
-    // Charts Gradients
-    // ------------------------------------------------------ //
-    var ctx1 = $("canvas").get(0).getContext("2d");
-    var gradient1 = ctx1.createLinearGradient(150, 0, 150, 300);
-    gradient1.addColorStop(0, '#273044');
-    gradient1.addColorStop(1, '#273044');
+                                    var pieChartExample = {
+                                        responsive: true
+                                    };
 
-    var gradient2 = ctx1.createLinearGradient(10, 0, 150, 300);
-    gradient2.addColorStop(0, '#5d99de');
-    gradient2.addColorStop(1, '#5d99de');
+                                    // ------------------------------------------------------- //
+                                    // Gráfica de cantidad de vacantes por tipo de horario
+                                    // ------------------------------------------------------ //
+                                    var DOUGHNUTCHARTEXMPLE2  = $('#cantVacantesTipoHorario');
+                                    var pieChartExample2 = new Chart(DOUGHNUTCHARTEXMPLE2, {
+                                        type: 'doughnut',
+                                        options: {
+                                            cutoutPercentage: 80,
+                                        },
+                                        data: {
+                                            labels: [
+                                                response.data[5][0].nombre,response.data[5][1].nombre,
+                                                response.data[5][2].nombre,response.data[5][3].nombre
+                                            ],
+                                            datasets: [
+                                                {
+                                                    data: [response.data[5][0].cantidad,response.data[5][1].cantidad,
+                                                           response.data[5][2].cantidad,response.data[5][3].cantidad],
+                                                    borderWidth: 0,
+                                                    backgroundColor: [
+                                                        '#5d99de',
+                                                        '#273044 '
+                                                    ],
+                                                    hoverBackgroundColor: [
+                                                        '#5d99de',
+                                                        '#273044'
+                                                    ]
+                                                }]
+                                            }
+                                    });
 
-
-     // ------------------------------------------------------- //
-    // Bar Chart
-    // ------------------------------------------------------ //
-    var BARCHARTEXMPLE2    = $('#barChartExample2');
-    var barChartExample2 = new Chart(BARCHARTEXMPLE2, {
-        type: 'bar',
-        options: {
-            scales: {
-                xAxes: [{
-                    display: true,
-                    gridLines: {
-                        color: '#fff'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        max: 100,
-                        min: 20
-                    },
-                    gridLines: {
-                        color: '#fff'
-                    }
-                }]
-            },
-            legend: false
-        },
-        data: {
-            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
-            datasets: [
-                {
-                    label: "Data Set 1",
-                    backgroundColor: [
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2
-                    ],
-                    hoverBackgroundColor: [
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2
-                    ],
-                    borderColor: [
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2
-                    ],
-                    borderWidth: 1,
-                    data: [65, 59, 80, 81, 56, 55, 40, 30, 45, 80, 44, 36, 66, 58],
-                }
-            ]
-        }
-    });
+                                    var pieChartExample2 = {
+                                        responsive: true
+                                    };
 
 
+                                    // ------------------------------------------------------- //
+                                    // Gráfica de cantidad de hombres y mujeres
+                                    // ------------------------------------------------------ //
+                                    var PIECHARTEXMPLE    = $('#cantMF');
+                                    var pieChartExample = new Chart(PIECHARTEXMPLE, {
+                                        type: 'pie',
+                                        data: {
+                                            labels: [
+                                                "Hombres",
+                                                "Mujeres"
+                                            ],
+                                            datasets: [
+                                                {
+                                                    data: [response.data[0][0].cantidad, response.data[0][1].cantidad],
+                                                    borderWidth: 0,
+                                                    backgroundColor: [
+                                                        "#0000ff",
+                                                        "#ffc0cb"
+                                                    ],
+                                                    hoverBackgroundColor: [
+                                                        "#0000cc",
+                                                        "#e5acb6"
+                                                    ]
+                                                }]
+                                            }
+                                    });
 
+                                    var pieChartExample = {
+                                        responsive: true
+                                    };
+                                    Swal.fire({
+                                        title: 'Todos los datos han sido cargados.',
+                                        showClass: {
+                                        popup: 'animate__animated animate__fadeInDown'
+                                        },
+                                        hideClass: {
+                                        popup: 'animate__animated animate__fadeOutUp'
+                                        }
+                                    })
+                        }
+                        else{
+                            let timerInterval
+                            Swal.fire({
+                            title: 'Se ha producido un error',
+                            html: 'Redireccionando en <b></b> milisegundos.',
+                            timer: 2000,
+                            timerProgressBar: true,
+                            onBeforeOpen: () => {
+                                Swal.showLoading()
+                                timerInterval = setInterval(() => {
+                                const content = Swal.getContent()
+                                if (content) {
+                                    const b = content.querySelector('b')
+                                    if (b) {
+                                    b.textContent = Swal.getTimerLeft()
+                                    }
+                                }
+                                }, 100)
+                            },
+                            onClose: () => {
+                                clearInterval(timerInterval)
+                                window.location.href = "/";
+                            }
+                            }).then((result) => {
+                            /* Read more about handling dismissals below */
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                console.log('I was closed by the timer')
+                            }
+                            });
+                        }
+                    });
+               
 
-    // ------------------------------------------------------- //
-    // Bar Chart
-    // ------------------------------------------------------ //
-    var BARCHARTEXMPLE3    = $('#barChartExample3');
-    var barChartExample3 = new Chart(BARCHARTEXMPLE3, {
-        type: 'bar',
-        options: {
-            scales: {
-                xAxes: [{
-                    display: true,
-                    gridLines: {
-                        color: '#fff'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        max: 100,
-                        min: 20
-                    },
-                    gridLines: {
-                        color: '#fff'
-                    }
-                }]
-            },
-            legend: false
-        },
-        data: {
-            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
-            datasets: [
-                {
-                    label: "Data Set 1",
-                    backgroundColor: [
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1
-                    ],
-                    hoverBackgroundColor: [
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1
-                    ],
-                    borderColor: [
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1,
-                        gradient1
-                    ],
-                    borderWidth: 1,
-                    data: [65, 59, 80, 81, 56, 55, 40, 30, 45, 80, 44, 36, 66, 58],
-                }
-            ]
-        }
-    });
-    // ------------------------------------------------------- //
-   // Pie Chart
-   // ------------------------------------------------------ //
-   var PIECHART = $('#pieChart1');
-   var myPieChart = new Chart(PIECHART, {
-       type: 'doughnut',
-       options: {
-           cutoutPercentage: 90,
-           legend: {
-               display: false
-           }
-       },
-       data: {
-           labels: [
-               "First",
-               "Second",
-               "Third"
-           ],
-           datasets: [
-               {
-                   data: [250, 200],
-                   borderWidth: [0, 0],
-                   backgroundColor: [
-                       green,
-                       "#eee",
-                   ],
-                   hoverBackgroundColor: [
-                       green,
-                       "#eee",
-                   ]
-               }]
-       }
-   });
-
-
-    // ------------------------------------------------------- //
-   // Pie Chart
-   // ------------------------------------------------------ //
-   var PIECHART = $('#pieChart2');
-   var myPieChart = new Chart(PIECHART, {
-       type: 'doughnut',
-       options: {
-           cutoutPercentage: 90,
-           legend: {
-               display: false
-           }
-       },
-       data: {
-           labels: [
-               "First",
-               "Second"
-           ],
-           datasets: [
-               {
-                   data: [300, 50],
-                   borderWidth: [0, 0],
-                   backgroundColor: [
-                       violet,
-                       "#eee"
-                   ],
-                   hoverBackgroundColor: [
-                       violet,
-                       "#eee"
-                   ]
-               }]
-       }
-   });
-
-
-    // ------------------------------------------------------- //
-    // Line Chart
-    // ------------------------------------------------------ //
-    var LINECHARTEXMPLE   = $('#lineChartExample');
-    var lineChartExample = new Chart(LINECHARTEXMPLE, {
-        type: 'line',
-        options: {
-            legend: {labels:{fontColor:"#777", fontSize: 12}},
-            scales: {
-                xAxes: [{
-                    display: true,
-                    gridLines: {
-                        color: '#fff'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        max: 100,
-                        min: 20
-                    },
-                    gridLines: {
-                        color: '#fff'
-                    }
-                }]
-            },
-        },
-        data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            datasets: [
-                {
-                    label: "Inicios de sesión",
-                    fill: true,
-                    lineTension: 0.3,
-                    backgroundColor: gradient1,
-                    borderColor: '#273044',
-                    borderCapStyle: 'butt',
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    borderJoinStyle: 'miter',
-                    borderWidth: 2,
-                    pointBorderColor: gradient1,
-                    pointBackgroundColor: "#fff",
-                    pointBorderWidth: 2,
-                    pointHoverRadius: 5,
-                    pointHoverBackgroundColor: gradient1,
-                    pointHoverBorderColor: "rgba(220,220,220,1)",
-                    pointHoverBorderWidth: 2,
-                    pointRadius: 1,
-                    pointHitRadius: 10,
-                    data: [0, 50, 33, 71, 49, 55, 35, 40, 30, 50, 25, 40],
-                    spanGaps: false
-                }
-            ]
-        }
-    });
-
-
-
-    // ------------------------------------------------------- //
-    // Line Chart
-    // ------------------------------------------------------ //
-
-    var LINECHART = $('#lineCahrtsm1');
-    var myLineChart = new Chart(LINECHART, {
-        type: 'line',
-        options: {
-            scales: {
-                xAxes: [{
-                    display: false
-                }],
-                yAxes: [{
-                    ticks: {
-                        max: 50,
-                        min: 0
-                    },
-                    display: false
-                }]
-            },
-            legend: {
-                display: false
-            }
-        },
-        data: {
-            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
-            datasets: [
-                {
-                    label: "Page Visitors",
-                    fill: true,
-                    lineTension: 0.4,
-                    backgroundColor: "transparent",
-                    borderColor: green,
-                    pointBorderColor: green,
-                    pointHoverBackgroundColor: green,
-                    borderCapStyle: 'butt',
-                    borderDash: [],
-                    borderDashOffset: 0.0,
-                    borderJoinStyle: 'miter',
-                    borderWidth: 3,
-                    pointBackgroundColor: "#fff",
-                    pointBorderWidth: 5,
-                    pointHoverRadius: 5,
-                    pointHoverBorderColor: "#fff",
-                    pointHoverBorderWidth: 1,
-                    pointRadius: 0,
-                    pointHitRadius: 1,
-                    data: [20, 14, 21, 15, 22, 8, 18, 13, 21, 13, 17, 13, 20, 15],
-                    spanGaps: false
-                }
-            ]
-        }
-    });
-
-
-
-    // ------------------------------------------------------- //
-    // Bar Chart
-    // ------------------------------------------------------ //
-    var BARCHARTEXMPLE    = $('#barChartExample');
-    var barChartExample = new Chart(BARCHARTEXMPLE, {
-        type: 'bar',
-        options: {
-            scales: {
-                xAxes: [{
-                    display: false,
-                    gridLines: {
-                        color: '#fff'
-                    }
-                }],
-                yAxes: [{
-                    display: false,
-                    gridLines: {
-                        color: '#fff'
-                    }
-                }]
-            },
-            legend: false
-        },
-        data: {
-            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
-            datasets: [
-                {
-                    label: "Data Set 1",
-                    backgroundColor: [
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2
-                    ],
-                    hoverBackgroundColor: [
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2
-                    ],
-                    borderColor: [
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2
-                    ],
-                    borderWidth: 1,
-                    data: [65, 59, 80, 81, 56, 55, 40, 30, 45, 80, 44, 36, 66, 58],
-                }
-            ]
-        }
-    });
-
-
-
-    // ------------------------------------------------------- //
-    // Bar Chart
-    // ------------------------------------------------------ //
-    var BARCHARTEXMPLE    = $('#barChartExample1');
-    var barChartExample = new Chart(BARCHARTEXMPLE, {
-        type: 'bar',
-        options: {
-            scales: {
-                xAxes: [{
-                    display: true,
-                    gridLines: {
-                        color: '#fff'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    ticks: {
-                        max: 100,
-                        min: 20
-                    },
-                    gridLines: {
-                        color: '#fff'
-                    }
-                }]
-            },
-            legend: false
-        },
-        data: {
-            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
-            datasets: [
-                {
-                    label: "Data Set 1",
-                    backgroundColor: [
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2
-                    ],
-                    hoverBackgroundColor: [
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2
-                    ],
-                    borderColor: [
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2,
-                        gradient2
-                    ],
-                    borderWidth: 1,
-                    data: [65, 59, 80, 81, 56, 55, 40, 30, 45, 80, 44, 36, 66, 58],
-                }
-            ]
-        }
-    });
-
-
-
-    // ------------------------------------------------------- //
-    // Doughnut Chart
-    // ------------------------------------------------------ //
-    var DOUGHNUTCHARTEXMPLE  = $('#doughnutChartExample');
-    var pieChartExample = new Chart(DOUGHNUTCHARTEXMPLE, {
-        type: 'doughnut',
-        options: {
-            cutoutPercentage: 80,
-        },
-        data: {
-            labels: [
-                "Empresas",
-                "Profesionales"
-            ],
-            datasets: [
-                {
-                    data: [250, 100],
-                    borderWidth: 0,
-                    backgroundColor: [
-                        '#5d99de',
-                        '#273044 '
-                    ],
-                    hoverBackgroundColor: [
-                        '#5d99de',
-                        '#273044'
-                    ]
-                }]
-            }
-    });
-
-    var pieChartExample = {
-        responsive: true
+        });
+    
     };
+}
 
-
-
-    // ------------------------------------------------------- //
-    // Polar Chart
-    // ------------------------------------------------------ //
-    var POLARCHARTEXMPLE  = $('#polarChartExample');
-    var polarChartExample = new Chart(POLARCHARTEXMPLE, {
-        type: 'polarArea',
-        options: {
-            elements: {
-                arc: {
-                    borderWidth: 0,
-                    borderColor: '#aaa'
-                }
-            }
-        },
-        data: {
-            datasets: [{
-                data: [
-                    7,
-                    16,
-                    12,
-                    11
-                ],
-                backgroundColor: [
-                    green,
-                    "#6adf8a",
-                    "#50c670",
-                    "#3fac5c"
-                ],
-                label: 'My dataset' // for legend
-            }],
-            labels: [
-                "A",
-                "B",
-                "C",
-                "D"
-            ]
-        }
-    });
-
-    var polarChartExample = {
-        responsive: true
-    };
-
-
-    // ------------------------------------------------------- //
-    // Pie Chart
-    // ------------------------------------------------------ //
-    var PIECHARTEXMPLE    = $('#pieChartExample');
-    var pieChartExample = new Chart(PIECHARTEXMPLE, {
-        type: 'pie',
-        data: {
-            labels: [
-                "Hombres",
-                "Mujeres"
-            ],
-            datasets: [
-                {
-                    data: [300, 50],
-                    borderWidth: 0,
-                    backgroundColor: [
-                        "#0000ff",
-                        "#ffc0cb"
-                    ],
-                    hoverBackgroundColor: [
-                        "#0000cc",
-                        "#e5acb6"
-                    ]
-                }]
-            }
-    });
-
-    var pieChartExample = {
-        responsive: true
-    };
-
-
-
-    // ------------------------------------------------------- //
-    // Radar Chart
-    // ------------------------------------------------------ //
-    var RADARCHARTEXMPLE  = $('#radarChartExample');
-    var radarChartExample = new Chart(RADARCHARTEXMPLE, {
-        type: 'radar',
-        data: {
-            labels: ["A", "B", "C", "D", "E", "C"],
-            datasets: [
-                {
-                    label: "First dataset",
-                    backgroundColor: "rgba(252, 117, 176, 0.4)",
-                    borderWidth: 2,
-                    borderColor: "rgba(252, 117, 176, 0.84)",
-                    pointBackgroundColor: "rgba(252, 117, 176, 0.84)",
-                    pointBorderColor: "#fff",
-                    pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: "rgba(252, 117, 176, 0.84)",
-                    data: [65, 59, 90, 81, 56, 55]
-                },
-                {
-                    label: "Second dataset",
-                    backgroundColor: "rgba(250, 199, 106, 0.4)",
-                    borderWidth: 2,
-                    borderColor: "rgba(250, 199, 106, 0.92)",
-                    pointBackgroundColor: "rgba(250, 199, 106, 0.92)",
-                    pointBorderColor: "#fff",
-                    pointHoverBackgroundColor: "#fff",
-                    pointHoverBorderColor: "rgba(250, 199, 106, 0.92)",
-                    data: [50, 60, 80, 45, 96, 70]
-                }
-            ]
-        }
-    });
-    var radarChartExample = {
-        responsive: true
-    };
-
-
-
-});
 
 
 

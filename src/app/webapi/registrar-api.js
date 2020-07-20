@@ -1,6 +1,10 @@
 const appRouter = require('express').Router();
-const userCtrl = require('../controllers/user')
+const { authenticateToken, validatePageAccess } = require('../services/user');
+
+appRouter.use('/profesional', require('./profesional'));
+appRouter.use('/empresa', require('./empresa'))
+appRouter.use('/admin', require('./admin'))
+appRouter.use('/user', require('./user'));
 
 
-appRouter.post('/registoempresa', userCtrl.RegistrarEmpresa);
-appRouter.post('/registoprofesional', userCtrl.RegistrarProfesional);
+module.exports = appRouter

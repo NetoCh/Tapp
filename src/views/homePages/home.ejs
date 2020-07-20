@@ -1,237 +1,124 @@
-<div class="page-holder w-100 d-flex flex-wrap">
-    <div class="container-fluid px-xl-5">
-        <div class="row">
-            <div class="col-lg-12 mt-5">
-                <div class="card mb-5 mb-lg-0">
-                    <div class="card-header">
-                        <h2 class="h6 mb-0 text-uppercase">Vacantes Destacadas</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style"
-                                    data-toggle="modal" data-target="#myModal2">
-                                    <div class="card rounded bg-hover-gradient-blue">
-                                        <div class="content p-4">
-                                            <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small class="ml-3">IT
-                                                    Consulting</small> <img src="img/medalla-de-honor.svg"
-                                                    class="float-right" style="max-width: 40px;" alt=""></i> </h2>
-                                            <small class="text-gray">itconsulting@yahoo.com</small>
-                                            <div class="text-uppercase">
-                                                <div class="font-weight-bold d-block">Analista de datos</div>
-                                                <h4 class="mb-0">$850.00</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style"
-                                    data-toggle="modal" data-target="#myModal2">
-                                    <div class="card rounded bg-hover-gradient-violet">
-                                        <div class="content p-4">
-                                            <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small
-                                                    class="ml-3">iThink</small> <img src="img/medalla-de-honor.svg"
-                                                    class="float-right" style="max-width: 40px;" alt=""></i></h2>
-                                            <small class="text-gray">iThink@yahoo.com</small>
-                                            <div class="text-uppercase">
-                                                <div class="font-weight-bold d-block">Diseñador grafico</div>
-                                                <h4 class="mb-0">$780.00</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style"
-                                    data-toggle="modal" data-target="#myModal2">
-                                    <div class="card rounded bg-hover-gradient-green">
-                                        <div class="content p-4">
-                                            <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small
-                                                    class="ml-3">XeusInnovation</small>
-                                                <img src="/img/medalla-de-honor.svg" class="float-right"
-                                                    style="max-width: 40px;" alt=""></i></h2>
-                                            <small class="text-gray">XeusInnovation@yahoo.com</small>
-                                            <div class="text-uppercase">
-                                                <div class="font-weight-bold d-block">Experto en eCommerce</div>
-                                                <h4 class="mb-0">$950.00</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style"
-                                    data-toggle="modal" data-target="#myModal2">
-                                    <div class="card rounded bg-hover-gradient-green">
-                                        <div class="content p-4">
-                                            <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small
-                                                    class="ml-3">PanaData</small> <img src="/img/medalla-de-honor.svg"
-                                                    class="float-right" style="max-width: 40px;" alt=""></i></h2>
-                                            <small class="text-gray">panadatan@yahoo.com</small>
-                                            <div class="text-uppercase">
-                                                <div class="font-weight-bold d-block">Experto en DevOps</div>
-                                                <h4 class="mb-0">$900.00</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style"
-                                    data-toggle="modal" data-target="#myModal2">
-                                    <div class="card rounded bg-hover-gradient-blue">
-                                        <div class="content p-4">
-                                            <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small
-                                                    class="ml-3">Julio&Ruiz</small> <img src="/img/medalla-de-honor.svg"
-                                                    class="float-right" style="max-width: 40px;" alt=""></i></h2>
-                                            <small class="text-gray">iarpsoftware@yahoo.com</small>
-                                            <div class="text-uppercase">
-                                                <div class="font-weight-bold d-block">Asistente legal</div>
-                                                <h4 class="mb-0">$650.00</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 mb-4"><a href="#" class="bg-hover-gradient-primary no-anchor-style"
-                                    data-toggle="modal" data-target="#myModal2">
-                                    <div class="card rounded bg-hover-gradient-blue">
-                                        <div class="content p-4">
-                                            <h2 class="mb-5"><i class="fas fa-bullhorn"></i><small
-                                                    class="ml-3">PanamáGo</small> <img src="/img/medalla-de-honor.svg"
-                                                    class="float-right" style="max-width: 40px;" alt=""></i></h2>
-                                            <small class="text-gray">panamago@yahoo.com</small>
-                                            <div class="text-uppercase">
-                                                <div class="font-weight-bold d-block">Community manager</div>
-                                                <h4 class="mb-0">$700.00</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%let response = page.data;%>
+<style>
+    .sidebar {
+        display: none;
+    }
+    #container {
+       padding-right: 0px !important;
+        padding-left: 0px !important; 
+    }
+    
+</style>
+<div class="hero-awesomex" style="background-image: url(https://ununsplash.imgix.net/photo-1416339134316-0e91dc9ded92?q=75&fm=jpg&s=883a422e10fc4149893984019f63c818)">
+    <div class="hero__content-awesomex">
+      <h1>TAPP, del APP al TRABAJO.</h1>
+      <!-- <a class="btn btn-hero-awesomex" href="#">Iniciar sesion</a> -->
+    </div>
+  </div>
+<!-- -----------------------------------------------DIVIDER------------------------------------------------------------------------ -->
+<div class="container-dividerx">
+    <section class="section-dividerx col-2-dividerx color-dividerx ss-style-curvedown">
+        <div class="column-dividerx text-dividerx">
+            <h2 class="font-weight-bold">Profesionales Destacados</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus iusto explicabo odio magnam natus in
+                facere officia quam quos modi voluptatum architecto consequuntur blanditiis dignissimos vero sed libero,
+                error unde!</p>
         </div>
-        <div class="row mb-5">
-            <div class="col-lg-12 mt-5">
-                <div class="card mb-5 mb-lg-0">
-                    <div class="card-header">
-                        <h2 class="h6 mb-0 text-uppercase">Profesionales Destacadas</h2>
+    </section>
+</div>
+<svg id="curveDownColor" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100"
+    viewBox="0 0 100 100" preserveAspectRatio="none">
+    <path d="M0 0 C 50 100 80 100 100 0 Z" />
+</svg>
+<!-- -----------------------------------------------DIVIDER------------------------------------------------------------------------ -->
+<div class="w-100 d-flex flex-wrap">
+    <div class="container-fluid px-xl-5">
+        <div class="description-entrepressx text-right">
+            <p class="ver-mas-entrepressx text-right">
+                <a href="#profesionales" style="font-size: 2rem;">Más profesionales</a>
+            </p>
+        </div>
+        <div class="row">
+            <% for (var i = 0; i< response[1].length && i< 4; i++) {%>
+            <div class="col-lg-3 col-md-6 col-sm-12 my-5 ">
+                <div class="card-awesomex">
+                    <div class="banner">
+                        <img class="svg" src="img/<%=response[1][i].foto%>">
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-12"><a data-toggle="modal" data-target="#Userdata"
-                                    class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
-                                    <div class="row">
-                                        <div
-                                            class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <img src="/img/avatar-4.jpg" alt="..." style="max-width: 3rem"
-                                                class="rounded-circle mx-3 my-2 my-lg-0">
-                                            <h6 class="mb-0">Jason Doe</h6>
-                                        </div>
-                                        <div
-                                            class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <div
-                                                class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">
-                                                Desarrollador</div>
-                                        </div>
-                                        <div
-                                            class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit..</p>
-                                        </div>
-                                        <div
-                                            class="col-lg-1 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <img src="/img/medalla-de-honor.svg" style="max-width: 40px;" alt=""></i>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-12"><a data-toggle="modal" data-target="#Userdata"
-                                    class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
-                                    <div class="row">
-                                        <div
-                                            class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <img src="/img/avatar-2.jpg" alt="..." style="max-width: 3rem"
-                                                class="rounded-circle mx-3 my-2 my-lg-0">
-                                            <h6 class="mb-0">Sam Andy</h6>
-                                        </div>
-                                        <div
-                                            class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <div
-                                                class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">
-                                                Web Developer</div>
-                                        </div>
-                                        <div
-                                            class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit..</p>
-                                        </div>
-                                        <div
-                                            class="col-lg-1 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <img src="/img/medalla-de-honor.svg" style="max-width: 40px;" alt=""></i>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-12"><a data-toggle="modal" data-target="#Userdata"
-                                    class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
-                                    <div class="row">
-                                        <div
-                                            class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <img src="/img/avatar-3.jpg" alt="..." style="max-width: 3rem"
-                                                class="rounded-circle mx-3 my-2 my-lg-0">
-                                            <h6 class="mb-0">Margret Peter</h6>
-                                        </div>
-                                        <div
-                                            class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <div
-                                                class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">
-                                                Analysis Agent</div>
-                                        </div>
-                                        <div
-                                            class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit..</p>
-                                        </div>
-                                        <div
-                                            class="col-lg-1 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <img src="/img/medalla-de-honor.svg" style="max-width: 40px;" alt=""></i>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col-lg-12"><a data-toggle="modal" data-target="#Userdata"
-                                    class="message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style">
-                                    <div class="row">
-                                        <div
-                                            class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <img src="/img/avatar-3.jpg" alt="..." style="max-width: 3rem"
-                                                class="rounded-circle mx-3 my-2 my-lg-0">
-                                            <h6 class="mb-0">Margret Peter</h6>
-                                        </div>
-                                        <div
-                                            class="col-lg-3 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <div
-                                                class="bg-gray-100 roundy px-4 py-1 mr-0 mr-lg-1 mt-2 mt-lg-0 text-dark exclode col-lg-12 text-center">
-                                                User testing</div>
-                                        </div>
-                                        <div
-                                            class="col-lg-5 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <p class="mb-0 mt-3 mt-lg-0">Lorem ipsum dolor sit amet, consectetur
-                                                adipiscing elit..</p>
-                                        </div>
-                                        <div
-                                            class="col-lg-1 d-flex align-items-center flex-column flex-lg-row text-center text-md-left">
-                                            <img src="/img/medalla-de-honor.svg" style="max-width: 40px;" alt=""></i>
-                                        </div>
-                                    </div>
-                                </a>
+                    <div class="menu"> </div>
+                    <h2 class="name-awesomex"><%=response[1][i].nombre_profesional%>
+                        <%=response[1][i].apellido_profesional%></h2>
+                    <div class="title-awesomex"><%=response[1][i].nombre_servicio%></div>
+                    <div class="actions-awesomex ">
+                        <div class="icon-info-awesomex row" style="text-align: center;">
+                            <div class="col-12">
+                                <img src="img/medalla-de-honor.svg" style="max-width: 40px;"></i>
                             </div>
                         </div>
+                        <div class="icon-btn-awesomex"><button>Información</button></div>
                     </div>
+                    <div class="description-awesomex text-center"><%=response[1][i].email%></div>
                 </div>
             </div>
+            <% } %>
         </div>
     </div>
+</div>
+<!-- -----------------------------------------------DIVIDER------------------------------------------------------------------------ -->
+<svg id="curveUpColor" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100"
+    preserveAspectRatio="none">
+    <path d="M0 100 C 20 0 50 0 100 100 Z" />
+</svg>
+
+<section class="section-dividerx col-2-dividerx color-dividerx ss-style-curvedown">
+    <div class="column-dividerx text-dividerx text-left">
+        <h2 class="font-weight-bold">Vacantes Destacadas</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus iusto explicabo odio magnam natus in
+            facere officia quam quos modi voluptatum architecto consequuntur blanditiis dignissimos vero sed libero,
+            error unde!</p>
+    </div>
+</section>
+<svg id="curveDownColor" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100"
+    viewBox="0 0 100 100" preserveAspectRatio="none">
+    <path d="M0 0 C 50 100 80 100 100 0 Z" />
+</svg>
+<!-- -----------------------------------------------DIVIDER------------------------------------------------------------------------ -->
+<div class="w-100 d-flex flex-wrap">
+    <div class="container-fluid px-xl-5 ">
+        <div class="description-entrepressx">
+            <p class="ver-mas-entrepressx text-left">
+                <a href="#vacantes" style="font-size: 2rem;">Más vacantes</a>
+            </p>
+        </div>
+        <div class="row my-5">
+            <% for (var i = 0; i< response[0].length && i< 3; i++) {%>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="blog-card-entrepressx">
+                        <div class="meta-entrepressx">
+                            <div class="photo-entrepressx"
+                                style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)">
+                            </div>
+                            <ul class="details-entrepressx">
+                                <li class="date-entrepressx"><%=response[0][i].fecha%></li>
+                                <li class="area-entrepressx"><%=response[0][i].nombre_area%></li>
+                                <li class="place-entrepressx"><%=response[0][i].ubicacion%></li>
+                            </ul>
+                        </div>
+                        <div class="description-entrepressx">
+                            <h1><%=response[0][i].nombre_vacante%> <img src="img/medalla-de-honor.svg" style="max-width: 40px;"></h1>
+                            <h2><%=response[0][i].email%></h2>
+                            <!-- <p class="text-center"><img src="img/medalla-de-honor.svg" style="max-width: 40px;"></p> -->
+                            <p><%=response[0][i].descripcion_vacante%></p>
+                            <p class="price-entrepressx text-left">
+                                <a style="font-size: 2rem;"><%=response[0][i].salario%></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
     <!-------------------------------- modal -------------------------------------------------- -->
     <div id="Userdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
         class="modal fade text-left">
@@ -277,4 +164,4 @@
             </div>
         </div>
     </footer>
-</div>
+<script src="/js/hero.js"></script>

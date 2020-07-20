@@ -2,18 +2,20 @@
 const pool = require('../models/pool')();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const userIp = require('ip');
 const jwtDecode = require('jwt-decode');
 const { v4: uuidv4 } = require('uuid'); //uso ==> uuidv4();
 const rolRoutes = {
     0: "/",
     1: "/admin",
-    2: "/empresa",
-    3: "/profesional"
+    2: "/profesional",
+    3: "/empresa"
+   
 }
 function UserServices() {
     var self = this;
     this.signIn = async function (model) {
-        let { user, password, ip } = model;
+        let { user, password } = model;
         let response = {
             success: false,
             message: "Usuario o Contraseña Incorrecto. Intentelo Nuevamente",
@@ -34,7 +36,6 @@ function UserServices() {
                 user: userData.email,
                 idLogin: userData.id_login,
                 rol: userData.rol,
-                ip,
                 uuid: uuidv4()
             }
             // Insertar la session si la contraseña es correcta
@@ -56,7 +57,7 @@ function UserServices() {
         let user = self.decryptToken(req);
         return await self.spDeleteUserSession(user);
     }
-    this.callSql = function (sql, parameteres) {
+    this.callSql = function (sql, parameteres) { // select * from tabla where id = ?;
         let response = {
             success: false,
             message: "No se logro encontrar este usuario",
@@ -110,8 +111,37 @@ function UserServices() {
             }
         });
     }
+    this.spGetUserDataBDComplete = function (idLogin) {
+        let response = {
+            success: false,
+            message: "No se logro encontrar este usuario",
+            data: []
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_data_usuario_completa(?)", [idLogin], (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                        response = {
+                            success: true,
+                            message: "Data del usuario extraida correctamente",
+                            data: rows[1][0]
+                        }
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
     this.spInsertUserSession = function (accessToken) {
-        let { uuid, ip, idLogin} = accessToken;
+        let { uuid, idLogin } = accessToken;
+        let ip = userIp.address();
         let response = {
             success: false,
             message: "No se logro insertar la sesión",
@@ -171,14 +201,13 @@ function UserServices() {
         if (token == null || token == undefined) return res.redirect('/');
         jwt.verify(token, process.env.ACCESS_TOKEN_KEY, async (err, user) => {
             if (err) {
-                res.cookie("active", "false");
                 res.cookie("token", token, { expires: new Date(Date.now()), httpOnly: true });
                 return res.redirect('/');
             } 
             res.user = user;
+            user.ip = userIp.address() || "";
             let response = await self.validateSession(user);
             if (!response.success) {
-                res.cookie("active", "false");
                 res.cookie("token", token, { expires: new Date(Date.now()), httpOnly: true });
                 return res.redirect('/');
             } 
@@ -186,6 +215,7 @@ function UserServices() {
             next()
         });
     }
+
     this.validateSession = function (accessToken) {
         // Valida si la sesión todavia es valida, de ser asi, le extiende el tiempo
         let { uuid, ip, idLogin } = accessToken;
@@ -224,13 +254,22 @@ function UserServices() {
         }
         return "";
     }
-    this.getHeaderMenu = function (req) {
-        let active = req.cookies.active === "true" ? true : false;
+    this.getHeaderMenu = async function (req) {
         let user = self.decryptToken(req);
-        if (active && user !== "" && user !== undefined) {
+        if (user !== "" && user !== undefined) {
+            let userData = await self.spGetUserDataBDComplete(user.idLogin);
+            let avatar = "defaultAvatar.png";
+            let title = user.user;
+            if (userData.success) {
+                avatar = userData.data.foto;
+                if (userData.data.nombre_profesional !== undefined);
+                title = `${userData.data.nombre_profesional} ${userData.data.apellido_profesional}`;
+                if (userData.data.nombre_empresa !== undefined)
+                    title = `${userData.data.nombre_empresa}`;
+            }
             const headerMenu = {
                 1: {
-                    image: "/img/avatar-6.jpg",
+                    image: "/img/" + "defaultAvatar.png",
                     title: user.user,
                     subTitle: "Admin",
                     list: [
@@ -244,9 +283,9 @@ function UserServices() {
                         }
                     ]
                 },
-                2: {
-                    image: "/img/avatar-6.jpg",
-                    title: user.user,
+                3: {
+                    image: "/img/" + avatar,
+                    title,
                     subTitle: "Empresa",
                     list: [
                         {
@@ -255,12 +294,12 @@ function UserServices() {
                         {
                             type: "list-item",
                             text: "Mi Cuenta",
-                            target: "/registroEmpresa"
+                            target: "/empresa#perfil"
                         },
                         {
                             type: "list-item",
                             text: "Vacantes Publicadas",
-                            target: "/empresa/empresaVacante"
+                            target: "#empresaVacante"
                         },
                         {
                             type: "divider"
@@ -272,9 +311,9 @@ function UserServices() {
                         }
                     ]
                 },
-                3: {
-                    image: "/img/avatar-6.jpg",
-                    title: user.user,
+                2: {
+                    image: "/img/" + avatar,
+                    title,
                     subTitle: "Profesional",
                     list: [
                         {
@@ -283,7 +322,7 @@ function UserServices() {
                         {
                             type: "list-item",
                             text: "Mi Cuenta",
-                            target: "/registroProfesional"
+                            target: "/profesional#perfil"
                         },
                         {
                             type: "divider"
@@ -299,7 +338,7 @@ function UserServices() {
             return headerMenu[user.rol];
         } else {
             return {
-                image: "/img/avatar-6.jpg",
+                image: "/img/defaultAvatar.png",
                 title: "Guest",
                 subTitle: "Sin Iniciar Sesión",
                 list: [
@@ -322,59 +361,5 @@ function UserServices() {
             else next();
         }
     }
-    this.getAll = () => {
-        return new Promise((resolve, reject) => {
-            pool.query('select * from Login', (error, rows) => {
-                if (error) reject(error);
-                resolve(rows)
-                console.log(rows[0].email)
-            })
-        })
-    }
-    this.getProfesionales = () => {
-        return new Promise((resolve, reject) => {
-            pool.query('CALL pa_traer_todos_Profesionales();', (error, rows) => {
-                if (error) reject(error);
-                resolve(rows)
-            })
-        })
-    }
-    this.getFiltroProfesionales = (filtro) => {
-        return new Promise((resolve, reject) => {
-            pool.query('CALL pa_filtrar_Profesionales(?, ?, ?, ?, ?);', [filtro[0], filtro[1], filtro[2], filtro[3], filtro[4]], (error, rows) => {
-                if (error) reject(error);
-                resolve(rows)
-            })
-        })
-    }
-    this.getVacantes = () => {
-        return new Promise((resolve, reject) => {
-            pool.query('CALL pa_traer_todas_Vacantes();', (error, rows) => {
-                if (error) reject(error);
-                resolve(rows)
-            })
-        })
-    }
-    this.getFiltroVacantes = (filtro) => {
-        return new Promise((resolve, reject) => {
-            pool.query('CALL pa_filtrar_Vacantes(?,?,?,?)', [filtro[0], filtro[1], filtro[2], filtro[3]], (error, rows) => {
-                if (error) reject(error);
-                resolve(rows)
-            })
-        })
-    }
-    this.ObtenerUsuario = (email) => {
-        try {
-            return new Promise((resolve, reject) => {
-                pool.query('select * from Login where email =?', email, (err, rows) => {
-                    if (err) reject(err);
-                    resolve(rows[0])
-                });
-            });
-        } catch (err) {
-            response.message = err;
-            resolve(response)
-        }
-    };
 }
 module.exports = new UserServices();
