@@ -294,7 +294,7 @@ function UserServices() {
                         {
                             type: "list-item",
                             text: "Mi Cuenta",
-                            target: "/registroEmpresa"
+                            target: "/empresa#perfil"
                         },
                         {
                             type: "list-item",

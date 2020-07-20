@@ -66,5 +66,9 @@ appRouter.get('/empresaVacante', function (req, res) {
     res.render("empresasPages/empresaVacante");
 });
 
+appRouter.get('/perfil', function (req, res) {
+    res.render("empresasPages/perfil");
+});
+
 
 module.exports = appRouter;

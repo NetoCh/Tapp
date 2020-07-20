@@ -31,3 +31,9 @@ route.register({ name: "registrarVacante", page: "empresa/registrarVacante", pos
     }
 });
 
+route.register({
+    name: "perfil", page: "empresa/perfil", postLoad: function () {
+        new Empresa().perfilInit();
+    }
+});
+

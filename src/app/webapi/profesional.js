@@ -36,19 +36,11 @@ appRouter.post("/accions", uploadAvatarProfesional.single("avatar"), async (req,
     let user = userServices.decryptToken(req);
     let model = req.body;
     model.idLogin = user.idLogin;
-    let updatedAvatarResponse;
-    let response = {
-        success: false,
-        message: ""
-    }
-    let updateResponse = await profesionalesServices.update(model);
-    if (updateResponse.success) {
-        response.success = true;
-        response.message = updateResponse.message;
-    }
+    let response = await profesionalesServices.update(model);
     if (req.file) {
-        updatedAvatarResponse = await profesionalesServices.updateAvatar(user.idLogin, req.file);
-        response.message += " " + updatedAvatarResponse.message;
+        let updatedAvatarResponse = await profesionalesServices.updateAvatar(user.idLogin, req.file);
+        if(!updatedAvatarResponse.success)
+            response.message += " " + updatedAvatarResponse.message;
     }
     res.json(response);
 })
