@@ -96,6 +96,44 @@ function Profesionales() {
     }
     this.perfilInit = () => {
         $(document).ready(() => {
+            $.get("/api/profesional/client_token", {}, function (clientToken) {
+                paypal.Button.render({
+                braintree: braintree,
+                client: {
+                    production: clientToken,
+                    sandbox: clientToken
+                },
+                env: 'sandbox', // Or 'sandbox'
+                commit: true, // This will add the transaction amount to the PayPal button
+                    payment: function (data, actions) {
+                    return actions.braintree.create({
+                        flow: 'checkout', // Required
+                        amount: 500.00, // Required
+                        currency: 'USD', // Required
+                        enableShippingAddress: true,
+                        shippingAddressEditable: false,
+                        shippingAddressOverride: {
+                            recipientName: 'Scruff McGruff',
+                            line1: '1234 Main St.',
+                            line2: 'Unit 1',
+                            city: 'Chicago',
+                            countryCode: 'US',
+                            postalCode: '60652',
+                            state: 'IL',
+                            phone: '123.456.7890'
+                        }
+                    });
+                },
+                onAuthorize: function (payload) {
+                    // Submit `payload.nonce` to your server.
+                    let nonce = payload.nonce;
+                    payload.nonces = nonce;
+                    $.post("/api/profesional/checkout", payload, function (response) {
+                        console.log(response);
+                    });
+                },
+                }, '#paypal-button');
+            });
             $.get("/api/profesional/accions", {}, function (response) {
                 if (response.success) {
                     let userData = response.data;
