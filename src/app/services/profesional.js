@@ -25,16 +25,6 @@ function profesionalServices() {
         })
     }
     this.registerProfesional = async (model) => {
-        let { nombreEmp,
-            apellidopro,
-            direccionpro,
-            edadpro,
-            sexopro,
-            telefonopro,
-            mailpro,
-            password,
-            descppro,
-            experienciapro } = model;
         model.password = await bcrypt.hash(model.password, 10);
         let data = Object.values(model);
         let response = {
@@ -61,7 +51,7 @@ function profesionalServices() {
         }
         return new Promise((resolve) => {
             try {
-                pool.query("CALL pa_registrar_profesional(?,?,?,?,?,?,?,?,?,?,?)", data, (error, rows) => {
+                pool.query("CALL pa_registrar_profesional(?,?,?,?,?,?,?,?,?,?,?,?,?)", data, (error, rows) => {
                     if (error) {
                         response.error = error;
                         resolve(response);
@@ -131,7 +121,7 @@ function profesionalServices() {
         if (avatarStatus.success) {
             if (avatarStatus.data) { 
                 let oldImage = destination + "/" + avatarStatus.data.foto;
-                if (fs.existsSync(oldImage)) {
+                if (fs.existsSync(oldImage) && avatarStatus.data.foto !== "defaultAvatar.png") {
                     fs.unlink(oldImage, (err) => {
                         if (err) throw err;
                         console.log(`deleted image: ${oldImage}`);
@@ -139,7 +129,7 @@ function profesionalServices() {
                 }
             }
         }
-        return response;
+        return avatarStatus;
     }
     this.spUpdateAvatar = function (idLogin, filename) {
         let response = {
