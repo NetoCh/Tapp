@@ -33,6 +33,7 @@ appRouter.get("/getAreas", async (req, res) => {
     let areas = await empresaService.GetAreas();
     res.json(areas);
 })
+
 appRouter.get("/getTipoHorarios", async (req, res) => {
     let tipoHorarios = await empresaService.GetTipoHorarios();
     res.json(tipoHorarios);

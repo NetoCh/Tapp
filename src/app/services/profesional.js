@@ -25,16 +25,6 @@ function profesionalServices() {
         })
     }
     this.registerProfesional = async (model) => {
-        let { nombreEmp,
-            apellidopro,
-            direccionpro,
-            edadpro,
-            sexopro,
-            telefonopro,
-            mailpro,
-            password,
-            descppro,
-            experienciapro } = model;
         model.password = await bcrypt.hash(model.password, 10);
         let data = Object.values(model);
         let response = {
@@ -61,7 +51,7 @@ function profesionalServices() {
         }
         return new Promise((resolve) => {
             try {
-                pool.query("CALL pa_registrar_profesional(?,?,?,?,?,?,?,?,?,?,?)", data, (error, rows) => {
+                pool.query("CALL pa_registrar_profesional(?,?,?,?,?,?,?,?,?,?,?,?,?)", data, (error, rows) => {
                     if (error) {
                         response.error = error;
                         resolve(response);

@@ -58,6 +58,10 @@ function Profesionales() {
     }
     this.registrarInit = () => {
         $(document).ready(() => {
+            $.get("/api/empresa/getAreas", {}, function (response) {
+                if (!response.success) return;
+                SELECT.fill(response.data, "areas", { text: "nombre", value: "id_area" }); 
+            });
             $("form").on("submit", (e) => {
                 e.preventDefault();
                 let formData = $("form").serializeArray();
