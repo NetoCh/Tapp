@@ -21,7 +21,7 @@ var uploadAvatarProfesional = multer({
     storage: storage
 });
 var gateway = braintree.connect({
-    accessToken: 'access_token$sandbox$56srv6fdmbrh24yg$a8a5b4d8e5d1ba73cb14f3516426bdd0'
+    accessToken: 'access_token$sandbox$3s78y6tdbxdyhvgb$3d6798054cc7efac2921b3bac068aeb3'
 });
 
 appRouter.get("/getProfesionales", async (req, res) => {
@@ -49,6 +49,11 @@ appRouter.post("/accions", uploadAvatarProfesional.single("avatar"), async (req,
     res.json(response);
 });
 
+appRouter.get("/destacado", async function (req, res) {
+    let user = userServices.decryptToken(req);
+    res.json(await profesionalesServices.checkDestacado(user.idLogin));
+});
+
 appRouter.get("/client_token", function (req, res) {
     gateway.clientToken.generate({}, function (err, response) {
         res.send(response.clientToken);
@@ -56,13 +61,14 @@ appRouter.get("/client_token", function (req, res) {
 });
 
 appRouter.post("/checkout", function (req, res) {
+    let user = userServices.decryptToken(req);
     var saleRequest = {
-        amount: 500.00,
+        amount: 5.00,
         merchantAccountId: "USD",
         paymentMethodNonce: req.body.nonces,
-        orderId: "Mapped to PayPal Invoice Number",
+        orderId: uuidv4(),
         descriptor: {
-            name: "tap*testttess"
+            name: "tap*testttest"
         },
         shipping: {
             firstName: "Jen",
@@ -78,7 +84,7 @@ appRouter.post("/checkout", function (req, res) {
         options: {
             paypal: {
                 customField: "PayPal",
-                description: "tap*testttess"
+                description: "tap*testttest"
             },
             submitForSettlement: true
         }
@@ -88,8 +94,9 @@ appRouter.post("/checkout", function (req, res) {
             console.log(err);
             res.send({ message: err });
         } else if (result.success) {
-            console.log(result);
-            res.send({message:result.transaction.id });
+            console.log(`Pago exitoso por parte de ${user.user} - transaccion: ${result.transaction.id}`);
+            profesionalesServices.destacarProfesional(user.idLogin);
+            res.send({ success: true, message: "Transacción exitosa", transactionId: result.transaction.id});
         } else {
             res.send({message: result.message });
         }
