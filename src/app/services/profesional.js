@@ -158,6 +158,59 @@ function profesionalServices() {
             }
         });
     }
+    this.checkDestacado = function (idLogin) {
+        let response = {
+            success: false,
+            message: "No se logro determinar el estado"
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_chkDestacado_profesional(?)", [idLogin], (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                        let success = rows[1][0].destacado === 1 ? true : false;
+                        response = {
+                            success,
+                            message: "El usuario está destacado"
+                        }
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
+    this.destacarProfesional = function (idLogin) {
+        let response = {
+            success: false,
+            message: "No se logro destacar esta cuenta"
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_destacar_profesional(?)", [idLogin], (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                        response = {
+                            success: true,
+                            message: "Su cuenta ha sido destacada"
+                        }
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
 }
 
 module.exports = new profesionalServices();
