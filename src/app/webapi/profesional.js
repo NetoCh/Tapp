@@ -63,7 +63,7 @@ appRouter.get("/client_token", function (req, res) {
 appRouter.post("/checkout", function (req, res) {
     let user = userServices.decryptToken(req);
     var saleRequest = {
-        amount: 5.00,
+        amount: 2.00,
         merchantAccountId: "USD",
         paymentMethodNonce: req.body.nonces,
         orderId: uuidv4(),
