@@ -99,6 +99,7 @@ function Profesionales() {
             $.get("/api/profesional/destacado", {}, function (response) {
                 if (response.success) {
                     $("#paypal-button").hide();
+                    $("#destacar-title-paypal-button").hide();
                 } else {
                     $.get("/api/profesional/client_token", {}, function (clientToken) {
                         paypal.Button.render({
@@ -106,7 +107,15 @@ function Profesionales() {
                         client: {
                             production: clientToken,
                             sandbox: clientToken
-                        },
+                            },
+                            locale: 'en_US',
+                            style: {
+                                size: 'small',
+                                color: 'black',
+                                shape: 'pill',
+                                label: 'checkout',
+                                tagline: 'false'
+                            },
                         env: 'sandbox', // Or 'sandbox'
                         commit: true, // This will add the transaction amount to the PayPal button
                             payment: function (data, actions) {
