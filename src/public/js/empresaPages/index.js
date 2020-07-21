@@ -3,12 +3,13 @@ const { route } = plugdo;
 route.load({
     el: '#container',
     notFoundMessage: `<link rel="import" href="404.html">`,
-    defaultPage: {
-        name: "", page: "/home", postLoad: () => {
-    }}
 });
 
-route.register({ name: "home", page: "/home" });
+route.register({
+    name: "", page: "empresa/home", postLoad: function () {
+        new Home().init();
+    }
+});
 route.register({
     name: "vacantes", page: "/verVacantes", postLoad: function () {
         new Vacantes().vacante();
@@ -26,8 +27,9 @@ route.register({
     }
 });
 
-route.register({ name: "registrarVacante", page: "empresa/registrarVacante", postLoad: function () {
-    new RegistrarVacantes().init();
+route.register({
+    name: "registrarVacante", page: "empresa/registrarVacante", postLoad: function () {
+        new RegistrarVacantes().init();
     }
 });
 

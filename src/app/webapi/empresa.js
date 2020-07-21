@@ -77,6 +77,12 @@ appRouter.post('/getMyVacants', async (req, res) => {
     res.json(response)
 })
 
+appRouter.post('/updateVacante', async (req, res) => {
+    let model = req.body;
+    let response = await empresaService.spUpdateVacante(model)
+    res.json(response)
+})
+
 appRouter.get("/accions", async (req, res) => {
     let user = userService.decryptToken(req);
     let response = await userService.spGetUserDataBDComplete(user.idLogin);

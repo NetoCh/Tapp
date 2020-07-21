@@ -3,60 +3,104 @@
         <nav class="mt-4" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active">Empresa</li>
-                <li class="breadcrumb-item active" aria-current="page">Vacante</li>
+                <li class="breadcrumb-item active" aria-current="page">Mis Vacantes Publicadas</li>
             </ol>
         </nav>
-        <div class="container py-3">
-            <div class="row">
-                <plugdo-card name="card-vacante" src="/templates/card-vacante.html"></plugdo-card>
+            <div class="container">
+                <div class="row" id='content-card'>
+                </div>
             </div>
-        </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content card">
-                <div class="modal-header card-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Formulario de Promoción</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body card-body">
-                    <form class="form-horizontal">
-                        <div class="form-group row">
-                            <label class="col-md-3 form-control-label">Inicio de promoción</label>
-                            <div class="col-md-9">
-                                <input type="date" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 form-control-label">Dias de promoción</label>
-                            <div class="col-md-9">
-                                <input type="number" min="0" class="form-control">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Promocionar</button>
-                </div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="editarVacante" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 id="perfilNombre" class="modal-title" data-dismiss="modal">Editar Vacante</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="formVacante">
+
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Nombre de vacante</label>
+                      <div class="col-md-9">
+                        <input type="text" id="nomVacante" name="nomVacante" class="form-control" required="true">
+                        <label class="form-text text-muted ml-3">Ingrese el nombre de la vacante. Ejemplo “Mean Full Stack”.</label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Área laboral</label>
+                      <div class="col-md-9">
+                        <select name="areaLaboral" id ="areaLaboral" class="form-control" required="true"> </select>
+                        <label class="form-text text-muted ml-3">Seleccione el área laboral de su vacante.</label>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Descripción</label>
+                      <div class="col-md-9">
+                        <textarea id="descripcion" name="descripcion"  class="form-control scroll"></textarea>
+                        <small class="form-text text-muted ml-3">Escriba la descripción de su vacante.</small>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Trabajos a desempeñar</label>
+                      <div class="col-md-9">
+                        <textarea id="trabajosDes" name="trabajosDes"  class="form-control scroll"></textarea>
+                        <small class="form-text text-muted ml-3">Detalle los trabajos que desempeñará el trabajador. Ejemplo “Configurar redes, monitorear puertos, etc”.</small>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Requisitos</label>
+                      <div class="col-md-9">
+                        <textarea id="requisitos" name="requisitos"  class="form-control scroll"></textarea>
+                        <small class="form-text text-muted ml-3">Describa los requisitos de su vacante. Idiomas, conocimientos técnicos, habilidades blandas, etc.</small>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Tipo de horario</label>
+                      <div class="col-md-9">
+                        <select name="tipoHorario"  id="tipoHorario" class="form-control"></select>
+                        <small class="form-text text-muted ml-3">Seleccione el tipo de horario de su vacante.</small>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Salario</label>
+                      <div class="col-md-9">
+                        <input name="salario" id="salario" type="number" min="0" step="0.01" class="form-control">
+                        <small class="form-text text-muted ml-3">Escriba el salario de su vacante.</small>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-md-3 form-control-label">Ubicación</label>
+                      <div class="col-md-9">
+                        <input id="ubicacion" name="ubicacion" type="text" class="form-control">
+                        <small class="form-text text-muted ml-3">Ingrese la ubicación donde se desarrollará el trabajo.</small>
+                      </div>
+                    </div>
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" id="btnUpdateVacante" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+</div>
+<footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 text-center text-md-left text-primary">
+                <p class="mb-2 mb-md-0">Tapp</p>
+            </div>
+            <div class="col-md-6 text-center text-md-right text-gray-400">
+                <p class="mb-0">Proyecto de Desarollo IX</p>
+                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
             </div>
         </div>
     </div>
-    <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-left text-primary">
-                    <p class="mb-2 mb-md-0">Tapp</p>
-                </div>
-                <div class="col-md-6 text-center text-md-right text-gray-400">
-                    <p class="mb-0">Proyecto de Desarollo IX</p>
-                    <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
+</footer>
