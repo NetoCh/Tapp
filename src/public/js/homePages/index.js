@@ -2,8 +2,12 @@ const { route } = plugdo;
 
 route.load({
     el: '#container',
-    notFoundMessage: `404 page not found`,
-    defaultPage: { name: "", page: "/home" }
+    notFoundMessage: `404 page not found`
+});
+
+route.register({ name: "", page: "/home", postLoad: function(){
+    new Home().init();
+    } 
 });
 
 route.register({ name: "vacantes", page: "/verVacantes", postLoad: function(){

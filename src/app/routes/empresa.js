@@ -47,13 +47,19 @@ const sideMenu = [
 ]
 
 appRouter.get('/', async (req, res) => { //aquí debe ir el index.ejs
-    let data = await homeServices.getDestacados()
     res.render(mainRoute, {
         page: {
-            route: './home',
             sideMenu,
-            data,
-            headerMenu: await userServices.getHeaderMenu(req)
+            headerMenu: await userServices.getHeaderMenu(req),
+        }
+    })
+});
+
+appRouter.get('/home', function (req, res) {
+    res.render('homePages/home', {
+        page: {
+            button: 'Ver Más..',
+            ruta: '#profesionales'
         }
     })
 });
