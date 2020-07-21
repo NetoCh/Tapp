@@ -44,10 +44,10 @@ appRouter.get('/', async function (req, res) { //aquí debe ir el index.ejs
 });
 
 appRouter.get('/home', async (req, res) => { //aquí debe ir el index.ejs
-    let data = await homeServices.getDestacados()
     res.render('homePages/home', {
         page: {
-            data
+            button: 'Iniciar sesión',
+            ruta: '/login'
         }
     });
 });

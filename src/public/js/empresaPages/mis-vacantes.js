@@ -66,10 +66,10 @@ function MisVacantes() {
                     globalData[index].imagen = ''
                 }
                 $('#content-card').append(
-                `<div class="col-lg-4 col-md-6 col-sm-12">
+                `<div class="col-lg-4 col-md-6 col-sm-12 my-2">
                     <div class="blog-card-entrepressx">
                     <div class="meta-entrepressx">
-                        <div class="photo-entrepressx" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)">
+                        <div class="photo-entrepressx" style="background-image: url(img/${globalData[index].foto})">
                         </div>
                         <ul class="details-entrepressx">
                             <li class="date-entrepressx">${globalData[index].fecha}</li>

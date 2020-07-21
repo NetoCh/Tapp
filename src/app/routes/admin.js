@@ -55,9 +55,19 @@ appRouter.get('/', async function (req, res) {
     })
 });
 
-appRouter.get('/dashboard', async (req, res) => { 
+appRouter.get('/home', async function (req, res) {
+    res.render('homePages/home', {
+        page: {
+            button: 'Ver Más...',
+            ruta: '#profesionales'
+        }
+    })
+});
+
+appRouter.get('/dashboard', async (req, res) => {
     res.render('adminPages/dashboard');
 });
+
 
 
 module.exports = appRouter;
