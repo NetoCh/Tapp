@@ -61,7 +61,7 @@ function Empresa() {
                 let formData = $("form").serializeArray();
                 let model = {}
                 formData.map(({ name, value }) => {
-                    model[name] = value;
+                    model[name] = $.trim(value);
                 });
                 let url = "/api/empresa/accions";
                 let fd = new FormData($("form").get(0));

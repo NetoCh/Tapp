@@ -188,7 +188,7 @@ function Profesionales() {
                 let formData = $("form").serializeArray();
                 let model = {}
                 formData.map(({ name, value }) => {
-                    model[name] = value;
+                    model[name] = $.trim(value);
                 });
                 let url = "/api/profesional/accions";
                 let fd = new FormData($("form").get(0));
