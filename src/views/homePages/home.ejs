@@ -1,4 +1,3 @@
-<%let response = page.data;%>
 <style>
     .sidebar {
         display: none;
@@ -12,7 +11,7 @@
 <div class="hero-awesomex" style="background-image: url(https://ununsplash.imgix.net/photo-1416339134316-0e91dc9ded92?q=75&fm=jpg&s=883a422e10fc4149893984019f63c818)">
     <div class="hero__content-awesomex">
       <h1>TAPP, Del app a tú casa.</h1>
-      <!-- <a class="btn btn-hero-awesomex" href="#">Iniciar sesion</a> -->
+      <a class="btn btn-hero-awesomex" href="<%=page.ruta%>"><%=page.button%></a>
     </div>
   </div>
 <!-- -----------------------------------------------DIVIDER------------------------------------------------------------------------ -->
@@ -38,29 +37,8 @@
                 <a href="#profesionales" style="font-size: 2rem;">Más profesionales</a>
             </p>
         </div>
-        <div class="row">
-            <% for (var i = 0; i< response[1].length && i< 4; i++) {%>
-            <div class="col-lg-3 col-md-6 col-sm-12 my-5 ">
-                <div class="card-awesomex">
-                    <div class="banner">
-                        <img class="svg" src="img/<%=response[1][i].foto%>">
-                    </div>
-                    <div class="menu"> </div>
-                    <h2 class="name-awesomex"><%=response[1][i].nombre_profesional%>
-                        <%=response[1][i].apellido_profesional%></h2>
-                    <div class="title-awesomex"><%=response[1][i].nombre_servicio%></div>
-                    <div class="actions-awesomex ">
-                        <div class="icon-info-awesomex row" style="text-align: center;">
-                            <div class="col-12">
-                                <img src="img/medalla-de-honor.svg" style="max-width: 40px;"></i>
-                            </div>
-                        </div>
-                        <div class="icon-btn-awesomex"><button>Información</button></div>
-                    </div>
-                    <div class="description-awesomex text-center"><%=response[1][i].email%></div>
-                </div>
-            </div>
-            <% } %>
+        <div class="row" id="container-profesionales">
+
         </div>
     </div>
 </div>
@@ -90,67 +68,85 @@
                 <a href="#vacantes" style="font-size: 2rem;">Más vacantes</a>
             </p>
         </div>
-        <div class="row my-5">
-            <% for (var i = 0; i< response[0].length && i< 3; i++) {%>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="blog-card-entrepressx">
-                        <div class="meta-entrepressx">
-                            <div class="photo-entrepressx"
-                                style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-2.jpg)">
-                            </div>
-                            <ul class="details-entrepressx">
-                                <li class="date-entrepressx"><%=response[0][i].fecha%></li>
-                                <li class="area-entrepressx"><%=response[0][i].nombre_area%></li>
-                                <li class="place-entrepressx"><%=response[0][i].ubicacion%></li>
-                            </ul>
-                        </div>
-                        <div class="description-entrepressx">
-                            <h1><%=response[0][i].nombre_vacante%> <img src="img/medalla-de-honor.svg" style="max-width: 40px;"></h1>
-                            <h2><%=response[0][i].email%></h2>
-                            <!-- <p class="text-center"><img src="img/medalla-de-honor.svg" style="max-width: 40px;"></p> -->
-                            <p><%=response[0][i].descripcion_vacante%></p>
-                            <p class="price-entrepressx text-left">
-                                <a style="font-size: 2rem;"><%=response[0][i].salario%></a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            <% } %>
+        <div class="row my-5" id="container-empresa">
+           
         </div>
     </div>
 </div>
     <!-------------------------------- modal -------------------------------------------------- -->
-    <div id="Userdata" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
-        class="modal fade text-left">
-        <div role="document" class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 id="exampleModalLabel" class="modal-title">Información general</h4>
-                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                            aria-hidden="true">×</span></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Nombre: </strong> Jason Doe</p>
-                    <p><strong>Edad:</strong> 25</p>
-                    <p><strong>Dirección:</strong> San Fransisco</p>
-                    <p><strong>Email:</strong> jasond@yahoo.com</p>
-                    <p><strong>Teléfono:</strong> 6666-6666</p>
-                    <p><strong>Nivel académico:</strong> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi
-                        sequi
-                        repellat architecto, blanditiis officiis doloribus a voluptates assumenda tenetur explicabo
-                        eligendi
-                        voluptatibus, earum ducimus dolores, nesciunt excepturi vel quia recusandae.</p>
-                    <p><strong>Experiencia:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit
-                        consequatur ratione veniam ea, deserunt laboriosam officia illum incidunt ducimus sunt!
-                        Quibusdam est
-                        laudantium molestias aut iste sequi veniam quae odio!</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-secondary">Cerrar</button>
-                </div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="verProfesional" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 id="perfilNombre" class="modal-title" data-dismiss="modal">Información General</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-2">
+                      <p><strong class="mr-1">Nombre: </strong>
+                    </div>
+                    <div class="col-10">
+                      <p id="nombre"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-2">
+                      <p><strong class="mr-1">Edad: </strong>
+                    </div>
+                    <div class="col-10">
+                      <p id="edad"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-2">
+                      <p><strong class="mr-1">Genero: </strong>
+                    </div>
+                    <div class="col-10">
+                      <p id="sexo"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-2">
+                      <p><strong class="mr-1">Dirección: </strong>
+                    </div>
+                    <div class="col-10">
+                      <p id="direccion"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-2">
+                      <p><strong class="mr-1">Email: </strong>
+                    </div>
+                    <div class="col-10">
+                      <p id="email"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-2">
+                      <p><strong class="mr-1">Teléfono: </strong>
+                    </div>
+                    <div class="col-10">
+                      <p id="telefono"></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-2">
+                      <p><strong class="mr-1">Experiencia: </strong>
+                    </div>
+                    <div class="col-10">
+                      <p id="experiencia"></p>
+                    </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
     <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
         <div class="container-fluid">
             <div class="row">

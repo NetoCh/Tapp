@@ -35,9 +35,16 @@ appRouter.get('/', async (req, res) => {
     res.render(mainRoute, {
         page: {
             sideMenu,
-            headerMenu: await userServices.getHeaderMenu(req)
-        }
+            headerMenu: await userServices.getHeaderMenu(req)        }
     })
+});
+appRouter.get('/home', (req, res) => {
+    res.render("homePages/home", {
+        page: {
+            button: 'Ver Más',
+            ruta: '#profesionales'
+        }
+    });
 });
 
 appRouter.get('/perfil', (req, res) => {
