@@ -98,8 +98,7 @@
           <div class="col-lg-6 col-md-6 col-sm-12 mt-4" id="<%= data.id_vacante %>">
               <div class="blog-card-entrepressx">
                   <div class="meta-entrepressx"><a  class="messageVacante  no-anchor-style" data-toggle="modal" data-target="#modal" data-id=<%= data.id_vacante %>>
-                      <div class="photo-entrepressx">
-                        <img src="img/<%= data.foto%>">
+                      <div class="photo-entrepressx" style="background-image: url(img/<%=data.foto%>)">
                       </div>
                       <ul class="details-entrepressx">
                           <li class="date-entrepressx"><%=data.fecha%></li>
@@ -108,7 +107,7 @@
                       </ul>
                   </div>
                   <div class="description-entrepressx">
-                      <h1><%=data.nombre_vacante%> <img src="img/medalla-de-honor.svg" style="max-width: 40px;"></h1>
+                  <h1><%=data.nombre_vacante%> <% if(data.destacado == 1) {%><img src="img/medalla-de-honor.svg" style="max-width: 40px;"></h1><% }%>
                       <h2><%=data.email%></h2>
                       <!-- <p class="text-center"><img src="img/medalla-de-honor.svg" style="max-width: 40px;"></p> -->
                       <p><%=data.descripcion_vacante%></p>
