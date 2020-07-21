@@ -5,17 +5,29 @@ route.load({
     notFoundMessage: `404 page not found`
 });
 
-route.register({ name: "", page: "/home", postLoad: function(){
-    new Home().init();
+route.register({
+    name: "", page: "/home", postLoad: function () {
+        $(document).ready(() => {
+            new Home().init();
+        })
+    
     } 
 });
 
-route.register({ name: "vacantes", page: "/verVacantes", postLoad: function(){
-    new Vacantes().vacante();
+route.register({
+    name: "vacantes", page: "/verVacantes", postLoad: function () {
+        $(document).ready(() => {
+            new Vacantes().vacante();
+        })
+    
     } 
 });
-route.register({ name: "profesionales", page: "/verProfesionales", postLoad: function () {
-    new Profesionales().profesional();
+route.register({
+    name: "profesionales", page: "/verProfesionales", postLoad: function () {
+        $(document).ready(() => {
+            new Profesionales().profesional();
+        })
+    
     }
 });
 

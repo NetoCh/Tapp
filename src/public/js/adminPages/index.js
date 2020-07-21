@@ -12,16 +12,22 @@ route.load({
 });
 route.register({
     name: "home", page: "admin/home", postLoad: function () {
-        new Home().init()
+        $(document).ready(() => {
+            new Home().init()
+        })
     }
 });
 route.register({
     name: "vacantes", page: "/verVacantes", postLoad: function () {
-        new Vacantes().vacante();
+        $(document).ready(() => {
+            new Vacantes().vacante();
+        })
     }
 });
 route.register({
     name: "profesionales", page: "/verProfesionales", postLoad: function () {
-        new Profesionales().profesional();
+        $(document).ready(() => {
+            new Profesionales().profesional();
+        })
     }
 });
