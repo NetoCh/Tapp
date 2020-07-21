@@ -78,6 +78,7 @@ function profesionalServices() {
         }
         try {
             let update = await self.spUpdateProfesional(data);
+            console.log(update);
             if (!update.success) return response;
             response = {
                 success: true,

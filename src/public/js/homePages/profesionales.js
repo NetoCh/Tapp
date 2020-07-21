@@ -158,7 +158,6 @@ function Profesionales() {
                     });
                 }
             });
-            
             $.get("/api/profesional/accions", {}, function (response) {
                 if (response.success) {
                     let userData = response.data;
@@ -172,6 +171,7 @@ function Profesionales() {
                     $("#emailP").val(userData.email)
                     $("#DescP").val(userData.descripcion_profesional);
                     $("#expP").val(userData.experiencia);
+                    $("#nivelAcademico").val(userData.nivel_academico);
                     $('#imagePreview').css('background-image', 'url(' + foto + ')');
                 } else {
                     Swal.fire({

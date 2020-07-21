@@ -10,8 +10,7 @@ function Home() {
 
     this.loadPage = () => {
         $.post('/api/home/getDestacados', {} , (response) => {
-            globalData = response.spData
-            console.log(globalData)
+            globalData = response.spData;
             $("#container-empresa").html('')
             $('#container-profesionales').html('')
             for (let index = 0; index < globalData[0].length && index < 3; index++) {
