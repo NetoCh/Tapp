@@ -229,7 +229,7 @@ function MisVacantes() {
         let model = globalData.find((element => element.id_vacante === id))
         Swal.fire({
             title: `¿Esta seguro que desea eliminar la vacante: ${model.nombre_vacante}`,
-            text: "Esta acción es reversible!",
+            text: "Esta acción es ireversible!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
