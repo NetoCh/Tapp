@@ -23,7 +23,7 @@ function UserServices() {
         }
 
         // Validaciones de parametros
-        if (user.trim() === "" || user.trim() === undefined) return response;
+        if (user === "" || user === undefined) return response;
         if (password.trim() === "" || password.trim() === undefined) return response;
         // Buscar Contraseña Encriptada del usuario;
         let spResponse = await self.spGetUserDataBD(user);

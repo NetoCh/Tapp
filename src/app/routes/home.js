@@ -62,7 +62,10 @@ appRouter.get('/login', function (req, res) {
 });
 
 appRouter.post('/login', async function (req, res) {
-    let user = req.body;
+    let user = {
+        user : req.body.user.trim(),
+        password: req.body.password.trim()
+    }
     // Llamar funcion para verificar si el usuario y la contraseña existe
     try {
         let response = await userServices.signIn(user);
