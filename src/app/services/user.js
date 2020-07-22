@@ -15,7 +15,7 @@ const rolRoutes = {
 function UserServices() {
     var self = this;
     this.signIn = async function (model) {
-        let { user, password } = model;
+        let { user, password } = model
         let response = {
             success: false,
             message: "Usuario o Contraseña Incorrecto. Intentelo Nuevamente",
