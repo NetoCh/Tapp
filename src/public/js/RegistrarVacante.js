@@ -10,15 +10,6 @@ function RegistrarVacantes (){
                     $.get("/api/empresa/getTipoHorarios", {}, function (response) {
                     if(response.success){
                         SELECT.fill(response.data,"tipoHorario", {text: "nombre", value: "id"}); 
-                        Swal.fire({
-                            title: 'Todos los campos deben ser llenados para el envío de este formulario.',
-                            showClass: {
-                            popup: 'animate__animated animate__fadeInDown'
-                            },
-                            hideClass: {
-                            popup: 'animate__animated animate__fadeOutUp'
-                            }
-                        })
                     }
                     else{
                         let timerInterval

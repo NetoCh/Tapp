@@ -244,6 +244,7 @@ function EmpresasServices() {
             return response;
         }
     }
+    
     this.spUpdateEmpresa = function (data) {
         let response = {
             success: false,
@@ -309,6 +310,63 @@ function EmpresasServices() {
                 });
             } catch (err) {
                 response.icon = "error"
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
+
+    this.spDestacarVacnte = function (idVacante) {
+        let response = {
+            success: false
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_destacar_vacante(?)", [idVacante], (error, rows) => {
+                    if (error) {
+                        response.icon = 'error'
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                        response = {
+                            success: true,
+                            data: rows[0][0]
+                        }
+                    }
+                    resolve(response);
+                });
+            } catch (err) {
+                response.icon = "error"
+                response.message = err;
+                resolve(response)
+            }
+        });
+    }
+
+    this.spDeleteVacante = (idVacante) => {
+        let response = {
+            success: false,
+            message: 'Error al eliminar la vacante',
+            icon: "error"
+        }
+        return new Promise((resolve) => {
+            try {
+                pool.query("CALL pa_eliminar_vacante(?)", [idVacante], (error, rows) => {
+                    if (error) {
+                        response.error = error;
+                        resolve(response);
+                    }
+                    if (rows[0][0]._message === 1) {
+                        response = {
+                            success: true,
+                            icon: 'success',
+                            message : 'Vacante eliminada con exito.'
+                        }
+                        resolve(response);
+                    }
+                });
+            } catch (err) {
                 response.message = err;
                 resolve(response)
             }
