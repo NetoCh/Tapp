@@ -1,13 +1,15 @@
 const appRouter = require('express').Router();
 const fs = require('fs');
-const multer = require('multer');
+const braintree = require('braintree');
 const { v4: uuidv4 } = require('uuid');
+const multer = require('multer');
 const vacantesCtrl = require('../services/vacante');
 const empresaService = require('../services/empresas');
 const userService = require('../services/user');
 const sanitizer = require('sanitizer');
 const { check, validationResult, sanitize } = require('express-validator');
 const { response } = require('express');
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         let fileStorage = 'src/public/img/';
@@ -102,6 +104,72 @@ appRouter.post("/accions", uploadAvatarProfesional.single("avatar"), async (req,
     }
     res.json(response);
 })
+
+var gateway = braintree.connect({
+    accessToken: 'access_token$sandbox$3s78y6tdbxdyhvgb$3d6798054cc7efac2921b3bac068aeb3'
+});
+
+appRouter.get("/client_token", function (req, res) {
+    gateway.clientToken.generate({}, function (err, response) {
+        res.send(response.clientToken);
+    });
+});
+
+appRouter.post("/checkout", (req, res) => {
+    // let user = userServices.decryptToken(req);
+    var saleRequest = {
+        amount: 10.00,
+        merchantAccountId: "USD",
+        paymentMethodNonce: req.body.nonces,
+        orderId: uuidv4(),
+        descriptor: {
+            name: "tap*testttest"
+        },
+        shipping: {
+            firstName: "Jen",
+            lastName: "Smith",
+            company: "Braintree",
+            streetAddress: "1 E 1st St",
+            extendedAddress: "5th Floor",
+            locality: "Bartlett",
+            region: "IL",
+            postalCode: "60103",
+            countryCodeAlpha2: "US"
+        },
+        options: {
+            paypal: {
+                customField: "PayPal",
+                description: "tap*testttest"
+            },
+            submitForSettlement: true
+        }
+    };
+    gateway.transaction.sale(saleRequest, async (err, result) => {
+        let model = {
+            success : false,
+            icon : 'error',
+            message : 'Transacción Declinada.'
+        }
+        if (err) {
+            res.send(model);
+        } else if (result.success) {
+            await empresaService.spDestacarVacnte(req.body.idVacante);
+            model.success = true;
+            model.icon = 'success';
+            model.message = 'Transacción exitosa'
+            model.transactionId = result.transaction.id
+            res.send(model);
+        } else {
+            res.send(model);
+        }
+    });
+});
+
+appRouter.post("/deleteVacant", async (req, res) => {
+    let response = await empresaService.spDeleteVacante(req.body.id);
+    res.json(response);
+});
+
 
 
 module.exports = appRouter;

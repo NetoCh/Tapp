@@ -31,13 +31,26 @@ const sideMenu = [
     }
 ]
 
-appRouter.get('/', async (req, res) => { 
-    res.render(mainRoute, {
+appRouter.get('/', async (req, res) => {
+    try {
+        res.render(mainRoute, {
+            page: {
+                sideMenu,
+                headerMenu: await userServices.getHeaderMenu(req)
+            }
+        })
+    } catch (e) {
+        console.log(e)
+    }
+
+});
+appRouter.get('/home', (req, res) => {
+    res.render("homePages/home", {
         page: {
-            sideMenu,
-            headerMenu: await userServices.getHeaderMenu(req)
+            button: 'Ver Más',
+            ruta: '#profesionales'
         }
-    })
+    });
 });
 
 appRouter.get('/perfil', (req, res) => {

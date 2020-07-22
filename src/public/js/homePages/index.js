@@ -3,15 +3,29 @@ const { route } = plugdo;
 route.load({
     el: '#container',
     notFoundMessage: `404 page not found`,
-    defaultPage: { name: "", page: "/home" }
+    defaultPage: {
+        name: "", page: "/home", postLoad: function () {
+            $(document).ready(() => {
+                new Home().init();
+            });
+        } 
+    }
 });
 
-route.register({ name: "vacantes", page: "/verVacantes", postLoad: function(){
-    new Vacantes().vacante();
+route.register({
+    name: "vacantes", page: "/verVacantes", postLoad: function () {
+        $(document).ready(() => {
+            new Vacantes().vacante();
+        })
+    
     } 
 });
-route.register({ name: "profesionales", page: "/verProfesionales", postLoad: function () {
-    new Profesionales().profesional();
+route.register({
+    name: "profesionales", page: "/verProfesionales", postLoad: function () {
+        $(document).ready(() => {
+            new Profesionales().profesional();
+        })
+    
     }
 });
 

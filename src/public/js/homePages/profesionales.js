@@ -96,6 +96,88 @@ function Profesionales() {
     }
     this.perfilInit = () => {
         $(document).ready(() => {
+            $.get("/api/profesional/destacado", {}, function (response) {
+                if (response.success) {
+                    $("#paypal-button").hide();
+                    $("#destacar-title-paypal-button").hide();
+                } else {
+                    $.get("/api/profesional/client_token", {}, function (clientToken) {
+                        paypal.Button.render({
+                        braintree: braintree,
+                        client: {
+                            production: clientToken,
+                            sandbox: clientToken
+                            },
+                            locale: 'en_US',
+                            style: {
+                                size: 'small',
+                                color: 'black',
+                                shape: 'pill',
+                                label: 'checkout',
+                                tagline: 'false'
+                            },
+                        env: 'sandbox', // Or 'sandbox'
+                        commit: true, // This will add the transaction amount to the PayPal button
+                            payment: function (data, actions) {
+                            return actions.braintree.create({
+                                flow: 'checkout', // Required
+                                amount: 2.00, // Required
+                                currency: 'USD', // Required
+                                enableShippingAddress: true,
+                                shippingAddressEditable: false,
+                                shippingAddressOverride: {
+                                    recipientName: 'Tapp',
+                                    line1: 'Panama',
+                                    line2: 'Panama',
+                                    city: 'Panama',
+                                    countryCode: 'PA',
+                                    postalCode: '507',
+                                    state: 'PA',
+                                    phone: '123.456.7890'
+                                }
+                            });
+                        },
+                        onAuthorize: function (payload) {
+                            // Submit `payload.nonce` to your server.
+                            let nonce = payload.nonce;
+                            payload.nonces = nonce;
+                            $.post("/api/profesional/checkout", payload, function (response) {
+                                let icon = response.success ? "success" : "error";
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: icon,
+                                    title: response.message,
+                                    showConfirmButton: false,
+                                    onClose: () => {
+                                        if (response.success) window.location.reload(true);
+                                    }
+                                })
+                            });
+                            Swal.fire({
+                                title: 'Procesando Transacción',
+                                html: 'Por favor, espere...',
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                onBeforeOpen: () => {
+                                    Swal.showLoading()
+                                    timerInterval = setInterval(() => {
+                                    }, 100)
+                                },
+                                onClose: () => {
+                                    clearInterval(timerInterval)
+                                }
+                            }).then((result) => {
+                                if (
+                                    /* Read more about handling dismissals below */
+                                    result.dismiss === Swal.DismissReason.timer
+                                ) {
+                                }
+                            });
+                        },
+                        }, '#paypal-button');
+                    });
+                }
+            });
             $.get("/api/profesional/accions", {}, function (response) {
                 if (response.success) {
                     let userData = response.data;
@@ -109,6 +191,7 @@ function Profesionales() {
                     $("#emailP").val(userData.email)
                     $("#DescP").val(userData.descripcion_profesional);
                     $("#expP").val(userData.experiencia);
+                    $("#nivelAcademico").val(userData.nivel_academico);
                     $('#imagePreview').css('background-image', 'url(' + foto + ')');
                 } else {
                     Swal.fire({
@@ -125,7 +208,7 @@ function Profesionales() {
                 let formData = $("form").serializeArray();
                 let model = {}
                 formData.map(({ name, value }) => {
-                    model[name] = value;
+                    model[name] = $.trim(value);
                 });
                 let url = "/api/profesional/accions";
                 let fd = new FormData($("form").get(0));

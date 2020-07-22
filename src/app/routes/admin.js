@@ -47,17 +47,32 @@ const sideMenu = [
 ]
 
 appRouter.get('/', async function (req, res) {
-    res.render(mainRoute, {
+    try{
+        res.render(mainRoute, {
+            page: {
+                sideMenu,
+                headerMenu: await userServices.getHeaderMenu(req)
+            }
+        })
+    }catch(e){
+        console.log(e)
+    }
+    
+});
+
+appRouter.get('/home', async function (req, res) {
+    res.render('homePages/home', {
         page: {
-            sideMenu,
-            headerMenu: await userServices.getHeaderMenu(req)
+            button: 'Ver Más...',
+            ruta: '#profesionales'
         }
     })
 });
 
-appRouter.get('/dashboard', async (req, res) => { 
+appRouter.get('/dashboard', async (req, res) => {
     res.render('adminPages/dashboard');
 });
+
 
 
 module.exports = appRouter;
