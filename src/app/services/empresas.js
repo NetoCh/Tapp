@@ -1,6 +1,7 @@
 'use strict'
 const pool = require('../models/pool')();
 const fs = require('fs');
+const bcrypt = require('bcrypt');
 function EmpresasServices() {
     var self = this;
     this.GetAreas = async function () {

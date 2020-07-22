@@ -153,6 +153,26 @@ function Profesionales() {
                                     }
                                 })
                             });
+                            Swal.fire({
+                                title: 'Procesando Transacción',
+                                html: 'Por favor, espere...',
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                onBeforeOpen: () => {
+                                    Swal.showLoading()
+                                    timerInterval = setInterval(() => {
+                                    }, 100)
+                                },
+                                onClose: () => {
+                                    clearInterval(timerInterval)
+                                }
+                            }).then((result) => {
+                                if (
+                                    /* Read more about handling dismissals below */
+                                    result.dismiss === Swal.DismissReason.timer
+                                ) {
+                                }
+                            });
                         },
                         }, '#paypal-button');
                     });
