@@ -47,12 +47,17 @@ const sideMenu = [
 ]
 
 appRouter.get('/', async function (req, res) {
-    res.render(mainRoute, {
-        page: {
-            sideMenu,
-            headerMenu: await userServices.getHeaderMenu(req)
-        }
-    })
+    try{
+        res.render(mainRoute, {
+            page: {
+                sideMenu,
+                headerMenu: await userServices.getHeaderMenu(req)
+            }
+        })
+    }catch(e){
+        console.log(e)
+    }
+    
 });
 
 appRouter.get('/home', async function (req, res) {

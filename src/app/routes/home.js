@@ -35,12 +35,17 @@ const sideMenu = [
 ]
 
 appRouter.get('/', async function (req, res) { //aquí debe ir el index.ejs
-    res.render(mainRoute, {
-        page: {
-            sideMenu: sideMenu,
-            headerMenu: await userServices.getHeaderMenu(req)
-        }
-    });
+    try {
+        res.render(mainRoute, {
+            page: {
+                sideMenu: sideMenu,
+                headerMenu: await userServices.getHeaderMenu(req)
+            }
+        });
+    } catch (e) {
+        console.log(e)
+    }
+
 });
 
 appRouter.get('/home', async (req, res) => { //aquí debe ir el index.ejs
@@ -95,35 +100,40 @@ appRouter.get('/registroProfesional', function (req, res) {
 });
 
 appRouter.get('/verVacantes', async function (req, res) {
-    let dbResponse;
-    let vacantes;
-    let areas;
-    let empresas;
-    let { empresa, area, destacado, salario_min } = req.query;
-    var filtro = [empresa, area, destacado, salario_min];
-    if (empresa !== undefined & area !== undefined & destacado !== undefined & salario_min !== undefined) {
-        dbResponse = await vacanteServices.getFiltroVacantes(filtro);
-        areas = dbResponse[1];
-        empresas = dbResponse[2];
-        vacantes = dbResponse[3];
-    } else {
-        dbResponse = await vacanteServices.getVacantes();
-        areas = dbResponse[0];
-        empresas = dbResponse[1];
-        vacantes = dbResponse[2];
-    }
-    res.render('homePages/verVacantes', {
-        page: {
-            areas,
-            empresas,
-            vacantes
+    try {
+        let dbResponse;
+        let vacantes;
+        let areas;
+        let empresas;
+        let { empresa, area, destacado, salario_min } = req.query;
+        var filtro = [empresa, area, destacado, salario_min];
+        if (empresa !== undefined & area !== undefined & destacado !== undefined & salario_min !== undefined) {
+            dbResponse = await vacanteServices.getFiltroVacantes(filtro);
+            areas = dbResponse[1];
+            empresas = dbResponse[2];
+            vacantes = dbResponse[3];
+        } else {
+            dbResponse = await vacanteServices.getVacantes();
+            areas = dbResponse[0];
+            empresas = dbResponse[1];
+            vacantes = dbResponse[2];
         }
-    })
+        res.render('homePages/verVacantes', {
+            page: {
+                areas,
+                empresas,
+                vacantes
+            }
+        })
+    } catch (e) {
+        console.log(e)
+    }
 });
 
 
 appRouter.get('/verProfesionales', async function (req, res) {
-    let dbResponse;
+    try{
+        let dbResponse;
     let profesionales;
     let areas;
     let { area, genero, destacado, edad_min, edad_max } = req.query;
@@ -143,6 +153,10 @@ appRouter.get('/verProfesionales', async function (req, res) {
             areas
         }
     })
+    }catch(e){
+        console.log(e)
+    }
+    
 });
 
 module.exports = appRouter;
